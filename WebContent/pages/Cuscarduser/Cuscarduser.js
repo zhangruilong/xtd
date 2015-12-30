@@ -3,24 +3,32 @@ Ext.onReady(function() {
 	var Cuscardusertitle = "当前位置:业务管理》" + Cuscarduserclassify;
 	var Cuscarduseraction = "CuscarduserAction.do";
 	var Cuscarduserfields = ['cuscardid'
-	        			    ,'cuscardcustomer' 
-	        			    ,'cuscardcustomernew' 
-	        			    ,'cuscardtype' 
-	        			    ,'cuscardno' 
-	        			    ,'cuscardpsw' 
-	        			    ,'cuscardbegin' 
-	        			    ,'cuscardend' 
-	        			    ,'cuscardmoney' 
-	        			    ,'cuscardnums' 
-	        			    ,'cuscardtimes' 
-	        			    ,'cuscardint' 
-	        			    ,'cuscarddetail' 
-	        			    ,'cuscardstatue' 
-	        			    ,'createtime' 
-	        			    ,'creator' 
-	        			      ];// 全部字段
+		        			    ,'cuscardcustomer' 
+		        			    ,'cuscardcustomernew' 
+		        			    ,'cuscardtype' 
+		        			    ,'cuscardno' 
+		        			    ,'cuscardpsw' 
+		        			    ,'cuscardbegin' 
+		        			    ,'cuscardend' 
+		        			    ,'cuscardmoney' 
+		        			    ,'cuscardnums' 
+		        			    ,'cuscardtimes' 
+		        			    ,'cuscardint' 
+		        			    ,'cuscarddetail' 
+		        			    ,'cuscardstatue' 
+		        			    ,'createtime' 
+		        			    ,'creator' 
+		        			    ,'customerstadiumnew' 
+		        			    ,'customercodenew' 
+		        			    ,'customernamenew' 
+		        			    ,'customerphonenew' 
+		        			    ,'customerstadium' 
+		        			    ,'customercode' 
+		        			    ,'customername' 
+		        			    ,'customerphone' 
+		        			      ];// 全部字段
 	var Cuscarduserkeycolumn = [ 'cuscardid' ];// 主键
-	var Cuscarduserstore = dataStore(Cuscarduserfields, basePath + Cuscarduseraction + "?method=selQuery");// 定义Cuscarduserstore
+	var Cuscarduserstore = dataStore(Cuscarduserfields, basePath + "CuscarduserviewAction.do" + "?method=selQuery");// 定义Cuscarduserstore
 	var Cuscardusersm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Cuscardusercm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Cuscardusersm, {// 改

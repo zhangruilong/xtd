@@ -49,13 +49,18 @@
 	<bean id="TicketAction" class="com.server.action.TicketAction" />
 	<bean id="AllcourseAction" class="com.server.action.AllcourseAction" />
 	<bean id="CuscardAction" class="com.server.action.CuscardAction" />
-	<bean id="CuscardchangeAction" class="com.server.action.CuscardAction" />
-	<bean id="CuscardcontinueAction" class="com.server.action.CuscardAction" />
-	<bean id="CuscarduserAction" class="com.server.action.CuscardAction" />
+	<bean id="CuscardchangeAction" class="com.server.action.CuscardchangeAction" />
+	<bean id="CuscardcontinueAction" class="com.server.action.CuscardcontinueAction" />
+	<bean id="CuscarduserAction" class="com.server.action.CuscarduserAction" />
 	
 	<bean id="PlaceviewAction" class="com.server.action.PlaceviewAction" />
 	<bean id="EmpviewAction" class="com.server.action.EmpviewAction" />
 	<bean id="CoachviewAction" class="com.server.action.CoachviewAction" />
 	<bean id="AllcourseviewAction" class="com.server.action.AllcourseviewAction" />
+	<bean id="CustomerviewAction" class="com.server.action.CustomerviewAction" />
+	<bean id="CuscardviewAction" class="com.server.action.CuscardviewAction" />
+	<bean id="CuscardchangeviewAction" class="com.server.action.CuscardchangeviewAction" />
+	<bean id="CuscardcontinueviewAction" class="com.server.action.CuscardcontinueviewAction" />
+	<bean id="CuscarduserviewAction" class="com.server.action.CuscarduserviewAction" />
 	
 </beans>

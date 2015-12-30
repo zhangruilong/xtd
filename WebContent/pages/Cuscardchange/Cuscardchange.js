@@ -3,24 +3,28 @@ Ext.onReady(function() {
 	var Cuscardchangetitle = "当前位置:业务管理》" + Cuscardchangeclassify;
 	var Cuscardchangeaction = "CuscardchangeAction.do";
 	var Cuscardchangefields = ['cuscardid'
-	        			    ,'cuscardcustomer' 
-	        			    ,'cuscardtype' 
-	        			    ,'cuscardno' 
-	        			    ,'cuscardnonew' 
-	        			    ,'cuscardpsw' 
-	        			    ,'cuscardbegin' 
-	        			    ,'cuscardend' 
-	        			    ,'cuscardmoney' 
-	        			    ,'cuscardnums' 
-	        			    ,'cuscardtimes' 
-	        			    ,'cuscardint' 
-	        			    ,'cuscarddetail' 
-	        			    ,'cuscardstatue' 
-	        			    ,'createtime' 
-	        			    ,'creator' 
-	        			      ];// 全部字段
+		        			    ,'cuscardcustomer' 
+		        			    ,'cuscardtype' 
+		        			    ,'cuscardno' 
+		        			    ,'cuscardnonew' 
+		        			    ,'cuscardpsw' 
+		        			    ,'cuscardbegin' 
+		        			    ,'cuscardend' 
+		        			    ,'cuscardmoney' 
+		        			    ,'cuscardnums' 
+		        			    ,'cuscardtimes' 
+		        			    ,'cuscardint' 
+		        			    ,'cuscarddetail' 
+		        			    ,'cuscardstatue' 
+		        			    ,'createtime' 
+		        			    ,'creator' 
+		        			    ,'customerstadium' 
+		        			    ,'customercode' 
+		        			    ,'customername' 
+		        			    ,'customerphone' 
+		        			      ];// 全部字段
 	var Cuscardchangekeycolumn = [ 'cuscardid' ];// 主键
-	var Cuscardchangestore = dataStore(Cuscardchangefields, basePath + Cuscardchangeaction + "?method=selQuery");// 定义Cuscardchangestore
+	var Cuscardchangestore = dataStore(Cuscardchangefields, basePath + "CuscardchangeviewAction.do?method=selQuery");// 定义Cuscardchangestore
 	var Cuscardchangesm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Cuscardchangecm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Cuscardchangesm, {// 改

@@ -19,9 +19,13 @@ Ext.onReady(function() {
 	        			    ,'creator' 
 	        			    ,'updtime' 
 	        			    ,'updor' 
+	        			    ,'customerstadium' 
+	        			    ,'customercode' 
+	        			    ,'customername' 
+	        			    ,'customerphone' 
 	        			      ];// 全部字段
 	var Cuscardkeycolumn = [ 'cuscardid' ];// 主键
-	var Cuscardstore = dataStore(Cuscardfields, basePath + Cuscardaction + "?method=selQuery");// 定义Cuscardstore
+	var Cuscardstore = dataStore(Cuscardfields, basePath + "CuscardviewAction.do" + "?method=selQuery");// 定义Cuscardstore
 	var Cuscardsm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Cuscardcm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Cuscardsm, {// 改
@@ -32,6 +36,27 @@ Ext.onReady(function() {
 		, {
 			header : '会员ID',
 			dataIndex : 'cuscardcustomer',
+			align : 'center',
+			width : 80,
+			hidden : true
+		}
+		, {
+			header : '会员编码',
+			dataIndex : 'customercode',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '会员姓名',
+			dataIndex : 'customername',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '会员手机',
+			dataIndex : 'customerphone',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -244,7 +269,7 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'numberfield',
 				fieldLabel : '卡总次数',
 				id : 'Cuscardcuscardnums',
 				name : 'cuscardnums',
@@ -296,54 +321,6 @@ Ext.onReady(function() {
 				fieldLabel : '状态',
 				id : 'Cuscardcuscardstatue',
 				name : 'cuscardstatue',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Cuscardcreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Cuscardcreator',
-				name : 'creator',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新时间',
-				id : 'Cuscardupdtime',
-				name : 'updtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新人',
-				id : 'Cuscardupdor',
-				name : 'updor',
 				maxLength : 100,
 				anchor : '95%'
 			} ]

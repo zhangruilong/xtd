@@ -3,26 +3,30 @@ Ext.onReady(function() {
 	var Cuscardcontinuetitle = "当前位置:业务管理》" + Cuscardcontinueclassify;
 	var Cuscardcontinueaction = "CuscardcontinueAction.do";
 	var Cuscardcontinuefields = ['cuscardid'
-	        			    ,'cuscardcustomer' 
-	        			    ,'cuscardtype' 
-	        			    ,'cuscardno' 
-	        			    ,'cuscardpsw' 
-	        			    ,'cuscardbegin' 
-	        			    ,'cuscardend' 
-	        			    ,'cuscardmoney' 
-	        			    ,'cuscardnums' 
-	        			    ,'cuscardtimes' 
-	        			    ,'cuscardmoneynew' 
-	        			    ,'cuscardnumsnew' 
-	        			    ,'cuscardtimesnew' 
-	        			    ,'cuscardint' 
-	        			    ,'cuscarddetail' 
-	        			    ,'cuscardstatue' 
-	        			    ,'createtime' 
-	        			    ,'creator' 
-	        			      ];// 全部字段
+	 	        			    ,'cuscardcustomer' 
+		        			    ,'cuscardtype' 
+		        			    ,'cuscardno' 
+		        			    ,'cuscardpsw' 
+		        			    ,'cuscardbegin' 
+		        			    ,'cuscardend' 
+		        			    ,'cuscardmoney' 
+		        			    ,'cuscardnums' 
+		        			    ,'cuscardtimes' 
+		        			    ,'cuscardmoneynew' 
+		        			    ,'cuscardnumsnew' 
+		        			    ,'cuscardtimesnew' 
+		        			    ,'cuscardint' 
+		        			    ,'cuscarddetail' 
+		        			    ,'cuscardstatue' 
+		        			    ,'createtime' 
+		        			    ,'creator' 
+		        			    ,'customerstadium' 
+		        			    ,'customercode' 
+		        			    ,'customername' 
+		        			    ,'customerphone' 
+		        			      ];// 全部字段
 	var Cuscardcontinuekeycolumn = [ 'cuscardid' ];// 主键
-	var Cuscardcontinuestore = dataStore(Cuscardcontinuefields, basePath + Cuscardcontinueaction + "?method=selQuery");// 定义Cuscardcontinuestore
+	var Cuscardcontinuestore = dataStore(Cuscardcontinuefields, basePath + "CuscardcontinueviewAction.do" + "?method=selQuery");// 定义Cuscardcontinuestore
 	var Cuscardcontinuesm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Cuscardcontinuecm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Cuscardcontinuesm, {// 改

@@ -27,9 +27,17 @@ Ext.onReady(function() {
 	        			    ,'creator' 
 	        			    ,'updtime' 
 	        			    ,'updor' 
+	        			    ,'stadiumid' 
+	        			    ,'stadiumcode' 
+	        			    ,'stadiumname' 
+	        			    ,'stadiumaddress' 
+	        			    ,'stadiumdetail' 
+	        			    ,'stadiumstatue' 
+	        			    ,'stadiumx' 
+	        			    ,'stadiumy' 
 	        			      ];// 全部字段
 	var Customerkeycolumn = [ 'customerid' ];// 主键
-	var Customerstore = dataStore(Customerfields, basePath + Customeraction + "?method=selQuery");// 定义Customerstore
+	var Customerstore = dataStore(Customerfields, basePath + "CustomerviewAction.do?method=selQuery");// 定义Customerstore
 	var Customersm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Customercm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Customersm, {// 改
@@ -40,6 +48,13 @@ Ext.onReady(function() {
 		, {
 			header : '场馆ID',
 			dataIndex : 'customerstadium',
+			align : 'center',
+			width : 80,
+			hidden : true
+		}
+		, {
+			header : '场馆',
+			dataIndex : 'stadiumname',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -220,18 +235,18 @@ Ext.onReady(function() {
 				hidden : true
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '场馆ID',
-				id : 'Customercustomerstadium',
-				name : 'customerstadium',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '场馆ID',
+//				id : 'Customercustomerstadium',
+//				name : 'customerstadium',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -244,18 +259,18 @@ Ext.onReady(function() {
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : 'OPENID',
-				id : 'Customeropenid',
-				name : 'openid',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : 'OPENID',
+//				id : 'Customeropenid',
+//				name : 'openid',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -264,6 +279,7 @@ Ext.onReady(function() {
 				fieldLabel : '姓名',
 				id : 'Customercustomername',
 				name : 'customername',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -272,7 +288,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : sexStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'customersex',
 				fieldLabel : '性别',
 				id : 'Customercustomersex',
 				name : 'customersex',
@@ -284,7 +309,7 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'numberfield',
 				fieldLabel : '年龄',
 				id : 'Customercustomerage',
 				name : 'customerage',
@@ -332,10 +357,11 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'numberfield',
 				fieldLabel : '手机',
 				id : 'Customercustomerphone',
 				name : 'customerphone',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -452,58 +478,19 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : statueStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'customerstatue',
 				fieldLabel : '状态',
 				id : 'Customercustomerstatue',
 				name : 'customerstatue',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Customercreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Customercreator',
-				name : 'creator',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新时间',
-				id : 'Customerupdtime',
-				name : 'updtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新人',
-				id : 'Customerupdor',
-				name : 'updor',
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -526,6 +513,18 @@ Ext.onReady(function() {
 		sm : Customersm,
 		bbar : Customerbbar,
 		tbar : [{
+				text : "办卡",
+				iconCls : 'add',
+				handler : function() {
+					var selections = Customergrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
+					}
+					selectCuscard(selections[0].data['customerid']);
+				}
+			},'-',{
 				text : "新增",
 				iconCls : 'add',
 				handler : function() {
