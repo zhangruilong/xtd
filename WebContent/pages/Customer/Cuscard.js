@@ -174,7 +174,7 @@ function selectCuscard(customerid) {
 		frame : true,
 		layout : 'column',
 		items : [ {
-			items : [ {
+			items : [ { 
 				xtype : 'textfield',
 				id : 'Cuscardcuscardid',
 				name : 'cuscardid',
