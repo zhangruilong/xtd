@@ -513,6 +513,18 @@ Ext.onReady(function() {
 		sm : Customersm,
 		bbar : Customerbbar,
 		tbar : [{
+				text : "预约场地",
+				iconCls : 'add',
+				handler : function() {
+					var selections = Customergrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
+					}
+					selectPlace(selections[0].data['customerid']);
+				}
+			},'-',{
 				text : "办卡",
 				iconCls : 'add',
 				handler : function() {

@@ -44,6 +44,50 @@ public class PlaceviewAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//查询所有
+	public void selAlldanche(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placeview.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlaceviewPoco.ORDER);
+		queryinfo.setWheresql("placeproject='单车'");
+		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//查询所有
+	public void selAllyouyong(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placeview.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlaceviewPoco.ORDER);
+		queryinfo.setWheresql("placeproject='游泳'");
+		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//查询所有
+	public void selAllyumaoqiu(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placeview.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlaceviewPoco.ORDER);
+		queryinfo.setWheresql("placeproject='羽毛球'");
+		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//查询所有
+	public void selAllyujia(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placeview.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlaceviewPoco.ORDER);
+		queryinfo.setWheresql("placeproject='瑜伽'");
+		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
 	//分页查询
 	public void selQuery(HttpServletRequest request, HttpServletResponse response){
 		Queryinfo queryinfo = getQueryinfo(request);
