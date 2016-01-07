@@ -339,7 +339,7 @@ function selectCuscard(customerid) {
 	
 	var Cuscardbbar = pagesizebar(Cuscardstore);//定义分页
 	var Cuscardgrid = new Ext.grid.GridPanel({
-		height : document.documentElement.clientHeight - 4,
+		height : document.documentElement.clientHeight - 30,
 		width : '100%',
 		
 		store : Cuscardstore,
@@ -350,8 +350,19 @@ function selectCuscard(customerid) {
 		},
 		cm : Cuscardcm,
 		sm : Cuscardsm,
-		bbar : Cuscardbbar,
 		tbar : [{
+				text : "预约场地",
+				iconCls : 'add',
+				handler : function() {
+					var selections = Customergrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
+					}
+					selectPlace(customerid,selections[0].data['cuscardid']);
+				}
+			},'-',{
 				text : "新增",
 				iconCls : 'add',
 				handler : function() {
@@ -454,22 +465,24 @@ function selectCuscard(customerid) {
 		}; 
 	});
 	Cuscardstore.load();//加载数据
-	var selectgridWindow = new Ext.Window({
-		layout : 'fit', // 设置窗口布局模式
-		width : 820, // 窗口宽度
-		height : 580, // 窗口高度
-		modal : true,
-		title : Cuscardtitle,
-		closeAction: 'hide',
-		closable : true, // 是否可关闭
-		collapsible : true, // 是否可收缩
-		maximizable : true, // 设置是否可以最大化
-		border : false, // 边框线设置
-		constrain : true, // 设置窗口是否可以溢出父容器
-		animateTarget : Ext.getBody(),
-		pageY : 50, // 页面定位Y坐标
-		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
-		items : Cuscardgrid
-	});
-	selectgridWindow.show();
+//	var selectgridWindow = new Ext.Window({
+//		layout : 'fit', // 设置窗口布局模式
+//		width : 820, // 窗口宽度
+//		height : 580, // 窗口高度
+//		modal : true,
+//		title : Cuscardtitle,
+//		closeAction: 'hide',
+//		closable : true, // 是否可关闭
+//		collapsible : true, // 是否可收缩
+//		maximizable : true, // 设置是否可以最大化
+//		border : false, // 边框线设置
+//		constrain : true, // 设置窗口是否可以溢出父容器
+//		animateTarget : Ext.getBody(),
+//		pageY : 50, // 页面定位Y坐标
+//		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
+//		items : Cuscardgrid
+//	});
+//	selectgridWindow.show();
+	
+	return Cuscardgrid;
 }

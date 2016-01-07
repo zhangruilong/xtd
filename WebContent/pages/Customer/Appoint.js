@@ -1,4 +1,4 @@
-function selectAppiont(customerid) {
+function selectAppoint(customerid) {
 	var Appiontclassify = "我的预约";
 	var Appionttitle = "当前位置:业务管理》" + Appiontclassify;
 	var Appiontaction = "AppiontAction.do";
@@ -253,7 +253,7 @@ function selectAppiont(customerid) {
 	
 	var Appiontbbar = pagesizebar(Appiontstore);//定义分页
 	var Appiontgrid = new Ext.grid.GridPanel({
-		height : document.documentElement.clientHeight - 4,
+		height : document.documentElement.clientHeight - 30,
 		width : '100%',
 		store : Appiontstore,
 		stripeRows : true,
@@ -265,12 +265,6 @@ function selectAppiont(customerid) {
 		sm : Appiontsm,
 		bbar : Appiontbbar,
 		tbar : [{
-				text : "预约场地",
-				iconCls : 'add',
-				handler : function() {
-					selectPlace(customerid);
-				}
-			},'-',{
 				text : "新增",
 				iconCls : 'add',
 				handler : function() {
@@ -368,26 +362,28 @@ function selectAppiont(customerid) {
 	Appiontstore.on("beforeload",function(){ 
 		Appiontstore.baseParams = {
 				query : Ext.getCmp("query"+Appiontaction).getValue(),
-				wheresql : "appiontcustomer='"+customerid+"'"
+				wheresql : "appointcustomer='"+customerid+"'"
 		}; 
 	});
 	Appiontstore.load();//加载数据
-	var selectgridWindow = new Ext.Window({
-		layout : 'fit', // 设置窗口布局模式
-		width : 820, // 窗口宽度
-		height : 580, // 窗口高度
-		modal : true,
-		title : Appionttitle,
-		closeAction: 'hide',
-		closable : true, // 是否可关闭
-		collapsible : true, // 是否可收缩
-		maximizable : true, // 设置是否可以最大化
-		border : false, // 边框线设置
-		constrain : true, // 设置窗口是否可以溢出父容器
-		animateTarget : Ext.getBody(),
-		pageY : 50, // 页面定位Y坐标
-		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
-		items : Appiontgrid
-	});
-	selectgridWindow.show();
+//	var selectgridWindow = new Ext.Window({
+//		layout : 'fit', // 设置窗口布局模式
+//		width : 820, // 窗口宽度
+//		height : 580, // 窗口高度
+//		modal : true,
+//		title : Appionttitle,
+//		closeAction: 'hide',
+//		closable : true, // 是否可关闭
+//		collapsible : true, // 是否可收缩
+//		maximizable : true, // 设置是否可以最大化
+//		border : false, // 边框线设置
+//		constrain : true, // 设置窗口是否可以溢出父容器
+//		animateTarget : Ext.getBody(),
+//		pageY : 50, // 页面定位Y坐标
+//		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
+//		items : Appiontgrid
+//	});
+//	selectgridWindow.show();
+	
+	return Appiontgrid;
 }

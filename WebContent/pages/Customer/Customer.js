@@ -71,7 +71,7 @@ Ext.onReady(function() {
 			dataIndex : 'openid',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '姓名',
@@ -513,30 +513,6 @@ Ext.onReady(function() {
 		sm : Customersm,
 		bbar : Customerbbar,
 		tbar : [{
-				text : "预约场地",
-				iconCls : 'add',
-				handler : function() {
-					var selections = Customergrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
-						});
-						return;
-					}
-					selectPlace(selections[0].data['customerid']);
-				}
-			},'-',{
-				text : "办卡",
-				iconCls : 'add',
-				handler : function() {
-					var selections = Customergrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
-						});
-						return;
-					}
-					selectCuscard(selections[0].data['customerid']);
-				}
-			},'-',{
 				text : "新增",
 				iconCls : 'add',
 				handler : function() {
@@ -630,6 +606,10 @@ Ext.onReady(function() {
 			}
 		]
 	});
+	Customergrid.addListener('rowclick',function(rid, rowIndex, columnIndex, e){  
+		var record = Customergrid.getStore().getAt(rowIndex);
+    	 editeInfo(record.get('customerid'));
+	});
 	Customergrid.region = 'center';
 	Customerstore.load();//加载数据
 	Customerstore.on("beforeload",function(){ 
@@ -637,10 +617,48 @@ Ext.onReady(function() {
 				query : Ext.getCmp("query"+Customeraction).getValue()
 		}; 
 	});
+	
+	var editPanel = new Ext.Panel({
+        id:"editPanel",
+        bodyStyle : 'padding:0px;',
+        width: 555
+    });
+	editPanel.region = 'east';
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',
 		bodyStyle : 'padding:0px;',
-		items : [ Customergrid ]
+		items : [ Customergrid ,editPanel ]
 	});
 })
+
+function editeInfo(customerid){
+	var editPanel = Ext.getCmp("editPanel");
+	if(Ext.getCmp("tabs")){
+		editPanel.remove(Ext.getCmp("tabs"),true);
+	}
+	editPanel.add(getTabPanel(customerid));
+	editPanel.doLayout();
+}
+
+function getTabPanel(customerid){
+	var tabs = new Ext.TabPanel({
+	    margins:'3 3 3 0', 
+	    activeTab: 0,
+	    id:"tabs",
+	    frame : true,
+	    defaults:{autoScroll:true},
+	    items:[{
+	        title: '会员卡',
+	        items: selectCuscard(customerid)
+	    },{
+	        title: '课程'
+	    },{
+	        title: '预约记录',
+	        items: selectAppoint(customerid)
+	    },{
+	        title: '消费记录'
+	    }]
+	});
+	return tabs;
+}
