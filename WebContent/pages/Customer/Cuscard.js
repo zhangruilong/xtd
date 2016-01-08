@@ -354,7 +354,7 @@ function selectCuscard(customerid) {
 				text : "预约场地",
 				iconCls : 'add',
 				handler : function() {
-					var selections = Customergrid.getSelectionModel().getSelections();
+					var selections = Cuscardgrid.getSelectionModel().getSelections();
 					if (selections.length != 1) {
 						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
 						});
@@ -394,44 +394,44 @@ function selectCuscard(customerid) {
 					}
 					commonDelete(basePath + Cuscardaction + "?method=delAll",selections,Cuscardstore,Cuscardkeycolumn);
 				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Cuscardaction + "?method=impAll","导入",Cuscardstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Cuscardaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Cuscardgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Cuscardgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Cuscardkeycolumn.length;i++){
-						fid += selections[0].data[Cuscardkeycolumn[i]] + ","
-					}
-					commonAttach(fid, Cuscardclassify);
-				}
+//			},'-',{
+//				text : "导入",
+//				iconCls : 'imp',
+//				handler : function() {
+//					commonImp(basePath + Cuscardaction + "?method=impAll","导入",Cuscardstore);
+//				}
+//			},'-',{
+//				text : "后台导出",
+//				iconCls : 'exp',
+//				handler : function() {
+//					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+//						if (btn == 'yes') {
+//							window.location.href = basePath + Cuscardaction + "?method=expAll"; 
+//						}
+//					});
+//				}
+//			},'-',{
+//				text : "前台导出",
+//				iconCls : 'exp',
+//				handler : function() {
+//					commonExp(Cuscardgrid);
+//				}
+//			},'-',{
+//				text : "附件",
+//				iconCls : 'attach',
+//				handler : function() {
+//					var selections = Cuscardgrid.getSelectionModel().getSelections();
+//					if (selections.length != 1) {
+//						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
+//						});
+//						return;
+//					}
+//					var fid = '';
+//					for (var i=0;i<Cuscardkeycolumn.length;i++){
+//						fid += selections[0].data[Cuscardkeycolumn[i]] + ","
+//					}
+//					commonAttach(fid, Cuscardclassify);
+//				}
 			},'->',{
 				xtype : 'textfield',
 				id : 'query'+Cuscardaction,

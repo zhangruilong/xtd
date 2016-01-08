@@ -544,28 +544,28 @@ Ext.onReady(function() {
 					commonDelete(basePath + Customeraction + "?method=delAll",selections,Customerstore,Customerkeycolumn);
 				}
 			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Customeraction + "?method=impAll","导入",Customerstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Customeraction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Customergrid);
-				}
-			},'-',{
+//				text : "导入",
+//				iconCls : 'imp',
+//				handler : function() {
+//					commonImp(basePath + Customeraction + "?method=impAll","导入",Customerstore);
+//				}
+//			},'-',{
+//				text : "后台导出",
+//				iconCls : 'exp',
+//				handler : function() {
+//					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
+//						if (btn == 'yes') {
+//							window.location.href = basePath + Customeraction + "?method=expAll"; 
+//						}
+//					});
+//				}
+//			},'-',{
+//				text : "前台导出",
+//				iconCls : 'exp',
+//				handler : function() {
+//					commonExp(Customergrid);
+//				}
+//			},'-',{
 				text : "附件",
 				iconCls : 'attach',
 				handler : function() {
