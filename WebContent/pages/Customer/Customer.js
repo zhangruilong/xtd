@@ -652,7 +652,8 @@ function getTabPanel(customerid){
 	        title: '会员卡',
 	        items: selectCuscard(customerid)
 	    },{
-	        title: '课程'
+	        title: '课程',
+	        items: selectMycourse(customerid)
 	    },{
 	        title: '预约记录',
 	        items: selectAppoint(customerid)

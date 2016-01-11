@@ -265,13 +265,6 @@ function selectAppoint(customerid) {
 		sm : Appiontsm,
 		bbar : Appiontbbar,
 		tbar : [{
-				text : "新增",
-				iconCls : 'add',
-				handler : function() {
-					AppiontdataForm.form.reset();
-					createWindow(basePath + Appiontaction + "?method=insAll", "新增", AppiontdataForm, Appiontstore);
-				}
-			},'-',{
 				text : "修改",
 				iconCls : 'edit',
 				handler : function() {
@@ -316,22 +309,6 @@ function selectAppoint(customerid) {
 				iconCls : 'exp',
 				handler : function() {
 					commonExp(Appiontgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Appiontgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Appiontkeycolumn.length;i++){
-						fid += selections[0].data[Appiontkeycolumn[i]] + ","
-					}
-					commonAttach(fid, Appiontclassify);
 				}
 			},'->',{
 				xtype : 'textfield',
