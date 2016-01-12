@@ -208,8 +208,7 @@ function selectMycourse(customerid) {
 				text : "预约课程",
 				iconCls : 'add',
 				handler : function() {
-					MycoursedataForm.form.reset();
-					createWindow(basePath + Mycourseaction + "?method=insAll", "新增", MycoursedataForm, Mycoursestore);
+					selectCourse();
 				}
 			},'-',{
 				text : "购买课程",
