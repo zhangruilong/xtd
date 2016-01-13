@@ -394,6 +394,10 @@ Ext.onReady(function() {
 			}
 		]
 	});
+	Coachgrid.addListener('rowclick',function(rid, rowIndex, columnIndex, e){  
+		var record = Coachgrid.getStore().getAt(rowIndex);
+//    	 editeInfo(record.get('coachid'));
+	});
 	Coachgrid.region = 'center';
 	Coachstore.load();//加载数据
 	Coachstore.on("beforeload",function(){ 
@@ -405,6 +409,6 @@ Ext.onReady(function() {
 		resizable : true,
 		layout : 'border',
 		bodyStyle : 'padding:0px;',
-		items : [ Coachgrid ]
+		items : [ Coachgrid,Coursegrid ]
 	});
 })

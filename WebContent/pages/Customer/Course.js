@@ -331,7 +331,31 @@ function selectCourse() {
 		animateTarget : Ext.getBody(),
 		pageY : 50, // 页面定位Y坐标
 		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
-		items : Coursegrid
+		items : Coursegrid, // 嵌入的表单面板
+		buttons : [
+					{
+						text : '确定',
+						iconCls : 'ok',
+						handler : function() {
+							var selectRows = Coursegrid.getSelectionModel()
+									.getSelections();
+							if (selectRows.length != 1) {
+								Ext.Msg.alert('提示', '请选择一条！', function() {
+								});
+								return;
+							}
+//							Ext.getCmp('Coachcoachstadiumname').setValue(selectRows[0].get("stadiumname"));
+//							Ext.getCmp('Coachcoachstadium').setValue(selectRows[0].get("stadiumid"));
+							selectgridWindow.close();
+						}
+					}, '-', {
+						text : '关闭',
+						iconCls : 'close',
+						handler : function() {
+							selectgridWindow.close();
+						}
+					}]
+	});
 	});
 	selectgridWindow.show();
 }

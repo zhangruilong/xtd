@@ -12,9 +12,13 @@ public class Allcourse
     */
    private String allcourseid; 
    /**
-    * 教练
+    * 教练ID
     */
    private String allcoursecoach;   
+   /**
+    * 课程名
+    */
+   private String allcoursename;   
    /**
     * 项目
     */
@@ -62,7 +66,7 @@ public class Allcourse
 	}
 
 	/**
-	 *设置"教练"属性
+	 *设置"教练ID"属性
 	 *@param allcoursecoach 实体的Allcoursecoach属性
 	 */
 	public void setAllcoursecoach(String allcoursecoach)
@@ -71,11 +75,28 @@ public class Allcourse
 	}
 	
 	/**
-	 *获取"教练"属性
+	 *获取"教练ID"属性
 	 */
 	public String getAllcoursecoach()
 	{
 		return this.allcoursecoach;
+	}	   
+
+	/**
+	 *设置"课程名"属性
+	 *@param allcoursename 实体的Allcoursename属性
+	 */
+	public void setAllcoursename(String allcoursename)
+	{
+		this.allcoursename = allcoursename;
+	}
+	
+	/**
+	 *获取"课程名"属性
+	 */
+	public String getAllcoursename()
+	{
+		return this.allcoursename;
 	}	   
 
 	/**
@@ -203,6 +224,7 @@ public class Allcourse
 	public Allcourse(
 		String allcourseid
 	 	,String allcoursecoach
+	 	,String allcoursename
 	 	,String allcourseproject
 	 	,String allcoursenum
 	 	,String allcoursemoney
@@ -214,6 +236,7 @@ public class Allcourse
 		super();
 		this.allcourseid = allcourseid;
 	 	this.allcoursecoach = allcoursecoach;
+	 	this.allcoursename = allcoursename;
 	 	this.allcourseproject = allcourseproject;
 	 	this.allcoursenum = allcoursenum;
 	 	this.allcoursemoney = allcoursemoney;

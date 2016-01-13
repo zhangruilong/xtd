@@ -4,16 +4,20 @@ function selectMycourse(customerid) {
 	var Mycourseaction = "MycourseAction.do";
 	var Mycoursefields = ['mycourseid'
 	        			    ,'mycoursecoach' 
-	        			    ,'mycourseroject' 
+	        			    ,'mycoursename' 
+	        			    ,'mycourseproject' 
 	        			    ,'mycoursenum' 
 	        			    ,'mycoursemoney' 
 	        			    ,'createtime' 
 	        			    ,'creator' 
 	        			    ,'updtime' 
 	        			    ,'updor' 
+	        			    ,'coachcode' 
+	        			    ,'coachname' 
+	        			    ,'coachphone' 
 	        			      ];// 全部字段
 	var Mycoursekeycolumn = [ 'mycourseid' ];// 主键
-	var Mycoursestore = dataStore(Mycoursefields, basePath + Mycourseaction + "?method=selQuery");// 定义Mycoursestore
+	var Mycoursestore = dataStore(Mycoursefields, basePath + "MycourseviewAction.do" + "?method=selQuery");// 定义Mycoursestore
 	var Mycoursesm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Mycoursecm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Mycoursesm, {// 改
@@ -26,11 +30,39 @@ function selectMycourse(customerid) {
 			dataIndex : 'mycoursecoach',
 			align : 'center',
 			width : 80,
+			hidden : true
+		}
+		, {
+			header : '教练编码',
+			dataIndex : 'coachcode',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '教练姓名',
+			dataIndex : 'coachname',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '教练手机',
+			dataIndex : 'coachphone',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '课程',
+			dataIndex : 'mycoursename',
+			align : 'center',
+			width : 80,
 			sortable : true
 		}
 		, {
 			header : '项目',
-			dataIndex : 'mycourseroject',
+			dataIndex : 'mycourseproject',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -110,8 +142,8 @@ function selectMycourse(customerid) {
 			items : [ {
 				xtype : 'textfield',
 				fieldLabel : '项目',
-				id : 'Mycoursemycourseroject',
-				name : 'mycourseroject',
+				id : 'Mycoursemycourseproject',
+				name : 'mycourseproject',
 				maxLength : 100,
 				anchor : '95%'
 			} ]

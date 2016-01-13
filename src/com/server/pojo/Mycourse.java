@@ -12,13 +12,17 @@ public class Mycourse
     */
    private String mycourseid; 
    /**
-    * 教练
+    * 教练ID
     */
    private String mycoursecoach;   
    /**
+    * 课程名
+    */
+   private String mycoursename;   
+   /**
     * 项目
     */
-   private String mycourseroject;   
+   private String mycourseproject;   
    /**
     * 课时
     */
@@ -62,7 +66,7 @@ public class Mycourse
 	}
 
 	/**
-	 *设置"教练"属性
+	 *设置"教练ID"属性
 	 *@param mycoursecoach 实体的Mycoursecoach属性
 	 */
 	public void setMycoursecoach(String mycoursecoach)
@@ -71,7 +75,7 @@ public class Mycourse
 	}
 	
 	/**
-	 *获取"教练"属性
+	 *获取"教练ID"属性
 	 */
 	public String getMycoursecoach()
 	{
@@ -79,20 +83,37 @@ public class Mycourse
 	}	   
 
 	/**
-	 *设置"项目"属性
-	 *@param mycourseroject 实体的Mycourseroject属性
+	 *设置"课程名"属性
+	 *@param mycoursename 实体的Mycoursename属性
 	 */
-	public void setMycourseroject(String mycourseroject)
+	public void setMycoursename(String mycoursename)
 	{
-		this.mycourseroject = mycourseroject;
+		this.mycoursename = mycoursename;
+	}
+	
+	/**
+	 *获取"课程名"属性
+	 */
+	public String getMycoursename()
+	{
+		return this.mycoursename;
+	}	   
+
+	/**
+	 *设置"项目"属性
+	 *@param mycourseproject 实体的Mycourseproject属性
+	 */
+	public void setMycourseproject(String mycourseproject)
+	{
+		this.mycourseproject = mycourseproject;
 	}
 	
 	/**
 	 *获取"项目"属性
 	 */
-	public String getMycourseroject()
+	public String getMycourseproject()
 	{
-		return this.mycourseroject;
+		return this.mycourseproject;
 	}	   
 
 	/**
@@ -203,7 +224,8 @@ public class Mycourse
 	public Mycourse(
 		String mycourseid
 	 	,String mycoursecoach
-	 	,String mycourseroject
+	 	,String mycoursename
+	 	,String mycourseproject
 	 	,String mycoursenum
 	 	,String mycoursemoney
 	 	,String createtime
@@ -214,7 +236,8 @@ public class Mycourse
 		super();
 		this.mycourseid = mycourseid;
 	 	this.mycoursecoach = mycoursecoach;
-	 	this.mycourseroject = mycourseroject;
+	 	this.mycoursename = mycoursename;
+	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
 	 	this.mycoursemoney = mycoursemoney;
 	 	this.createtime = createtime;

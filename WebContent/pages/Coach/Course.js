@@ -1,4 +1,3 @@
-Ext.onReady(function() {
 	var Courseclassify = "每日课程";
 	var Coursetitle = "当前位置:业务管理》" + Courseclassify;
 	var Courseaction = "CourseAction.do";
@@ -134,6 +133,30 @@ Ext.onReady(function() {
 				name : 'courseplace',
 				maxLength : 100,
 				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .9,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '场地',
+				id : 'Coursecourseplacename',
+				name : 'courseplacename',
+				readOnly:true,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .1,
+			layout : 'form',
+			items : [ {
+				xtype : 'button',
+				iconCls : 'select',
+				maxLength : 100,
+				handler : selectPlace.createCallback(),
+				scope : this,
+				anchor : '25%'
 			} ]
 		}
 		, {
@@ -274,7 +297,7 @@ Ext.onReady(function() {
 	var Coursebbar = pagesizebar(Coursestore);//定义分页
 	var Coursegrid = new Ext.grid.GridPanel({
 		height : document.documentElement.clientHeight - 4,
-		width : '100%',
+		width : '50%',
 		title : Coursetitle,
 		store : Coursestore,
 		stripeRows : true,
@@ -379,17 +402,10 @@ Ext.onReady(function() {
 			}
 		]
 	});
-	Coursegrid.region = 'center';
+	Coursegrid.region = 'east';
 	Coursestore.load();//加载数据
 	Coursestore.on("beforeload",function(){ 
 		Coursestore.baseParams = {
 				query : Ext.getCmp("query"+Courseaction).getValue()
 		}; 
 	});
-	var win = new Ext.Viewport({//只能有一个viewport
-		resizable : true,
-		layout : 'border',
-		bodyStyle : 'padding:0px;',
-		items : [ Coursegrid ]
-	});
-})

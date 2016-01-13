@@ -2,35 +2,35 @@ package com.server.pojo;
 
 import java.sql.Date;
 /**
- * allcourseview 实体类
+ * 我的私教课 实体类
  *@author ZhangRuiLong
  */
-public class Allcourseview
+public class Mycourseview
 {
    /**
-    * allcourseid,主键
+    * mycourseid,主键
     */
-   private String allcourseid; 
+   private String mycourseid; 
    /**
-    * allcoursecoach
+    * mycoursecoach
     */
-   private String allcoursecoach;   
+   private String mycoursecoach;   
    /**
-    * allcoursename
+    * mycoursename
     */
-   private String allcoursename;   
+   private String mycoursename;   
    /**
-    * allcourseproject
+    * mycourseroject
     */
-   private String allcourseproject;   
+   private String mycourseroject;   
    /**
-    * allcoursenum
+    * mycoursenum
     */
-   private String allcoursenum;   
+   private String mycoursenum;   
    /**
-    * allcoursemoney
+    * mycoursemoney
     */
-   private String allcoursemoney;   
+   private String mycoursemoney;   
    /**
     * createtime
     */
@@ -61,105 +61,105 @@ public class Allcourseview
    private String coachphone;   
     //属性方法	    
      /**
-	 *设置主键"allcourseid"属性
-	 *@param allcourseid 实体的Allcourseid属性
+	 *设置主键"mycourseid"属性
+	 *@param mycourseid 实体的Mycourseid属性
 	 */
-	public void setAllcourseid(String allcourseid)
+	public void setMycourseid(String mycourseid)
 	{
-		this.allcourseid = allcourseid;
+		this.mycourseid = mycourseid;
 	}
 	
 	/**
-	 *获取主键"allcourseid"属性
+	 *获取主键"mycourseid"属性
 	 */
-	public String getAllcourseid()
+	public String getMycourseid()
 	{
-		return this.allcourseid;
+		return this.mycourseid;
 	}
 
 	/**
-	 *设置"allcoursecoach"属性
-	 *@param allcoursecoach 实体的Allcoursecoach属性
+	 *设置"mycoursecoach"属性
+	 *@param mycoursecoach 实体的Mycoursecoach属性
 	 */
-	public void setAllcoursecoach(String allcoursecoach)
+	public void setMycoursecoach(String mycoursecoach)
 	{
-		this.allcoursecoach = allcoursecoach;
+		this.mycoursecoach = mycoursecoach;
 	}
 	
 	/**
-	 *获取"allcoursecoach"属性
+	 *获取"mycoursecoach"属性
 	 */
-	public String getAllcoursecoach()
+	public String getMycoursecoach()
 	{
-		return this.allcoursecoach;
+		return this.mycoursecoach;
 	}	   
 
 	/**
-	 *设置"allcoursename"属性
-	 *@param allcoursename 实体的Allcoursename属性
+	 *设置"mycoursename"属性
+	 *@param mycoursename 实体的Mycoursename属性
 	 */
-	public void setAllcoursename(String allcoursename)
+	public void setMycoursename(String mycoursename)
 	{
-		this.allcoursename = allcoursename;
+		this.mycoursename = mycoursename;
 	}
 	
 	/**
-	 *获取"allcoursename"属性
+	 *获取"mycoursename"属性
 	 */
-	public String getAllcoursename()
+	public String getMycoursename()
 	{
-		return this.allcoursename;
+		return this.mycoursename;
 	}	   
 
 	/**
-	 *设置"allcourseproject"属性
-	 *@param allcourseproject 实体的Allcourseproject属性
+	 *设置"mycourseroject"属性
+	 *@param mycourseroject 实体的Mycourseroject属性
 	 */
-	public void setAllcourseproject(String allcourseproject)
+	public void setMycourseroject(String mycourseroject)
 	{
-		this.allcourseproject = allcourseproject;
+		this.mycourseroject = mycourseroject;
 	}
 	
 	/**
-	 *获取"allcourseproject"属性
+	 *获取"mycourseroject"属性
 	 */
-	public String getAllcourseproject()
+	public String getMycourseroject()
 	{
-		return this.allcourseproject;
+		return this.mycourseroject;
 	}	   
 
 	/**
-	 *设置"allcoursenum"属性
-	 *@param allcoursenum 实体的Allcoursenum属性
+	 *设置"mycoursenum"属性
+	 *@param mycoursenum 实体的Mycoursenum属性
 	 */
-	public void setAllcoursenum(String allcoursenum)
+	public void setMycoursenum(String mycoursenum)
 	{
-		this.allcoursenum = allcoursenum;
+		this.mycoursenum = mycoursenum;
 	}
 	
 	/**
-	 *获取"allcoursenum"属性
+	 *获取"mycoursenum"属性
 	 */
-	public String getAllcoursenum()
+	public String getMycoursenum()
 	{
-		return this.allcoursenum;
+		return this.mycoursenum;
 	}	   
 
 	/**
-	 *设置"allcoursemoney"属性
-	 *@param allcoursemoney 实体的Allcoursemoney属性
+	 *设置"mycoursemoney"属性
+	 *@param mycoursemoney 实体的Mycoursemoney属性
 	 */
-	public void setAllcoursemoney(String allcoursemoney)
+	public void setMycoursemoney(String mycoursemoney)
 	{
-		this.allcoursemoney = allcoursemoney;
+		this.mycoursemoney = mycoursemoney;
 	}
 	
 	/**
-	 *获取"allcoursemoney"属性
+	 *获取"mycoursemoney"属性
 	 */
-	public String getAllcoursemoney()
+	public String getMycoursemoney()
 	{
-		return this.allcoursemoney;
+		return this.mycoursemoney;
 	}	   
 
 	/**
@@ -280,17 +280,17 @@ public class Allcourseview
 	{
 		return this.coachphone;
 	}	   
-	public Allcourseview() {
+	public Mycourseview() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Allcourseview(
-		String allcourseid
-	 	,String allcoursecoach
-	 	,String allcoursename
-	 	,String allcourseproject
-	 	,String allcoursenum
-	 	,String allcoursemoney
+	public Mycourseview(
+		String mycourseid
+	 	,String mycoursecoach
+	 	,String mycoursename
+	 	,String mycourseroject
+	 	,String mycoursenum
+	 	,String mycoursemoney
 	 	,String createtime
 	 	,String creator
 	 	,String updtime
@@ -300,12 +300,12 @@ public class Allcourseview
 	 	,String coachphone
 		 ){
 		super();
-		this.allcourseid = allcourseid;
-	 	this.allcoursecoach = allcoursecoach;
-	 	this.allcoursename = allcoursename;
-	 	this.allcourseproject = allcourseproject;
-	 	this.allcoursenum = allcoursenum;
-	 	this.allcoursemoney = allcoursemoney;
+		this.mycourseid = mycourseid;
+	 	this.mycoursecoach = mycoursecoach;
+	 	this.mycoursename = mycoursename;
+	 	this.mycourseroject = mycourseroject;
+	 	this.mycoursenum = mycoursenum;
+	 	this.mycoursemoney = mycoursemoney;
 	 	this.createtime = createtime;
 	 	this.creator = creator;
 	 	this.updtime = updtime;

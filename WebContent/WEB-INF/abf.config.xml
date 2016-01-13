@@ -52,6 +52,7 @@
 	<bean id="CuscardchangeAction" class="com.server.action.CuscardchangeAction" />
 	<bean id="CuscardcontinueAction" class="com.server.action.CuscardcontinueAction" />
 	<bean id="CuscarduserAction" class="com.server.action.CuscarduserAction" />
+	<bean id="MycourseAction" class="com.server.action.MycourseAction" />
 	
 	<bean id="PlaceviewAction" class="com.server.action.PlaceviewAction" />
 	<bean id="EmpviewAction" class="com.server.action.EmpviewAction" />
@@ -62,5 +63,6 @@
 	<bean id="CuscardchangeviewAction" class="com.server.action.CuscardchangeviewAction" />
 	<bean id="CuscardcontinueviewAction" class="com.server.action.CuscardcontinueviewAction" />
 	<bean id="CuscarduserviewAction" class="com.server.action.CuscarduserviewAction" />
+	<bean id="MycourseviewAction" class="com.server.action.MycourseviewAction" />
 	
 </beans>

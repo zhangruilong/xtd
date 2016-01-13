@@ -4,6 +4,7 @@ Ext.onReady(function() {
 	var Allcourseaction = "AllcourseAction.do";
 	var Allcoursefields = ['allcourseid'
 	        			    ,'allcoursecoach' 
+	        			    ,'allcoursename'
 	        			    ,'allcourseproject' 
 	        			    ,'allcoursenum' 
 	        			    ,'allcoursemoney' 
@@ -48,6 +49,13 @@ Ext.onReady(function() {
 		, {
 			header : '教练手机',
 			dataIndex : 'coachphone',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '课程',
+			dataIndex : 'allcoursename',
 			align : 'center',
 			width : 80,
 			sortable : true
