@@ -7,6 +7,9 @@ function selectAppoint(customerid) {
 	        			    ,'appointcard' 
 	        			    ,'appointplace' 
 	        			    ,'appointcourse' 
+	        			    ,'appointplacename' 
+	        			    ,'appointcoursename' 
+	        			    ,'appointcoachname' 
 	        			    ,'appointproject' 
 	        			    ,'appointbegin' 
 	        			    ,'appointend' 
@@ -48,6 +51,27 @@ function selectAppoint(customerid) {
 		, {
 			header : '课程ID',
 			dataIndex : 'appointcourse',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '场地',
+			dataIndex : 'appointplacename',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '课程',
+			dataIndex : 'appointcoursename',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '教练',
+			dataIndex : 'appointcoachname',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -160,6 +184,42 @@ function selectAppoint(customerid) {
 				fieldLabel : '课程ID',
 				id : 'Appiontappointcourse',
 				name : 'appointcourse',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '场地',
+				id : 'Appiontappointplacename',
+				name : 'appointplacename',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '课程',
+				id : 'Appiontappointcoursename',
+				name : 'appointcoursename',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '教练',
+				id : 'Appiontappointcoachname',
+				name : 'appointcoachname',
 				maxLength : 100,
 				anchor : '95%'
 			} ]

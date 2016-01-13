@@ -28,6 +28,18 @@ public class Appiont
     */
    private String appointcourse;   
    /**
+    * 场地
+    */
+   private String appointplacename;   
+   /**
+    * 课程
+    */
+   private String appointcoursename;   
+   /**
+    * 教练
+    */
+   private String appointcoachname;   
+   /**
     * 项目
     */
    private String appointproject;   
@@ -139,6 +151,57 @@ public class Appiont
 	public String getAppointcourse()
 	{
 		return this.appointcourse;
+	}	   
+
+	/**
+	 *设置"场地"属性
+	 *@param appointplacename 实体的Appointplacename属性
+	 */
+	public void setAppointplacename(String appointplacename)
+	{
+		this.appointplacename = appointplacename;
+	}
+	
+	/**
+	 *获取"场地"属性
+	 */
+	public String getAppointplacename()
+	{
+		return this.appointplacename;
+	}	   
+
+	/**
+	 *设置"课程"属性
+	 *@param appointcoursename 实体的Appointcoursename属性
+	 */
+	public void setAppointcoursename(String appointcoursename)
+	{
+		this.appointcoursename = appointcoursename;
+	}
+	
+	/**
+	 *获取"课程"属性
+	 */
+	public String getAppointcoursename()
+	{
+		return this.appointcoursename;
+	}	   
+
+	/**
+	 *设置"教练"属性
+	 *@param appointcoachname 实体的Appointcoachname属性
+	 */
+	public void setAppointcoachname(String appointcoachname)
+	{
+		this.appointcoachname = appointcoachname;
+	}
+	
+	/**
+	 *获取"教练"属性
+	 */
+	public String getAppointcoachname()
+	{
+		return this.appointcoachname;
 	}	   
 
 	/**
@@ -269,6 +332,9 @@ public class Appiont
 	 	,String appointcard
 	 	,String appointplace
 	 	,String appointcourse
+	 	,String appointplacename
+	 	,String appointcoursename
+	 	,String appointcoachname
 	 	,String appointproject
 	 	,String appointbegin
 	 	,String appointend
@@ -283,6 +349,9 @@ public class Appiont
 	 	this.appointcard = appointcard;
 	 	this.appointplace = appointplace;
 	 	this.appointcourse = appointcourse;
+	 	this.appointplacename = appointplacename;
+	 	this.appointcoursename = appointcoursename;
+	 	this.appointcoachname = appointcoachname;
 	 	this.appointproject = appointproject;
 	 	this.appointbegin = appointbegin;
 	 	this.appointend = appointend;
