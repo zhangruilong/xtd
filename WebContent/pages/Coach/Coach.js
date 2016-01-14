@@ -396,7 +396,7 @@ Ext.onReady(function() {
 	});
 	Coachgrid.addListener('rowclick',function(rid, rowIndex, columnIndex, e){  
 		var record = Coachgrid.getStore().getAt(rowIndex);
-//    	 editeInfo(record.get('coachid'));
+    	 editeInfo(record.get('coachid'));
 	});
 	Coachgrid.region = 'center';
 	Coachstore.load();//加载数据
@@ -405,10 +405,24 @@ Ext.onReady(function() {
 				query : Ext.getCmp("query"+Coachaction).getValue()
 		}; 
 	});
+	var editPanel = new Ext.Panel({
+        id:"editPanel",
+        bodyStyle : 'padding:0px;',
+        width: 555
+    });
+	editPanel.region = 'east';
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',
 		bodyStyle : 'padding:0px;',
-		items : [ Coachgrid,Coursegrid ]
+		items : [ Coachgrid,editPanel ]
 	});
 })
+function editeInfo(params){
+	var editPanel = Ext.getCmp("editPanel");
+	if(Ext.getCmp("tabs")){
+		editPanel.remove(Ext.getCmp("tabs"),true);
+	}
+	editPanel.add(selectCourse(params));
+	editPanel.doLayout();
+}

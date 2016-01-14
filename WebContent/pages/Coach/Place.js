@@ -282,10 +282,11 @@ function selectPlace() {
 									});
 									return;
 								}
-								alert(selectRows[0].get("placename"));
-//								Ext.getCmp('Empempstadiumname').setValue(selectRows[0].get("stadiumname"));
-//								Ext.getCmp('Empempstadium').setValue(selectRows[0].get("stadiumid"));
-								selectgridWindow.close();
+								Ext.getCmp('Coursecourseplacename').setValue(selectRows[0].get("placename"));
+								Ext.getCmp('Coursecourseplace').setValue(selectRows[0].get("placeid"));
+								Ext.getCmp('Coursecoursebegin').setValue(selectRows[0].get("placebegin"));
+								Ext.getCmp('Coursecourseend').setValue(selectRows[0].get("placeend"));
+								mTabPanelWindow.close();
 							}
 						}, '-', {
 							text : '关闭',
@@ -309,10 +310,9 @@ function selectPlace() {
 									});
 									return;
 								}
-								alert(selectRows[0].get("placename"));
-//								Ext.getCmp('Empempstadiumname').setValue(selectRows[0].get("stadiumname"));
-//								Ext.getCmp('Empempstadium').setValue(selectRows[0].get("stadiumid"));
-								selectgridWindow.close();
+								Ext.getCmp('Coursecourseplacename').setValue(selectRows[0].get("placename"));
+								Ext.getCmp('Coursecourseplace').setValue(selectRows[0].get("placeid"));
+								mTabPanelWindow.close();
 							}
 						}, '-', {
 							text : '关闭',
@@ -336,10 +336,11 @@ function selectPlace() {
 									});
 									return;
 								}
-								alert(selectRows[0].get("placename"));
-//								Ext.getCmp('Empempstadiumname').setValue(selectRows[0].get("stadiumname"));
-//								Ext.getCmp('Empempstadium').setValue(selectRows[0].get("stadiumid"));
-								selectgridWindow.close();
+								Ext.getCmp('Coursecourseplacename').setValue(selectRows[0].get("placename"));
+								Ext.getCmp('Coursecourseplace').setValue(selectRows[0].get("placeid"));
+								Ext.getCmp('Coursecoursebegin').setValue(selectRows[0].get("placebegin"));
+								Ext.getCmp('Coursecourseend').setValue(selectRows[0].get("placeend"));
+								mTabPanelWindow.close();
 							}
 						}, '-', {
 							text : '关闭',
@@ -363,10 +364,11 @@ function selectPlace() {
 									});
 									return;
 								}
-								alert(selectRows[0].get("placename"));
-//								Ext.getCmp('Empempstadiumname').setValue(selectRows[0].get("stadiumname"));
-//								Ext.getCmp('Empempstadium').setValue(selectRows[0].get("stadiumid"));
-								selectgridWindow.close();
+								Ext.getCmp('Coursecourseplacename').setValue(selectRows[0].get("placename"));
+								Ext.getCmp('Coursecourseplace').setValue(selectRows[0].get("placeid"));
+								Ext.getCmp('Coursecoursebegin').setValue(selectRows[0].get("placebegin"));
+								Ext.getCmp('Coursecourseend').setValue(selectRows[0].get("placeend"));
+								mTabPanelWindow.close();
 							}
 						}, '-', {
 							text : '关闭',
@@ -406,35 +408,4 @@ function selectPlace() {
 		items : mTabPanel
 	});
 	mTabPanelWindow.show();
-}
-function addAppoint(url, selections, store, keycolumn) {
-	Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要预约当前选择的场地？', function(btn, text) {
-		if (btn == 'yes') {
-			var ids = '[';
-//			selections[0].data["placeid"];
-			for (var i = 0; i < selections.length; i++) {
-				ids += "{";
-				for (var j = 0; j < keycolumn.length; j++){
-					ids += "'"+keycolumn[j]+"':'" + selections[i].data[keycolumn[j]] + "',"
-				}
-				ids = ids.substr(0, ids.length - 1) + "},";
-			};
-			Ext.Ajax.request({
-				url : basePath + "AppiontAction.do" + "?method=insAll",
-				method : 'POST',
-				params : {
-					json : ids.substr(0, ids.length - 1) + "]"
-				},
-				success : function(response) {
-					var resp = Ext.decode(response.responseText); 
-					Ext.Msg.alert('提示', resp.msg, function(){
-						store.reload();
-					});
-				},
-				failure : function(response) {
-					Ext.Msg.alert('提示', '网络出现问题，请稍后再试');
-				}
-			});
-		}
-	});
 }

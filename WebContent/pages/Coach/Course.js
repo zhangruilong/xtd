@@ -1,3 +1,4 @@
+function selectCourse(params) {	
 	var Courseclassify = "每日课程";
 	var Coursetitle = "当前位置:业务管理》" + Courseclassify;
 	var Courseaction = "CourseAction.do";
@@ -127,7 +128,7 @@
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'hidden',
 				fieldLabel : '场地ID',
 				id : 'Coursecourseplace',
 				name : 'courseplace',
@@ -163,7 +164,7 @@
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'hidden',
 				fieldLabel : '教练ID',
 				id : 'Coursecoursecoach',
 				name : 'coursecoach',
@@ -231,73 +232,25 @@
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '状态',
-				id : 'Coursecoursestatue',
-				name : 'coursestatue',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Coursecreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Coursecreator',
-				name : 'creator',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新时间',
-				id : 'Courseupdtime',
-				name : 'updtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新人',
-				id : 'Courseupdor',
-				name : 'updor',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '状态',
+//				id : 'Coursecoursestatue',
+//				name : 'coursestatue',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		]
 	});
 	
 	var Coursebbar = pagesizebar(Coursestore);//定义分页
 	var Coursegrid = new Ext.grid.GridPanel({
 		height : document.documentElement.clientHeight - 4,
-		width : '50%',
+		width : '100%',
 		title : Coursetitle,
 		store : Coursestore,
 		stripeRows : true,
@@ -312,8 +265,9 @@
 				text : "新增",
 				iconCls : 'add',
 				handler : function() {
-					CoursedataForm.form.reset();
+					CoursedataForm.form.reset();params
 					createWindow(basePath + Courseaction + "?method=insAll", "新增", CoursedataForm, Coursestore);
+					CoursedataForm.getForm().setValues({Coursecoursecoach:params});
 				}
 			},'-',{
 				text : "修改",
@@ -409,3 +363,5 @@
 				query : Ext.getCmp("query"+Courseaction).getValue()
 		}; 
 	});
+	return Coursegrid;
+}
