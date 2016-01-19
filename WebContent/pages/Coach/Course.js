@@ -30,14 +30,14 @@ function selectCourse(params) {
 			dataIndex : 'courseplace',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '教练ID',
 			dataIndex : 'coursecoach',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '编码',
@@ -53,62 +53,62 @@ function selectCourse(params) {
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '开始时间',
-			dataIndex : 'coursebegin',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '结束时间',
-			dataIndex : 'courseend',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '开始时间',
+//			dataIndex : 'coursebegin',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '结束时间',
+//			dataIndex : 'courseend',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '备注',
 			dataIndex : 'coursedetail',
 			align : 'center',
-			width : 80,
+			width : 280,
 			sortable : true
 		}
-		, {
-			header : '状态',
-			dataIndex : 'coursestatue',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '创建时间',
-			dataIndex : 'createtime',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '创建人',
-			dataIndex : 'creator',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新时间',
-			dataIndex : 'updtime',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新人',
-			dataIndex : 'updor',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '状态',
+//			dataIndex : 'coursestatue',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '创建时间',
+//			dataIndex : 'createtime',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '创建人',
+//			dataIndex : 'creator',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '更新时间',
+//			dataIndex : 'updtime',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '更新人',
+//			dataIndex : 'updor',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		]
 	});
 	var CoursedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
@@ -196,30 +196,30 @@ function selectCourse(params) {
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '开始时间',
-				id : 'Coursecoursebegin',
-				name : 'coursebegin',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '结束时间',
-				id : 'Coursecourseend',
-				name : 'courseend',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '开始时间',
+//				id : 'Coursecoursebegin',
+//				name : 'coursebegin',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '结束时间',
+//				id : 'Coursecourseend',
+//				name : 'courseend',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',

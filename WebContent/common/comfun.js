@@ -6,6 +6,10 @@ var sexStore = new Ext.data.ArrayStore({//性别下拉
 	fields:["name"],
 	data:[["男"],["女"]]
 });
+var projectStore = new Ext.data.ArrayStore({//项目下拉
+	fields:["name"],
+	data:[["游泳"],["瑜伽"],["单车"],["羽毛球"]]
+});
 //定义store
 function dataStore(fields,url) {
 	var store = new Ext.data.JsonStore({

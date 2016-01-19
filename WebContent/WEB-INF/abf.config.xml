@@ -53,6 +53,7 @@
 	<bean id="CuscardcontinueAction" class="com.server.action.CuscardcontinueAction" />
 	<bean id="CuscarduserAction" class="com.server.action.CuscarduserAction" />
 	<bean id="MycourseAction" class="com.server.action.MycourseAction" />
+	<bean id="PlacetimeAction" class="com.server.action.PlacetimeAction" />
 	
 	<bean id="PlaceviewAction" class="com.server.action.PlaceviewAction" />
 	<bean id="EmpviewAction" class="com.server.action.EmpviewAction" />
