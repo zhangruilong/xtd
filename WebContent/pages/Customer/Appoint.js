@@ -32,28 +32,28 @@ function selectAppoint(customerid) {
 			dataIndex : 'appointcustomer',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '会员卡ID',
 			dataIndex : 'appointcard',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '场地ID',
 			dataIndex : 'appointplace',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '课程ID',
 			dataIndex : 'appointcourse',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '场地',
@@ -83,20 +83,20 @@ function selectAppoint(customerid) {
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '开始时间',
-			dataIndex : 'appointbegin',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '结束时间',
-			dataIndex : 'appointend',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '开始时间',
+//			dataIndex : 'appointbegin',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '结束时间',
+//			dataIndex : 'appointend',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '备注',
 			dataIndex : 'appointdetail',

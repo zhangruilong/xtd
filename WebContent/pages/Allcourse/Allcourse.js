@@ -143,7 +143,7 @@ Ext.onReady(function() {
 				xtype : 'textfield',
 				fieldLabel : '教练',
 				id : 'Allcourseallcoursecoachname',
-				name : 'allcoursecoachname',
+				name : 'coachname',
 				readOnly:true,
 				anchor : '95%'
 			} ]
@@ -168,6 +168,18 @@ Ext.onReady(function() {
 				fieldLabel : '项目',
 				id : 'Allcourseallcourseproject',
 				name : 'allcourseproject',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '课程',
+				id : 'Allcourseallcoursename',
+				name : 'allcoursename',
 				maxLength : 100,
 				anchor : '95%'
 			} ]

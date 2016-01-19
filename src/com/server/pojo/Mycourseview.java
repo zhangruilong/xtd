@@ -20,9 +20,9 @@ public class Mycourseview
     */
    private String mycoursename;   
    /**
-    * mycourseroject
+    * mycourseproject
     */
-   private String mycourseroject;   
+   private String mycourseproject;   
    /**
     * mycoursenum
     */
@@ -112,20 +112,20 @@ public class Mycourseview
 	}	   
 
 	/**
-	 *设置"mycourseroject"属性
-	 *@param mycourseroject 实体的Mycourseroject属性
+	 *设置"mycourseproject"属性
+	 *@param mycourseproject 实体的Mycourseproject属性
 	 */
-	public void setMycourseroject(String mycourseroject)
+	public void setMycourseproject(String mycourseproject)
 	{
-		this.mycourseroject = mycourseroject;
+		this.mycourseproject = mycourseproject;
 	}
 	
 	/**
-	 *获取"mycourseroject"属性
+	 *获取"mycourseproject"属性
 	 */
-	public String getMycourseroject()
+	public String getMycourseproject()
 	{
-		return this.mycourseroject;
+		return this.mycourseproject;
 	}	   
 
 	/**
@@ -288,7 +288,7 @@ public class Mycourseview
 		String mycourseid
 	 	,String mycoursecoach
 	 	,String mycoursename
-	 	,String mycourseroject
+	 	,String mycourseproject
 	 	,String mycoursenum
 	 	,String mycoursemoney
 	 	,String createtime
@@ -303,7 +303,7 @@ public class Mycourseview
 		this.mycourseid = mycourseid;
 	 	this.mycoursecoach = mycoursecoach;
 	 	this.mycoursename = mycoursename;
-	 	this.mycourseroject = mycourseroject;
+	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
 	 	this.mycoursemoney = mycoursemoney;
 	 	this.createtime = createtime;

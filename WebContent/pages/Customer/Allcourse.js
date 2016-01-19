@@ -185,9 +185,28 @@ function selectAllcourse() {
 								});
 								return;
 							}
-//							Ext.getCmp('Coachcoachstadiumname').setValue(selectRows[0].get("stadiumname"));
-//							Ext.getCmp('Coachcoachstadium').setValue(selectRows[0].get("stadiumid"));
-							selectgridWindow.close();
+							var json = "[{'mycoursecoach':'"+selectRows[0].data['allcoursecoach']
+							        			    +"','mycoursename':'"+selectRows[0].data['allcoursename']
+							        			    +"','mycourseproject':'"+selectRows[0].data['allcourseproject']
+							        			    +"','mycoursenum':'"+selectRows[0].data['allcoursenum']
+							        			    +"','mycoursemoney':'"+selectRows[0].data['allcoursemoney']
+							        			    +"'}]";
+							Ext.Ajax.request({
+								url : basePath + "MycourseAction.do?method=insAll",
+								method : 'POST',
+								params : {
+									json : json
+								},
+								success : function(response) {
+									var resp = Ext.decode(response.responseText); 
+									Ext.Msg.alert('提示', resp.msg, function(){
+										selectgridWindow.close();
+									});
+								},
+								failure : function(response) {
+									Ext.Msg.alert('提示', '网络出现问题，请稍后再试');
+								}
+							});
 						}
 					}, '-', {
 						text : '关闭',

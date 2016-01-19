@@ -240,7 +240,15 @@ function selectMycourse(customerid) {
 				text : "预约课程",
 				iconCls : 'add',
 				handler : function() {
-					selectCourse();
+					var selections = Mycoursegrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
+					}
+					selectCourse(customerid,selections[0].data['mycourseid'],selections[0].data['mycoursename']
+					,selections[0].data['mycoursenum'],selections[0].data['mycoursecoach']
+					,selections[0].data['mycoursename'],selections[0].data['mycourseproject']);
 				}
 			},'-',{
 				text : "购买课程",
