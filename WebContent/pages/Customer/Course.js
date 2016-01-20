@@ -163,9 +163,9 @@ function selectCourse(customerid,mycourseid,mycoursename,mycoursenum,coachid,coa
 									var json = "[{'appointcustomer':'"+customerid
 				        			    +"','appointplace':'"+selectRows[0].data['placeid']
 				        			    +"','appointcourse':'"+mycourseid
-				        			    +"','appointplacename':'"+selectRows[0].data['placename']
-				        			    +"','appointcoursename':'"+mycoursename
-				        			    +"','appointcoachname':'"+coachname
+				        			    +"','appointplacename':'"+selectRows[0].data['placename']+"-"+mycoursename+"-"+coachname
+//				        			    +"','appointcoursename':'"+mycoursename
+//				        			    +"','appointcoachname':'"+coachname
 										+"','appointproject':'"+projectname
 										+"','appointdetail':'"+Ext.getCmp('Placetimeplacetimedetail').value
 				        			    +"'}]";

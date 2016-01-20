@@ -248,7 +248,7 @@ function selectMycourse(customerid) {
 					}
 					selectCourse(customerid,selections[0].data['mycourseid'],selections[0].data['mycoursename']
 					,selections[0].data['mycoursenum'],selections[0].data['mycoursecoach']
-					,selections[0].data['mycoursename'],selections[0].data['mycourseproject']);
+					,selections[0].data['coachname'],selections[0].data['mycourseproject']);
 				}
 			},'-',{
 				text : "购买课程",

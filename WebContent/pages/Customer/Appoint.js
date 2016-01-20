@@ -59,23 +59,23 @@ function selectAppoint(customerid) {
 			header : '场地',
 			dataIndex : 'appointplacename',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
-		, {
-			header : '课程',
-			dataIndex : 'appointcoursename',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '教练',
-			dataIndex : 'appointcoachname',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '课程',
+//			dataIndex : 'appointcoursename',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '教练',
+//			dataIndex : 'appointcoachname',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '项目',
 			dataIndex : 'appointproject',
@@ -101,7 +101,7 @@ function selectAppoint(customerid) {
 			header : '备注',
 			dataIndex : 'appointdetail',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
