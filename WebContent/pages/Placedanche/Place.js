@@ -58,13 +58,6 @@ Ext.onReady(function() {
 			width : 80,
 			sortable : true
 		}
-//		, {
-//			header : '人数',
-//			dataIndex : 'placepeople',
-//			align : 'center',
-//			width : 80,
-//			sortable : true
-//		}
 		, {
 			header : '备注',
 			dataIndex : 'placedetail',
@@ -79,26 +72,26 @@ Ext.onReady(function() {
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '开始时间',
-			dataIndex : 'placebegin',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '结束时间',
-			dataIndex : 'placeend',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '开始时间',
+//			dataIndex : 'placebegin',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '结束时间',
+//			dataIndex : 'placeend',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 //		, {
 //			header : '项目',
 //			dataIndex : 'placeproject',
 //			align : 'center',
 //			width : 80,
-//			sortable : true
+//			hidden : true
 //		}
 		]
 	});
@@ -187,30 +180,30 @@ Ext.onReady(function() {
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'timefield',
-				fieldLabel : '开始时间',
-				id : 'Placeplacebegin',
-				name : 'placebegin',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'timefield',
-				fieldLabel : '结束时间',
-				id : 'Placeplaceend',
-				name : 'placeend',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'timefield',
+//				fieldLabel : '开始时间',
+//				id : 'Placeplacebegin',
+//				name : 'placebegin',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'timefield',
+//				fieldLabel : '结束时间',
+//				id : 'Placeplaceend',
+//				name : 'placeend',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
