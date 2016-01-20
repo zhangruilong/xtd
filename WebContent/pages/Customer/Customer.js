@@ -259,18 +259,6 @@ Ext.onReady(function() {
 				anchor : '95%'
 			} ]
 		}
-//		, {
-//			columnWidth : 1,
-//			layout : 'form',
-//			items : [ {
-//				xtype : 'textfield',
-//				fieldLabel : 'OPENID',
-//				id : 'Customeropenid',
-//				name : 'openid',
-//				maxLength : 100,
-//				anchor : '95%'
-//			} ]
-//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',

@@ -38,7 +38,7 @@ Ext.onReady(function() {
 			header : '备注',
 			dataIndex : 'placetimedetail',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
@@ -112,19 +112,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '备注',
-				id : 'Placetimeplacetimedetail',
-				name : 'placetimedetail',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : statueStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'placetimestatue',
 				fieldLabel : '状态',
 				id : 'Placetimeplacetimestatue',
 				name : 'placetimestatue',
@@ -136,7 +133,7 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'timefield',
 				fieldLabel : '开始时间',
 				id : 'Placetimeplacetimebegin',
 				name : 'placetimebegin',
@@ -148,7 +145,7 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'timefield',
 				fieldLabel : '结束时间',
 				id : 'Placetimeplacetimeend',
 				name : 'placetimeend',
@@ -160,7 +157,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : projectStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'placetimeproject',
 				fieldLabel : '项目',
 				id : 'Placetimeplacetimeproject',
 				name : 'placetimeproject',
