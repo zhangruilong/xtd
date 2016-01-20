@@ -147,7 +147,7 @@ function selectPlace(customerid,cuscardid) {
 		height : 580, // 窗口高度
 		modal : true,
 		title : Placetitle,
-		closeAction: 'hide',
+//		closeAction: 'hide',
 		closable : true, // 是否可关闭
 		collapsible : true, // 是否可收缩
 		maximizable : true, // 设置是否可以最大化
