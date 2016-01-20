@@ -57,13 +57,13 @@ Ext.onReady(function() {
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '卡余额',
-			dataIndex : 'cardtypemoney',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '卡余额',
+//			dataIndex : 'cardtypemoney',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '卡余次',
 			dataIndex : 'cardtypetimes',
@@ -128,7 +128,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : cardStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'cardtypeclass',
 				fieldLabel : '分类',
 				id : 'Cardtypecardtypeclass',
 				name : 'cardtypeclass',
@@ -152,7 +161,7 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'numberfield',
 				fieldLabel : '价格',
 				id : 'Cardtypecardtypeprice',
 				name : 'cardtypeprice',
@@ -160,23 +169,23 @@ Ext.onReady(function() {
 				anchor : '95%'
 			} ]
 		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'numberfield',
+//				fieldLabel : '卡余额',
+//				id : 'Cardtypecardtypemoney',
+//				name : 'cardtypemoney',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '卡余额',
-				id : 'Cardtypecardtypemoney',
-				name : 'cardtypemoney',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
+				xtype : 'numberfield',
 				fieldLabel : '卡余次',
 				id : 'Cardtypecardtypetimes',
 				name : 'cardtypetimes',
@@ -200,7 +209,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : statueStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'cardtypestatue',
 				fieldLabel : '状态',
 				id : 'Cardtypecardtypestatue',
 				name : 'cardtypestatue',
