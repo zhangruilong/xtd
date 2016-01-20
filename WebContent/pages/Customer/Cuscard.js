@@ -76,7 +76,7 @@ function selectCuscard(customerid) {
 			sortable : true
 		}
 		, {
-			header : '密码',
+			header : '有效期',
 			dataIndex : 'cuscardpsw',
 			align : 'center',
 			width : 80,
@@ -194,7 +194,7 @@ function selectCuscard(customerid) {
 			} ]
 		}
 		, {
-			columnWidth : 1,
+			columnWidth : .9,
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
@@ -203,6 +203,18 @@ function selectCuscard(customerid) {
 				name : 'cuscardtype',
 				maxLength : 100,
 				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .1,
+			layout : 'form',
+			items : [ {
+				xtype : 'button',
+				iconCls : 'select',
+				maxLength : 100,
+				handler : selectCardtype.createCallback(),
+				scope : this,
+				anchor : '25%'
 			} ]
 		}
 		, {
@@ -222,7 +234,7 @@ function selectCuscard(customerid) {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '密码',
+				fieldLabel : '有效期',
 				id : 'Cuscardcuscardpsw',
 				name : 'cuscardpsw',
 				maxLength : 100,
@@ -233,7 +245,7 @@ function selectCuscard(customerid) {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'datefield',
 				fieldLabel : '有效期开始',
 				id : 'Cuscardcuscardbegin',
 				name : 'cuscardbegin',
@@ -245,7 +257,7 @@ function selectCuscard(customerid) {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'datefield',
 				fieldLabel : '有效期结束',
 				id : 'Cuscardcuscardend',
 				name : 'cuscardend',

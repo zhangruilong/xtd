@@ -7,6 +7,7 @@
 	<script type="text/javascript" src="Mycourse.js"></script>
 	<script type="text/javascript" src="Appoint.js"></script>
 	<script type="text/javascript" src="Place.js"></script>
+	<script type="text/javascript" src="Cardtype.js"></script>
 	<script type="text/javascript" src="Cuscard.js"></script>
 	<script type="text/javascript" src="Customer.js"></script>
   </head>
