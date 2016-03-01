@@ -143,7 +143,7 @@ function selectCourse(params) {
 				xtype : 'textfield',
 				fieldLabel : '场地',
 				id : 'Coursecourseplacename',
-				name : 'courseplacename',
+				name : 'placename',
 				readOnly:true,
 				anchor : '95%'
 			} ]

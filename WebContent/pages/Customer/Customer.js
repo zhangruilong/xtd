@@ -235,18 +235,42 @@ Ext.onReady(function() {
 				hidden : true
 			} ]
 		}
-//		, {
-//			columnWidth : 1,
-//			layout : 'form',
-//			items : [ {
-//				xtype : 'textfield',
-//				fieldLabel : '场馆ID',
-//				id : 'Customercustomerstadium',
-//				name : 'customerstadium',
-//				maxLength : 100,
-//				anchor : '95%'
-//			} ]
-//		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '场馆ID',
+				id : 'Customercustomerstadium',
+				name : 'customerstadium',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .9,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '场馆',
+				id : 'Customercustomerstadiumname',
+				name : 'stadiumname',
+				readOnly:true,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .1,
+			layout : 'form',
+			items : [ {
+				xtype : 'button',
+				iconCls : 'select',
+				maxLength : 100,
+				handler : selectStadium.createCallback(),
+				scope : this,
+				anchor : '25%'
+			} ]
+		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -532,28 +556,6 @@ Ext.onReady(function() {
 					commonDelete(basePath + Customeraction + "?method=delAll",selections,Customerstore,Customerkeycolumn);
 				}
 			},'-',{
-//				text : "导入",
-//				iconCls : 'imp',
-//				handler : function() {
-//					commonImp(basePath + Customeraction + "?method=impAll","导入",Customerstore);
-//				}
-//			},'-',{
-//				text : "后台导出",
-//				iconCls : 'exp',
-//				handler : function() {
-//					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-//						if (btn == 'yes') {
-//							window.location.href = basePath + Customeraction + "?method=expAll"; 
-//						}
-//					});
-//				}
-//			},'-',{
-//				text : "前台导出",
-//				iconCls : 'exp',
-//				handler : function() {
-//					commonExp(Customergrid);
-//				}
-//			},'-',{
 				text : "附件",
 				iconCls : 'attach',
 				handler : function() {
@@ -646,7 +648,7 @@ function getTabPanel(customerid){
 	        title: '预约记录',
 	        items: selectAppoint(customerid)
 	    },{
-	        title: '消费记录'
+	        title: '打卡记录'
 	    }]
 	});
 	return tabs;

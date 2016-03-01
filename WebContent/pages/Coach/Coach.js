@@ -69,7 +69,7 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '地址',
+			header : '其他信息',
 			dataIndex : 'coachaddress',
 			align : 'center',
 			width : 80,
@@ -100,7 +100,7 @@ Ext.onReady(function() {
 			header : '备注',
 			dataIndex : 'coachdetail',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
@@ -158,7 +158,7 @@ Ext.onReady(function() {
 				xtype : 'textfield',
 				fieldLabel : '场馆',
 				id : 'Coachcoachstadiumname',
-				name : 'coachstadiumname',
+				name : 'stadiumname',
 				readOnly:true,
 				anchor : '95%'
 			} ]
@@ -263,11 +263,10 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'textarea',
 				fieldLabel : '备注',
 				id : 'Coachcoachdetail',
 				name : 'coachdetail',
-				maxLength : 100,
 				anchor : '95%'
 			} ]
 		}
@@ -275,7 +274,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : statueStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'coachstatue',
 				fieldLabel : '状态',
 				id : 'Coachcoachstatue',
 				name : 'coachstatue',

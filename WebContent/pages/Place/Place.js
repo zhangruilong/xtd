@@ -3,18 +3,26 @@ Ext.onReady(function() {
 	var Placetitle = "当前位置:业务管理》" + Placeclassify;
 	var Placeaction = "PlaceAction.do";
 	var Placefields = ['placeid'
-	        			    ,'placestadium' 
-	        			    ,'placecode' 
-	        			    ,'placename' 
-	        			    ,'placepeople' 
-	        			    ,'placedetail' 
-	        			    ,'placestatue' 
-	        			    ,'placebegin' 
-	        			    ,'placeend' 
-	        			    ,'placeproject' 
-	        			      ];// 全部字段
+	       			    ,'placestadium' 
+	    			    ,'placecode' 
+	    			    ,'placename' 
+	    			    ,'placepeople' 
+	    			    ,'placedetail' 
+	    			    ,'placestatue' 
+	    			    ,'placebegin' 
+	    			    ,'placeend' 
+	    			    ,'placeproject' 
+	    			    ,'stadiumid' 
+	    			    ,'stadiumcode' 
+	    			    ,'stadiumname' 
+	    			    ,'stadiumaddress' 
+	    			    ,'stadiumdetail' 
+	    			    ,'stadiumstatue' 
+	    			    ,'stadiumx' 
+	    			    ,'stadiumy' 
+	    			      ];// 全部字段
 	var Placekeycolumn = [ 'placeid' ];// 主键
-	var Placestore = dataStore(Placefields, basePath + Placeaction + "?method=selQuery");// 定义Placestore
+	var Placestore = dataStore(Placefields, basePath + "PlaceviewAction.do?method=selQuery");// 定义Placestore
 	var Placesm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Placecm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Placesm, {// 改
@@ -25,6 +33,13 @@ Ext.onReady(function() {
 		, {
 			header : '场馆ID',
 			dataIndex : 'placestadium',
+			align : 'center',
+			width : 80,
+			hidden : true
+		}
+		, {
+			header : '场馆',
+			dataIndex : 'stadiumname',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -64,20 +79,20 @@ Ext.onReady(function() {
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '开始时间',
-			dataIndex : 'placebegin',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '结束时间',
-			dataIndex : 'placeend',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '开始时间',
+//			dataIndex : 'placebegin',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
+//		, {
+//			header : '结束时间',
+//			dataIndex : 'placeend',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '项目',
 			dataIndex : 'placeproject',
@@ -104,12 +119,36 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'hidden',
 				fieldLabel : '场馆ID',
 				id : 'Placeplacestadium',
 				name : 'placestadium',
 				maxLength : 100,
 				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .9,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '场馆',
+				id : 'stadiumname',
+				name : 'stadiumname',
+				readOnly:true,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .1,
+			layout : 'form',
+			items : [ {
+				xtype : 'button',
+				iconCls : 'select',
+				maxLength : 100,
+				handler : selectStadium.createCallback(),
+				scope : this,
+				anchor : '25%'
 			} ]
 		}
 		, {
@@ -164,7 +203,16 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : statueStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'placestatue',
 				fieldLabel : '状态',
 				id : 'Placeplacestatue',
 				name : 'placestatue',
@@ -172,35 +220,44 @@ Ext.onReady(function() {
 				anchor : '95%'
 			} ]
 		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '开始时间',
+//				id : 'Placeplacebegin',
+//				name : 'placebegin',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '结束时间',
+//				id : 'Placeplaceend',
+//				name : 'placeend',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '开始时间',
-				id : 'Placeplacebegin',
-				name : 'placebegin',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '结束时间',
-				id : 'Placeplaceend',
-				name : 'placeend',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : projectStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'placeproject',
 				fieldLabel : '项目',
 				id : 'Placeplaceproject',
 				name : 'placeproject',

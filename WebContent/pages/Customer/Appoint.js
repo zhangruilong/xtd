@@ -140,54 +140,54 @@ function selectAppoint(customerid) {
 				hidden : true
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '会员ID',
-				id : 'Appiontappointcustomer',
-				name : 'appointcustomer',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '会员卡ID',
-				id : 'Appiontappointcard',
-				name : 'appointcard',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '场地ID',
-				id : 'Appiontappointplace',
-				name : 'appointplace',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '课程ID',
-				id : 'Appiontappointcourse',
-				name : 'appointcourse',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '会员ID',
+//				id : 'Appiontappointcustomer',
+//				name : 'appointcustomer',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '会员卡ID',
+//				id : 'Appiontappointcard',
+//				name : 'appointcard',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '场地ID',
+//				id : 'Appiontappointplace',
+//				name : 'appointplace',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '课程ID',
+//				id : 'Appiontappointcourse',
+//				name : 'appointcourse',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -200,30 +200,30 @@ function selectAppoint(customerid) {
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '课程',
-				id : 'Appiontappointcoursename',
-				name : 'appointcoursename',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '教练',
-				id : 'Appiontappointcoachname',
-				name : 'appointcoachname',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '课程',
+//				id : 'Appiontappointcoursename',
+//				name : 'appointcoursename',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '教练',
+//				id : 'Appiontappointcoachname',
+//				name : 'appointcoachname',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -236,30 +236,30 @@ function selectAppoint(customerid) {
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '开始时间',
-				id : 'Appiontappointbegin',
-				name : 'appointbegin',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '结束时间',
-				id : 'Appiontappointend',
-				name : 'appointend',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '开始时间',
+//				id : 'Appiontappointbegin',
+//				name : 'appointbegin',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '结束时间',
+//				id : 'Appiontappointend',
+//				name : 'appointend',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -280,30 +280,6 @@ function selectAppoint(customerid) {
 				fieldLabel : '状态',
 				id : 'Appiontappointstatue',
 				name : 'appointstatue',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Appiontcreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Appiontcreator',
-				name : 'creator',
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -336,33 +312,6 @@ function selectAppoint(customerid) {
 					}
 					createWindow(basePath + Appiontaction + "?method=updAll", "修改", AppiontdataForm, Appiontstore);
 					AppiontdataForm.form.loadRecord(selections[0]);
-				}
-			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Appiontgrid.getSelectionModel().getSelections();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请选择您要删除的数据！');
-						return;
-					}
-					commonDelete(basePath + Appiontaction + "?method=delAll",selections,Appiontstore,Appiontkeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Appiontaction + "?method=impAll","导入",Appiontstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Appiontaction + "?method=expAll"; 
-						}
-					});
 				}
 			},'-',{
 				text : "前台导出",

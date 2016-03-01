@@ -38,18 +38,18 @@ Ext.onReady(function() {
 			header : '地址',
 			dataIndex : 'stadiumaddress',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
 			header : '备注',
 			dataIndex : 'stadiumdetail',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
-			header : '状态',
+			header : '电话',
 			dataIndex : 'stadiumstatue',
 			align : 'center',
 			width : 80,
@@ -116,7 +116,6 @@ Ext.onReady(function() {
 				fieldLabel : '地址',
 				id : 'Stadiumstadiumaddress',
 				name : 'stadiumaddress',
-				maxLength : 100,
 				anchor : '95%'
 			} ]
 		}
@@ -124,11 +123,10 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'textarea',
 				fieldLabel : '备注',
 				id : 'Stadiumstadiumdetail',
 				name : 'stadiumdetail',
-				maxLength : 100,
 				anchor : '95%'
 			} ]
 		}
@@ -137,7 +135,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '状态',
+				fieldLabel : '电话',
 				id : 'Stadiumstadiumstatue',
 				name : 'stadiumstatue',
 				maxLength : 100,

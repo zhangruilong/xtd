@@ -25,7 +25,7 @@ function selectCuscard(customerid) {
 	        			    ,'customerphone' 
 	        			      ];// 全部字段
 	var Cuscardkeycolumn = [ 'cuscardid' ];// 主键
-	var Cuscardstore = dataStore(Cuscardfields, basePath + "CuscardviewAction.do" + "?method=selQuery");// 定义Cuscardstore
+	var Cuscardstore = dataStore(Cuscardfields, basePath + "CuscardviewAction.do" + "?method=selAll");// 定义Cuscardstore
 	var Cuscardsm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Cuscardcm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Cuscardsm, {// 改
