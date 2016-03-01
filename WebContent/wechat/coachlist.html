@@ -1,0 +1,84 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Agile Lite</title>
+		<link rel="stylesheet" href="assets/agile/css/agile.layout.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+		<link rel="stylesheet" href="assets/app/css/app.css">
+	</head>
+	<body>
+		<div id="section_container">
+			<section id="list_more_section" data-role="section" class="active">
+				<header>
+				    <div class="titlebar">
+				    	<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				    	<h1>教练列表</h1>
+				    </div>
+				</header>
+				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:44px;bottom:0px;">
+					<div class="scroller"> 
+					    <ul class="listitem">
+					    <script id="template" type="text/html">
+						<% for (i = 0; i < root.length; i ++) { %>
+						<li>
+							<a onclick="nextpage('<%= root[i].coachid %>','<%= root[i].coachcode %>','<%= root[i].coachname %>','<%= root[i].coachphone %>'
+							,'<%= root[i].coachaddress %>','<%= root[i].coachsex %>','<%= root[i].coachage %>','<%= root[i].coachimage %>','<%= root[i].coachdetail %>');">
+								<i class="ricon iconfont iconline-arrow-right"></i>
+								<img placeholder="assets/app/img/list/defaultimg.png" data-source="images/1.png" class="img" style="width:70px;"/>
+								<div class="text">
+										<h1><%= root[i].coachname %></h1>
+						            	<small>
+						            		<%= root[i].coachsex %>，<%= root[i].coachage %>岁，<%= root[i].coachaddress %>
+						            		<br/>
+						            		电话：<%= root[i].coachphone %>
+						            	</small>
+					        	</div>
+						    </a>
+						</li>
+						<% } %>
+						</script>
+					    </ul>
+					</div>  
+				</article>
+			</section>
+		</div>
+		
+		<!--- third --->
+		<script src="assets/third/jquery/jquery-2.1.3.min.js"></script>
+		<script src="assets/third/jquery/jquery.mobile.custom.min.js"></script>
+		<script src="assets/third/iscroll/iscroll-probe.js"></script>
+		<script src="assets/third/arttemplate/template-native.js"></script>
+		<!-- agile -->
+		<script type="text/javascript" src="assets/agile/js/agile.js"></script>		
+		<!--- bridge --->
+		<script type="text/javascript" src="assets/bridge/exmobi.js"></script>
+		<script type="text/javascript" src="assets/bridge/agile.exmobi.js"></script>
+		<!-- app -->
+		<script type="text/javascript" src="assets/app/js/app.js"></script>
+		<script>
+			$('#main_article').on('refreshInit', function(){
+				A.template('#template').renderReplace('../CoachAction.do?method=selQuery');
+			});
+			function nextpage(coachid,coachcode,coachname,coachphone,coachaddress
+					,coachsex,coachage,coachimage,coachdetail){
+				var coach = new Object();
+				coach.coachid = coachid;
+				coach.coachcode = coachcode;
+				coach.coachname = coachname;
+				coach.coachphone = coachphone;
+				coach.coachaddress = coachaddress;
+				coach.coachsex = coachsex;
+				coach.coachage = coachage;
+				coach.coachimage = coachimage;
+				coach.coachdetail = coachdetail;
+				window.localStorage.setItem("coach",JSON.stringify(coach));
+				window.location.href = "coach.html";
+			}
+		</script>
+	</body>
+</html>

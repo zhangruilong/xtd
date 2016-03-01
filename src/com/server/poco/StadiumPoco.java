@@ -45,7 +45,7 @@ public class StadiumPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " stadiumid ";
+   public static final String ORDER = " stadiumid desc ";
    /**
 	 * 要模糊查询字段
 	 */

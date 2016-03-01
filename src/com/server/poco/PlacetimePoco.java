@@ -45,7 +45,7 @@ public class PlacetimePoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " placetimeid ";
+   public static final String ORDER = " placetimeid desc ";
    /**
 	 * 要模糊查询字段
 	 */

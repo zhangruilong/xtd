@@ -1,0 +1,82 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<title>Agile Lite</title>
+		<link rel="stylesheet" href="assets/agile/css/agile.layout.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+		<link rel="stylesheet" href="assets/app/css/app.css">
+	</head>
+	<body>
+		<div id="section_container">
+			<section id="list_more_section" data-role="section" class="active">
+				<header>
+				    <div class="titlebar">
+				    	<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				    	<h1>课程列表</h1>
+				    </div>
+				</header>
+				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:44px;bottom:0px;">
+					<div class="scroller"> 
+					    <ul class="listitem">
+					    <script id="template" type="text/html">
+						<% for (i = 0; i < root.length; i ++) { %>
+						<li>
+							<a onclick="nextpage('<%= root[i].allcourseid %>','<%= root[i].allcoursecoach %>','<%= root[i].allcoursename %>'
+							,'<%= root[i].allcourseproject %>','<%= root[i].allcoursenum %>','<%= root[i].allcoursemoney %>');" class="button ricon">购买</a>
+								<div class="text">
+									<h1><%= root[i].allcoursename %>(<%= root[i].allcourseproject %>)</h1>
+										课时：<%= root[i].allcoursenum %>,
+					            		费用：￥<%= root[i].allcoursemoney %>元
+					        	</div>
+						</li>
+						<% } %>
+						</script>
+					       <!--  <li>
+					        	<a href="#course" data-toggle="html" class="button ricon">购买</a>
+					            <div class="text">
+					            	成人瑜伽 (￥200元)
+					            	<small>
+					            		让你学会如何做成人瑜伽
+					            	</small>
+					            </div>
+					        </li> -->
+					    </ul>
+					</div>  
+				</article>
+			</section>
+		</div>
+		
+		<!--- third --->
+		<script src="assets/third/jquery/jquery-2.1.3.min.js"></script>
+		<script src="assets/third/jquery/jquery.mobile.custom.min.js"></script>
+		<script src="assets/third/iscroll/iscroll-probe.js"></script>
+		<script src="assets/third/arttemplate/template-native.js"></script>
+		<!-- agile -->
+		<script type="text/javascript" src="assets/agile/js/agile.js"></script>		
+		<!--- bridge --->
+		<script type="text/javascript" src="assets/bridge/exmobi.js"></script>
+		<script type="text/javascript" src="assets/bridge/agile.exmobi.js"></script>
+		<!-- app -->
+		<script type="text/javascript" src="assets/app/js/app.js"></script>
+		<script>
+			$('#main_article').on('refreshInit', function(){
+				A.template('#template').renderReplace('../AllcourseAction.do?method=selQuery');
+			});
+			function nextpage(allcourseid,allcoursecoach,allcoursename
+					,allcourseproject,allcoursenum,allcoursemoney){
+				    A.confirm('提示','这是一个Confirm！',
+				    	function(){
+				    		A.showToast('你选择了“确定”');
+				    	},
+				    	function(){
+				    		A.alarmToast('你选择了“取消”');
+				    	});
+			}
+		</script>
+	</body>
+</html>

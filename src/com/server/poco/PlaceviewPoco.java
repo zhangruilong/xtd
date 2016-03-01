@@ -65,7 +65,7 @@ public class PlaceviewPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " placeid ";
+   public static final String ORDER = " placeid desc ";
    /**
 	 * 要模糊查询字段
 	 */

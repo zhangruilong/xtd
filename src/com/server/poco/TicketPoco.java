@@ -41,7 +41,7 @@ public class TicketPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " ticketid ";
+   public static final String ORDER = " ticketid desc ";
    /**
 	 * 要模糊查询字段
 	 */

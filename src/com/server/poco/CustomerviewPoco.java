@@ -95,7 +95,7 @@ public class CustomerviewPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " customerid ";
+   public static final String ORDER = " customerid desc ";
    /**
 	 * 要模糊查询字段
 	 */

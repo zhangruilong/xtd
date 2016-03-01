@@ -71,7 +71,7 @@ public class CoachviewPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " coachid ";
+   public static final String ORDER = " coachid desc ";
    /**
 	 * 要模糊查询字段
 	 */

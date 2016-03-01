@@ -49,7 +49,7 @@ public class CardtypePoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " cardtypeid ";
+   public static final String ORDER = " cardtypeid desc ";
    /**
 	 * 要模糊查询字段
 	 */

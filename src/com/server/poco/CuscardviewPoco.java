@@ -71,7 +71,7 @@ public class CuscardviewPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " cuscardid ";
+   public static final String ORDER = " cuscardid desc ";
    /**
 	 * 要模糊查询字段
 	 */

@@ -375,7 +375,7 @@ function selectCuscard(customerid) {
 					selectPlace(customerid,selections[0].data['cuscardid']);
 				}
 			},'-',{
-				text : "新增",
+				text : "发卡",
 				iconCls : 'add',
 				handler : function() {
 					CuscarddataForm.form.reset();
@@ -396,75 +396,43 @@ function selectCuscard(customerid) {
 					CuscarddataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
+				text : "过户",
+				iconCls : 'edit',
 				handler : function() {
 					var selections = Cuscardgrid.getSelectionModel().getSelections();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请选择您要删除的数据！');
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
 						return;
 					}
-					commonDelete(basePath + Cuscardaction + "?method=delAll",selections,Cuscardstore,Cuscardkeycolumn);
+					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
+					CuscarddataForm.form.loadRecord(selections[0]);
 				}
-//			},'-',{
-//				text : "导入",
-//				iconCls : 'imp',
-//				handler : function() {
-//					commonImp(basePath + Cuscardaction + "?method=impAll","导入",Cuscardstore);
-//				}
-//			},'-',{
-//				text : "后台导出",
-//				iconCls : 'exp',
-//				handler : function() {
-//					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-//						if (btn == 'yes') {
-//							window.location.href = basePath + Cuscardaction + "?method=expAll"; 
-//						}
-//					});
-//				}
-//			},'-',{
-//				text : "前台导出",
-//				iconCls : 'exp',
-//				handler : function() {
-//					commonExp(Cuscardgrid);
-//				}
-//			},'-',{
-//				text : "附件",
-//				iconCls : 'attach',
-//				handler : function() {
-//					var selections = Cuscardgrid.getSelectionModel().getSelections();
-//					if (selections.length != 1) {
-//						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-//						});
-//						return;
-//					}
-//					var fid = '';
-//					for (var i=0;i<Cuscardkeycolumn.length;i++){
-//						fid += selections[0].data[Cuscardkeycolumn[i]] + ","
-//					}
-//					commonAttach(fid, Cuscardclassify);
-//				}
-			},'->',{
-				xtype : 'textfield',
-				id : 'query'+Cuscardaction,
-				name : 'query',
-				emptyText : '模糊匹配',
-				width : 100,
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							if ("" == Ext.getCmp("query"+Cuscardaction).getValue()) {
-								Cuscardstore.load();
-							} else {
-								Cuscardstore.load({
-									params : {
-										query : Ext.getCmp("query"+Cuscardaction).getValue()
-									}
-								});
-							}
-						}
+			},'-',{
+				text : "换卡",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Cuscardgrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
 					}
+					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
+					CuscarddataForm.form.loadRecord(selections[0]);
+				}
+			},'-',{
+				text : "续卡",
+				iconCls : 'edit',
+				handler : function() {
+					var selections = Cuscardgrid.getSelectionModel().getSelections();
+					if (selections.length != 1) {
+						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						});
+						return;
+					}
+					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
+					CuscarddataForm.form.loadRecord(selections[0]);
 				}
 			}
 		]
@@ -472,29 +440,10 @@ function selectCuscard(customerid) {
 	Cuscardgrid.region = 'center';
 	Cuscardstore.on("beforeload",function(){ 
 		Cuscardstore.baseParams = {
-				query : Ext.getCmp("query"+Cuscardaction).getValue(),
 				wheresql : "cuscardcustomer='"+customerid+"'"
 		}; 
 	});
 	Cuscardstore.load();//加载数据
-//	var selectgridWindow = new Ext.Window({
-//		layout : 'fit', // 设置窗口布局模式
-//		width : 820, // 窗口宽度
-//		height : 580, // 窗口高度
-//		modal : true,
-//		title : Cuscardtitle,
-//		closeAction: 'hide',
-//		closable : true, // 是否可关闭
-//		collapsible : true, // 是否可收缩
-//		maximizable : true, // 设置是否可以最大化
-//		border : false, // 边框线设置
-//		constrain : true, // 设置窗口是否可以溢出父容器
-//		animateTarget : Ext.getBody(),
-//		pageY : 50, // 页面定位Y坐标
-//		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
-//		items : Cuscardgrid
-//	});
-//	selectgridWindow.show();
 	
 	return Cuscardgrid;
 }

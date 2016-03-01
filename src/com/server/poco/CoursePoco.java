@@ -55,7 +55,7 @@ public class CoursePoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " courseid ";
+   public static final String ORDER = " courseid desc ";
    /**
 	 * 要模糊查询字段
 	 */

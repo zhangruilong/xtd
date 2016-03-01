@@ -47,7 +47,7 @@ public class NotesPoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " notesid ";
+   public static final String ORDER = " notesid desc ";
    /**
 	 * 要模糊查询字段
 	 */

@@ -49,7 +49,7 @@ public class MycoursePoco
    /**
     * 实体排序
     */
-   public static final String ORDER = " mycourseid ";
+   public static final String ORDER = " mycourseid desc ";
    /**
 	 * 要模糊查询字段
 	 */
