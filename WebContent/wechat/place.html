@@ -75,8 +75,8 @@
 		<!-- app -->
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
+			var project = window.localStorage.getItem("project");
 			$('#main_article').on('refreshInit', function(){
-				var project = window.localStorage.getItem("project");
 				var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 				if("all"==project){
 					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\'');
@@ -87,9 +87,32 @@
 				}
 			});
 			function nextpage(placeid,placename){
-				    A.confirm('提示','这是一个Confirm！',
+				    A.confirm('提示','确定预约'+placename,
 				    	function(){
-				    		A.showToast('你选择了“确定”');
+					    	var json = "[{'appointcustomer':'"+"14514433424807691"  //会员id
+	        			    +"','appointplace':'"+placeid
+							+"','appointplacename':'"+placename
+	        			    +"','appointcard':'"+"14514556069953016"       //会员卡id
+	        			    +"','appointproject':'"+project
+							+"','appointdetail':'"+$('#placetime').val()
+	        			    +"'}]";
+					    	$.ajax({
+								url : "../AppiontAction.do?method=insAll",
+								data : {
+									json : json
+								},
+								success : function(resp) {
+									var respText = eval('('+resp+')'); 
+					    			if(respText.success == false) 
+					    				alert(respText.msg);
+					    			else {
+					    				A.showToast('预约成功！');
+					    			}
+								},
+								error : function(resp) {
+									alert('网络出现问题，请稍后再试');
+								}
+							});
 				    	},
 				    	function(){
 				    		A.alarmToast('你选择了“取消”');

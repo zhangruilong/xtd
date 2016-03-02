@@ -70,9 +70,31 @@
 			});
 			function nextpage(allcourseid,allcoursecoach,allcoursename
 					,allcourseproject,allcoursenum,allcoursemoney){
-				    A.confirm('提示','这是一个Confirm！',
+				    A.confirm('提示','确认购买'+allcoursename,
 				    	function(){
-				    		A.showToast('你选择了“确定”');
+					    	var json = "[{'mycoursecoach':'"+allcoursecoach
+	        			    +"','mycoursename':'"+allcoursename
+	        			    +"','mycourseproject':'"+allcourseproject
+	        			    +"','mycoursenum':'"+allcoursenum
+	        			    +"','mycoursemoney':'"+allcoursemoney
+	        			    +"'}]";
+					    	$.ajax({
+								url : "../MycourseAction.do?method=insAll",
+								data : {
+									json : json
+								},
+								success : function(resp) {
+									var respText = eval('('+resp+')'); 
+					    			if(respText.success == false) 
+					    				alert(respText.msg);
+					    			else {
+					    				A.showToast('购买成功！');
+					    			}
+								},
+								error : function(resp) {
+									alert('网络出现问题，请稍后再试');
+								}
+							});
 				    	},
 				    	function(){
 				    		A.alarmToast('你选择了“取消”');
