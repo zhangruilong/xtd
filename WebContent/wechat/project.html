@@ -4,21 +4,51 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
-		<title>新天地</title>
+		<title>Agile Lite</title>
+		<link rel="stylesheet" href="assets/agile/css/agile.layout.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+		<link rel="stylesheet" href="assets/app/css/app.css">
 	</head>
 	<body>
-	<table style="width: 300px;">
-	<tr>
-		<td><img alt="" src="images/allcourse.png"></td>
-	</tr>
-	<tr>
-		<td rowspan="2"><img alt="" src="images/yujia.png"></td>
-		<td><img alt="" src="images/youyong.png"></td>
-	</tr>
-	<tr>
-		<td><img alt="" src="images/yumaoqiu.png"></td>
-	</tr>
-	
-	</table>
+		<div id="section_container">
+			<section id="lazyload_section" data-role="section" class="active">
+				<article data-role="article" id="main_article" data-scroll="verticle" class="active" style="bottom:0px;">
+					<div class="scroller">  
+						<img onclick="nextpage('all');" data-source="images/allcourse.png" class="img" style="width:100%;"/>
+						<img onclick="nextpage('瑜伽');" data-source="images/yujia.png" class="left img" style="width:50%;"/>
+						<img onclick="nextpage('游泳');" data-source="images/youyong.png" class="right img" style="width:50%;"/>
+						<img onclick="nextpage('羽毛球');" data-source="images/yumaoqiu.png" class="right img" style="width:50%;"/>
+						<img onclick="nextpage('健美');" data-source="images/jianmei.png" class="left img" style="width:50%;"/>
+						<img onclick="nextpage('单车');" data-source="images/danche.png" class="right img" style="width:50%;"/>
+						<img onclick="nextpage('减脂');" data-source="images/jianzi.png" class="left img" style="width:50%;"/>
+						<img onclick="nextpage('乒乓');" data-source="images/pinpan.png" class="left img" style="width:50%;"/>
+						<img onclick="nextpage('篮球');" data-source="images/lanqiu.png" class="right img" style="width:50%;"/>
+						<img onclick="nextpage('增肌');" data-source="images/zengji.png" class="img" style="width:100%;"/>
+    				</div>  
+
+				</article>
+			</section>
+		</div>
+		
+		<!--- third --->
+		<script src="assets/third/jquery/jquery-2.1.3.min.js"></script>
+		<script src="assets/third/jquery/jquery.mobile.custom.min.js"></script>
+		<script src="assets/third/iscroll/iscroll-probe.js"></script>
+		<script src="assets/third/arttemplate/template-native.js"></script>
+		<!-- agile -->
+		<script type="text/javascript" src="assets/agile/js/agile.js"></script>		
+		<!--- bridge --->
+		<script type="text/javascript" src="assets/bridge/exmobi.js"></script>
+		<script type="text/javascript" src="assets/bridge/agile.exmobi.js"></script>
+		<!-- app -->
+		<script type="text/javascript" src="assets/app/js/app.js"></script>
+		<script>
+			function nextpage(project){
+				window.localStorage.setItem("project",project);
+				window.location.href = "stadiumlist.html";
+			}
+		</script>
 	</body>
 </html>
