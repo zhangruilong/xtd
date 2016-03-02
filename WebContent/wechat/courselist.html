@@ -65,7 +65,8 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			$('#main_article').on('refreshInit', function(){
-				A.template('#template').renderReplace('../AllcourseAction.do?method=selQuery');
+				var coach = JSON.parse(window.localStorage.getItem("coach"));
+				A.template('#template').renderReplace('../AllcourseAction.do?method=selAll&wheresql=allcoursecoach=\''+coach.coachid+'\'');
 			});
 			function nextpage(allcourseid,allcoursecoach,allcoursename
 					,allcourseproject,allcoursenum,allcoursemoney){

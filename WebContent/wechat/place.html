@@ -77,8 +77,14 @@
 		<script>
 			$('#main_article').on('refreshInit', function(){
 				var project = window.localStorage.getItem("project");
-				A.template('#template').renderReplace('../PlaceAction.do?method=selAlly&wheresql=placeproject=\''+project+'\'');
-				A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll&wheresql=placetimeproject=\''+project+'\'');
+				var stadium = JSON.parse(window.localStorage.getItem("stadium"));
+				if("all"==project){
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\'');
+					A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll');
+				}else{
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placeproject=\''+project+'\' and placestadium=\''+stadium.stadiumid+'\'');
+					A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll&wheresql=placetimeproject=\''+project+'\'');
+				}
 			});
 			function nextpage(placeid,placename){
 				    A.confirm('提示','这是一个Confirm！',

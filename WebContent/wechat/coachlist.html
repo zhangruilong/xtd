@@ -62,7 +62,8 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			$('#main_article').on('refreshInit', function(){
-				A.template('#template').renderReplace('../CoachAction.do?method=selQuery');
+				var stadium = JSON.parse(window.localStorage.getItem("stadium"));
+				A.template('#template').renderReplace('../CoachAction.do?method=selAll&wheresql=coachstadium=\''+stadium.stadiumid+'\'');
 			});
 			function nextpage(coachid,coachcode,coachname,coachphone,coachaddress
 					,coachsex,coachage,coachimage,coachdetail){
