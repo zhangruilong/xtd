@@ -47,7 +47,7 @@
 		<script>
 			function nextpage(project){
 				window.localStorage.setItem("project",project);
-				window.location.href = "stadiumlist.html";
+				setTimeout(function(){window.location.href = "stadiumlist.html";}, 300);
 			}
 		</script>
 	</body>
