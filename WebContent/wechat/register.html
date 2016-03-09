@@ -1,0 +1,92 @@
+<!-- HTML5文件 -->
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
+		<title>新天地健身</title>
+		<link rel="stylesheet" href="assets/agile/css/agile.layout.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+		<link rel="stylesheet" href="assets/agile/css/flat/iconform.css">
+		<link rel="stylesheet" href="assets/component/timepicker/timepicker.css">
+		<link rel="stylesheet" href="assets/app/css/app.css">
+	</head>
+	<body>
+		<div id="section_container">
+			<section id="form_section" data-role="section" class="active">
+				<header>
+				    <div class="titlebar">
+				    	<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
+				    	<h1>会员注册</h1>
+				    </div>
+				</header>
+				<article data-role="article" id="border_article" data-scroll="verticle" class="active" style="top:44px;bottom:0px;">
+					<div class="scroller">
+						<form autocomplete="off" class="form-square">
+							<label class="label-left" for="email">姓名</label>
+							<label class="label-right">
+						    	<input id="customername" type="text" autocomplete="on" required/>
+						    </label>
+						    
+						    <label class="label-left" for="phone">手机</label>
+						    <label class="label-right">
+						    	<input id="customerphone" type="number" required/>
+						    </label>
+						    <button class="right submit" onclick="nextpage();">
+							<i class="iconfont iconline-rdo-tick"></i>
+							<span>提交</span>
+						</button>
+		  				</form>
+						
+					</div>
+				</article>
+			</section>
+		</div>
+		
+		<!--- third --->
+		<script src="assets/third/zepto/zepto.min.js"></script>
+		<script src="assets/third/iscroll/iscroll-probe.js"></script>
+		<script src="assets/third/arttemplate/template-native.js"></script>
+		<!-- agile -->
+		<script type="text/javascript" src="assets/agile/js/agile.js"></script>		
+		<!--- bridge --->
+		<script type="text/javascript" src="assets/bridge/exmobi.js"></script>
+		<script type="text/javascript" src="assets/bridge/agile.exmobi.js"></script>
+		<!-- app -->
+		<script src="assets/component/timepicker/agile.timepicker.js"></script>	
+		<script type="text/javascript" src="assets/component/extend.js"></script>
+		<script type="text/javascript" src="assets/app/js/app.js"></script>
+		<script type="text/javascript">
+		function nextpage(){
+			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
+			var openid = window.localStorage.getItem("openid");
+			var json = "[{'customerstadium':'"+stadium.stadiumid
+			+"','openid':'"+openid
+		    +"','customername':'"+$('#customername').val()
+		    +"','customerphone':'"+$('#customerphone').val()
+		    +"'}]";
+	    	$.ajax({
+				url : "../CustomerAction.do?method=register",
+				data : {
+					json : json
+				},
+				success : function(resp) {
+					var respText = eval('('+resp+')'); 
+	    			if(respText.code == 400) 
+	    				alert(respText.msg);
+	    			else {
+	    				A.showToast('注册成功！');
+	    				window.localStorage.setItem("customerid",respText.msg);
+	    				window.location.href = "cardtypelist.html";
+	    			}
+				},
+				error : function(resp) {
+					alert('网络出现问题，请稍后再试');
+				}
+			});
+		}
+		</script>
+	</body>
+</html>

@@ -302,6 +302,7 @@ function selectCardtype() {
 								});
 								return;
 							} 
+							Ext.getCmp('Cuscardcuscarddetail').setValue(selectRows[0].get("cardtypename"));
 							Ext.getCmp('Cuscardcuscardtype').setValue(selectRows[0].get("cardtypeclass"));
 							Ext.getCmp('Cuscardcuscardpsw').setValue(selectRows[0].get("cardtypeday"));
 							Ext.getCmp('Cuscardcuscardmoney').setValue(selectRows[0].get("cardtypeprice"));

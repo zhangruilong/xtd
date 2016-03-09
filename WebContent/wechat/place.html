@@ -87,12 +87,23 @@
 				}
 			});
 			function nextpage(placeid,placename){
+				if(!window.localStorage.getItem("customerid")){
+					
+					A.confirm('提示','请先填写姓名和手机号码',
+					    	function(){
+								window.location.href = "register.html";
+					    	},
+					    	function(){
+					    		A.alarmToast('你选择了“取消”');
+					    	});
+				}else{
+					var customerid = window.localStorage.getItem("customerid");
 				    A.confirm('提示','确定预约'+placename,
 				    	function(){
-					    	var json = "[{'appointcustomer':'"+"14514433424807691"  //会员id
+					    	var json = "[{'appointcustomer':'"+customerid  //会员id
 	        			    +"','appointplace':'"+placeid
 							+"','appointplacename':'"+placename
-	        			    +"','appointcard':'"+"14514556069953016"       //会员卡id
+	        			    +"','appointcard':'"+"0"       //会员卡id
 	        			    +"','appointproject':'"+project
 							+"','appointdetail':'"+$('#placetime').val()
 	        			    +"'}]";
@@ -117,6 +128,7 @@
 				    	function(){
 				    		A.alarmToast('你选择了“取消”');
 				    	});
+				}
 			}
 		</script>
 	</body>

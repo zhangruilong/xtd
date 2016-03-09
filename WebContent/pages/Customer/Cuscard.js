@@ -226,6 +226,7 @@ function selectCuscard(customerid) {
 				id : 'Cuscardcuscardno',
 				name : 'cuscardno',
 				maxLength : 100,
+				allowBlank : false,
 				anchor : '95%'
 			} ]
 		}
@@ -274,6 +275,7 @@ function selectCuscard(customerid) {
 				id : 'Cuscardcuscardmoney',
 				name : 'cuscardmoney',
 				maxLength : 100,
+				allowBlank : false,
 				anchor : '95%'
 			} ]
 		}
@@ -286,6 +288,7 @@ function selectCuscard(customerid) {
 				id : 'Cuscardcuscardnums',
 				name : 'cuscardnums',
 				maxLength : 100,
+				allowBlank : false,
 				anchor : '95%'
 			} ]
 		}
@@ -298,6 +301,7 @@ function selectCuscard(customerid) {
 				id : 'Cuscardcuscardtimes',
 				name : 'cuscardtimes',
 				maxLength : 100,
+				allowBlank : false,
 				anchor : '95%'
 			} ]
 		}
@@ -310,6 +314,7 @@ function selectCuscard(customerid) {
 				id : 'Cuscardcuscardint',
 				name : 'cuscardint',
 				maxLength : 100,
+				allowBlank : false,
 				anchor : '95%'
 			} ]
 		}

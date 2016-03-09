@@ -1,8 +1,10 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.server.dao.CustomerDao;
 import com.server.pojo.Customer;
@@ -93,5 +95,31 @@ public class CustomerAction extends BaseAction {
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
+	}
+	//注册
+	public void register(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Customer temp = cuss.get(0);
+		//判断是否已注册
+		String customerid = CommonUtil.getNewId();
+		Queryinfo queryinfo = getQueryinfo();
+		queryinfo.setType(Customer.class);
+		queryinfo.setWheresql("openid='"+temp.getOpenid()+"'");
+		if(DAO.getTotal(queryinfo)==0){
+			temp.setCustomerid(customerid);
+			result = DAO.insSingle(temp);
+			if(CommonConst.SUCCESS.equals(result)){
+//				HttpSession session = request.getSession();
+//				session.setAttribute("user", temp); //存
+//				session.setAttribute("userid", customerid); //存
+//				session.setAttribute("username", temp.getCustomername()); //存
+				responsePW(response, "{success:true,code:202,msg:'"+customerid+"'}");
+			}
+			else
+				responsePW(response, result);
+		}else{
+			responsePW(response, "{success:true,code:400,msg:'该账号已存在'}");
+		}
+		
 	}
 }
