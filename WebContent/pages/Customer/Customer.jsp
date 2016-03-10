@@ -2,6 +2,7 @@
 <html>
   <head>
 	<%@ include file="/common/common.jsp" %>
+	<script type="text/javascript" src="SelectCustomer.js"></script>
 	<script type="text/javascript" src="Stadium.js"></script>
     <script type="text/javascript" src="Course.js"></script>
 	<script type="text/javascript" src="Allcourse.js"></script>

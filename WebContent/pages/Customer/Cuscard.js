@@ -353,7 +353,386 @@ function selectCuscard(customerid) {
 		}
 		]
 	});
-	
+	var CuscardchangedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
+		id:'CuscardchangedataForm',
+		labelAlign : 'right',
+		frame : true,
+		layout : 'column',
+		items : [{
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '新卡号',
+				id : 'Cuscardchangenonew',
+				name : 'cuscardnonew',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		,{
+			items : [ { 
+				xtype : 'textfield',
+				id : 'Cuscardchangeid',
+				name : 'cuscardid',
+				hidden : true
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '会员ID',
+				id : 'Cuscardchangecustomer',
+				name : 'cuscardcustomer',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .9,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '分类',
+				id : 'Cuscardchangetype',
+				name : 'cuscardtype',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡号',
+				id : 'Cuscardchangeno',
+				name : 'cuscardno',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期',
+				id : 'Cuscardchangepsw',
+				name : 'cuscardpsw',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期开始',
+				id : 'Cuscardchangebegin',
+				name : 'cuscardbegin',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期结束',
+				id : 'Cuscardchangeend',
+				name : 'cuscardend',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡余额',
+				id : 'Cuscardchangemoney',
+				name : 'cuscardmoney',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡总次数',
+				id : 'Cuscardchangenums',
+				name : 'cuscardnums',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡余次',
+				id : 'Cuscardchangetimes',
+				name : 'cuscardtimes',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡积分',
+				id : 'Cuscardchangeint',
+				name : 'cuscardint',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '备注',
+				id : 'Cuscardchangedetail',
+				name : 'cuscarddetail',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '状态',
+				id : 'Cuscardchangestatue',
+				name : 'cuscardstatue',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		]
+	});
+	var CuscardcontinuedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
+		id:'CuscardcontinuedataForm',
+		labelAlign : 'right',
+		frame : true,
+		layout : 'column',
+		items : [{
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '卡新余额',
+				id : 'Cuscardcontinuemoneynew',
+				name : 'cuscardmoneynew',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		,{
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '卡新总次数',
+				id : 'Cuscardcontinuenumsnew',
+				name : 'cuscardnumsnew',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		,{
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'textfield',
+				fieldLabel : '卡新余次',
+				id : 'Cuscardcontinuetimesnew',
+				name : 'cuscardtimesnew',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		,{
+			items : [ { 
+				xtype : 'textfield',
+				id : 'Cuscardcontinueid',
+				name : 'cuscardid',
+				hidden : true
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '会员ID',
+				id : 'Cuscardcontinuecustomer',
+				name : 'cuscardcustomer',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .9,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '分类',
+				id : 'Cuscardcontinuetype',
+				name : 'cuscardtype',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡号',
+				id : 'Cuscardcontinueno',
+				name : 'cuscardno',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期',
+				id : 'Cuscardcontinuepsw',
+				name : 'cuscardpsw',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期开始',
+				id : 'Cuscardcontinuebegin',
+				name : 'cuscardbegin',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '有效期结束',
+				id : 'Cuscardcontinueend',
+				name : 'cuscardend',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'numberfield',
+				fieldLabel : '卡余额',
+				id : 'Cuscardcontinuemoney',
+				name : 'cuscardmoney',
+				maxLength : 100,
+				editable : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'numberfield',
+				fieldLabel : '卡总次数',
+				id : 'Cuscardcontinuenums',
+				name : 'cuscardnums',
+				maxLength : 100,
+				editable : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'numberfield',
+				fieldLabel : '卡余次',
+				id : 'Cuscardcontinuetimes',
+				name : 'cuscardtimes',
+				maxLength : 100,
+				editable : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '卡积分',
+				id : 'Cuscardcontinueint',
+				name : 'cuscardint',
+				maxLength : 100,
+				allowBlank : false,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '备注',
+				id : 'Cuscardcontinuedetail',
+				name : 'cuscarddetail',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '状态',
+				id : 'Cuscardcontinuestatue',
+				name : 'cuscardstatue',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
+		]
+	});
 	var Cuscardbbar = pagesizebar(Cuscardstore);//定义分页
 	var Cuscardgrid = new Ext.grid.GridPanel({
 		height : document.documentElement.clientHeight - 30,
@@ -406,12 +785,11 @@ function selectCuscard(customerid) {
 				handler : function() {
 					var selections = Cuscardgrid.getSelectionModel().getSelections();
 					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						Ext.Msg.alert('提示', '请选择一条要过户的记录！', function() {
 						});
 						return;
 					}
-					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
-					CuscarddataForm.form.loadRecord(selections[0]);
+					selectCustomer(selections[0]);
 				}
 			},'-',{
 				text : "换卡",
@@ -419,12 +797,12 @@ function selectCuscard(customerid) {
 				handler : function() {
 					var selections = Cuscardgrid.getSelectionModel().getSelections();
 					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
+						Ext.Msg.alert('提示', '请选择一条要换卡的记录！', function() {
 						});
 						return;
 					}
-					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
-					CuscarddataForm.form.loadRecord(selections[0]);
+					createWindow(basePath + "CuscardchangeAction.do" + "?method=change", "换卡", CuscardchangedataForm, Cuscardstore);
+					CuscardchangedataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
 				text : "续卡",
@@ -436,8 +814,8 @@ function selectCuscard(customerid) {
 						});
 						return;
 					}
-					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
-					CuscarddataForm.form.loadRecord(selections[0]);
+					createWindow(basePath + "CuscardcontinueAction.do" + "?method=ccontinue", "修改", CuscardcontinuedataForm, Cuscardstore);
+					CuscardcontinuedataForm.form.loadRecord(selections[0]);
 				}
 			}
 		]

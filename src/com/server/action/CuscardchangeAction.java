@@ -1,6 +1,7 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -92,6 +93,18 @@ public class CuscardchangeAction extends BaseAction {
 		queryinfo.setOrder(CuscardchangePoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//换卡
+	public void change(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Cuscardchange temp = cuss.get(0);
+		String sqlCuscard = "update Cuscard set cuscardno='"+
+				temp.getCuscardnonew()+"' where cuscardid='"+
+				temp.getCuscardid()+"'";
+		temp.setCuscardid(CommonUtil.getNewId());
+		String sqlCuscardchange = DAO.getInsSingleSql(temp);
+		result = DAO.doAll(sqlCuscard,sqlCuscardchange);
 		responsePW(response, result);
 	}
 }

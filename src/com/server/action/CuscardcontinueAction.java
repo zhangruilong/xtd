@@ -1,10 +1,12 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.CuscardcontinueDao;
+import com.server.pojo.Cuscardchange;
 import com.server.pojo.Cuscardcontinue;
 import com.server.poco.CuscardcontinuePoco;
 import com.system.tools.CommonConst;
@@ -92,6 +94,20 @@ public class CuscardcontinueAction extends BaseAction {
 		queryinfo.setOrder(CuscardcontinuePoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//续卡
+	public void ccontinue(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Cuscardcontinue temp = cuss.get(0);
+		String sqlCuscard = "update Cuscard set cuscardmoney='"+
+				temp.getCuscardmoneynew()+"',cuscardnums="+
+				temp.getCuscardnumsnew()+",cuscardtimes="+
+				temp.getCuscardtimesnew()+" where cuscardid='"+
+				temp.getCuscardid()+"'";
+		temp.setCuscardid(CommonUtil.getNewId());
+		String sqlCuscardchange = DAO.getInsSingleSql(temp);
+		result = DAO.doAll(sqlCuscard,sqlCuscardchange);
 		responsePW(response, result);
 	}
 }

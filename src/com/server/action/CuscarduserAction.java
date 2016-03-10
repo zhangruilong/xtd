@@ -1,11 +1,14 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.CuscarduserDao;
+import com.server.pojo.Cuscard;
 import com.server.pojo.Cuscarduser;
+import com.server.poco.CuscardPoco;
 import com.server.poco.CuscarduserPoco;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
@@ -92,6 +95,19 @@ public class CuscarduserAction extends BaseAction {
 		queryinfo.setOrder(CuscarduserPoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//新增
+	public void guohu(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Cuscarduser temp = cuss.get(0);
+		String sqlCuscard = "update Cuscard set cuscardcustomer='"+
+				temp.getCuscardcustomernew()+"' where cuscardid='"+
+				temp.getCuscardid()+"'";
+		temp.setCuscardid(CommonUtil.getNewId());
+		String sqlCuscarduser = DAO.getInsSingleSql(temp);
+		
+		result = DAO.doAll(sqlCuscard,sqlCuscarduser);
 		responsePW(response, result);
 	}
 }
