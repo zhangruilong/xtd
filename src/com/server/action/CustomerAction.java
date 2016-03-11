@@ -14,6 +14,7 @@ import com.system.tools.base.BaseAction;
 import com.system.tools.pojo.Fileinfo;
 import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
+import com.system.tools.util.DateUtils;
 import com.system.tools.util.FileUtil;
 import com.system.tools.pojo.Pageinfo;
 
@@ -38,6 +39,8 @@ public class CustomerAction extends BaseAction {
 		json2cuss(request);
 		for(Customer temp:cuss){
 			temp.setCustomerid(CommonUtil.getNewId());
+			temp.setCreator(getCurrentUsername(request));
+			temp.setCreatetime(DateUtils.getDateTime());
 			result = DAO.insSingle(temp);
 		}
 		responsePW(response, result);
@@ -53,6 +56,8 @@ public class CustomerAction extends BaseAction {
 	//修改
 	public void updAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
+		cuss.get(0).setUpdor(getCurrentUsername(request));
+		cuss.get(0).setUpdtime(DateUtils.getDateTime());
 		result = DAO.updSingle(cuss.get(0),CustomerPoco.KEYCOLUMN);
 		responsePW(response, result);
 	}
@@ -106,6 +111,8 @@ public class CustomerAction extends BaseAction {
 		queryinfo.setType(Customer.class);
 		queryinfo.setWheresql("openid='"+temp.getOpenid()+"'");
 		if(DAO.getTotal(queryinfo)==0){
+			temp.setCreator(getCurrentUsername(request));
+			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setCustomerid(customerid);
 			result = DAO.insSingle(temp);
 			if(CommonConst.SUCCESS.equals(result)){

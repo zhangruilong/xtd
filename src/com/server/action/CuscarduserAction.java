@@ -15,6 +15,7 @@ import com.system.tools.base.BaseAction;
 import com.system.tools.pojo.Fileinfo;
 import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
+import com.system.tools.util.DateUtils;
 import com.system.tools.util.FileUtil;
 import com.system.tools.pojo.Pageinfo;
 
@@ -38,6 +39,8 @@ public class CuscarduserAction extends BaseAction {
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
 		for(Cuscarduser temp:cuss){
+			temp.setCreator(getCurrentUsername(request));
+			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setCuscardid(CommonUtil.getNewId());
 			result = DAO.insSingle(temp);
 		}
@@ -105,6 +108,8 @@ public class CuscarduserAction extends BaseAction {
 				temp.getCuscardcustomernew()+"' where cuscardid='"+
 				temp.getCuscardid()+"'";
 		temp.setCuscardid(CommonUtil.getNewId());
+		temp.setCreator(getCurrentUsername(request));
+		temp.setCreatetime(DateUtils.getDateTime());
 		String sqlCuscarduser = DAO.getInsSingleSql(temp);
 		
 		result = DAO.doAll(sqlCuscard,sqlCuscarduser);
