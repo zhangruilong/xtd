@@ -21,7 +21,7 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
-			header : '编码',
+			header : '门店照片',
 			dataIndex : 'stadiumcode',
 			align : 'center',
 			width : 80,

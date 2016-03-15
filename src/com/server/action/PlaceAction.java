@@ -61,7 +61,7 @@ public class PlaceAction extends BaseAction {
 		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
 		queryinfo.setOrder(PlacePoco.ORDER);
 		cuss = (ArrayList<Place>) DAO.selAll(queryinfo);
-		FileUtil.expExcel(response,cuss,PlacePoco.CHINESENAME,PlacePoco.KEYCOLUMN,PlacePoco.NAME);
+		FileUtil.expExcel(response,cuss,PlacePoco.CHINESENAME,PlacePoco.NAME);
 	}
 	//导入
 	public void impAll(HttpServletRequest request, HttpServletResponse response){

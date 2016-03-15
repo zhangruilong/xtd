@@ -22,6 +22,7 @@ public class PlacePoco
     * 实体中文字段
     */
    public static String[] CHINESENAME = {
+	    "ID",
 	 	"场馆ID",
 	 	"编码",
 	 	"名称",
