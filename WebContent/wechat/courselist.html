@@ -72,7 +72,9 @@
 					,allcourseproject,allcoursenum,allcoursemoney){
 				    A.confirm('提示','确认购买'+allcoursename,
 				    	function(){
+				    		var customerid = window.localStorage.getItem("customerid");
 					    	var json = "[{'mycoursecoach':'"+allcoursecoach
+					    	+"','mycoursecustomer':'"+customerid
 	        			    +"','mycoursename':'"+allcoursename
 	        			    +"','mycourseproject':'"+allcourseproject
 	        			    +"','mycoursenum':'"+allcoursenum

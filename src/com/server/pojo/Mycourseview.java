@@ -14,7 +14,8 @@ public class Mycourseview
    /**
     * mycoursecoach
     */
-   private String mycoursecoach;   
+   private String mycoursecoach;  
+   private String mycoursecustomer;
    /**
     * mycoursename
     */
@@ -287,6 +288,7 @@ public class Mycourseview
 	public Mycourseview(
 		String mycourseid
 	 	,String mycoursecoach
+	 	,String mycoursecustomer
 	 	,String mycoursename
 	 	,String mycourseproject
 	 	,String mycoursenum
@@ -302,6 +304,7 @@ public class Mycourseview
 		super();
 		this.mycourseid = mycourseid;
 	 	this.mycoursecoach = mycoursecoach;
+	 	this.mycoursecustomer = mycoursecustomer;
 	 	this.mycoursename = mycoursename;
 	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
@@ -313,6 +316,14 @@ public class Mycourseview
 	 	this.coachcode = coachcode;
 	 	this.coachname = coachname;
 	 	this.coachphone = coachphone;
+	}
+
+	public String getMycoursecustomer() {
+		return mycoursecustomer;
+	}
+
+	public void setMycoursecustomer(String mycoursecustomer) {
+		this.mycoursecustomer = mycoursecustomer;
 	}
 }
 

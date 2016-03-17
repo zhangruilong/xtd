@@ -15,6 +15,7 @@ public class Mycourse
     * 教练ID
     */
    private String mycoursecoach;   
+   private String mycoursecustomer; 
    /**
     * 课程名
     */
@@ -224,6 +225,7 @@ public class Mycourse
 	public Mycourse(
 		String mycourseid
 	 	,String mycoursecoach
+	 	,String mycoursecustomer
 	 	,String mycoursename
 	 	,String mycourseproject
 	 	,String mycoursenum
@@ -236,6 +238,7 @@ public class Mycourse
 		super();
 		this.mycourseid = mycourseid;
 	 	this.mycoursecoach = mycoursecoach;
+	 	this.mycoursecustomer = mycoursecustomer;
 	 	this.mycoursename = mycoursename;
 	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
@@ -244,6 +247,14 @@ public class Mycourse
 	 	this.creator = creator;
 	 	this.updtime = updtime;
 	 	this.updor = updor;
+	}
+
+	public String getMycoursecustomer() {
+		return mycoursecustomer;
+	}
+
+	public void setMycoursecustomer(String mycoursecustomer) {
+		this.mycoursecustomer = mycoursecustomer;
 	}
 }
 

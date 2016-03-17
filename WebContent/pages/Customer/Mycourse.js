@@ -4,6 +4,7 @@ function selectMycourse(customerid) {
 	var Mycourseaction = "MycourseAction.do";
 	var Mycoursefields = ['mycourseid'
 	        			    ,'mycoursecoach' 
+	        			    ,'mycoursecustomer' 
 	        			    ,'mycoursename' 
 	        			    ,'mycourseproject' 
 	        			    ,'mycoursenum' 
@@ -23,6 +24,13 @@ function selectMycourse(customerid) {
 		columns : [ new Ext.grid.RowNumberer(), Mycoursesm, {// 改
 			header : 'ID',
 			dataIndex : 'mycourseid',
+			hidden : true
+		}
+		, {
+			header : '会员id',
+			dataIndex : 'mycoursecustomer',
+			align : 'center',
+			width : 80,
 			hidden : true
 		}
 		, {
@@ -204,12 +212,17 @@ function selectMycourse(customerid) {
 				text : "购买课程",
 				iconCls : 'add',
 				handler : function() {
-					selectAllcourse();
+					selectAllcourse(customerid);
 				}
 			}
 		]
 	});
 	Mycoursegrid.region = 'center';
+	Mycoursestore.on("beforeload",function(){ 
+		Mycoursestore.baseParams = {
+				wheresql : "mycoursecustomer='"+customerid+"'"
+		}; 
+	});
 	Mycoursestore.load();//加载数据
 	return Mycoursegrid;
 }

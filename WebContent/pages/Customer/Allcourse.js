@@ -1,4 +1,4 @@
-function selectAllcourse() {
+function selectAllcourse(customerid ) {
 	var Allcourseclassify = "私教课";
 	var Allcoursetitle = "当前位置:业务管理》" + Allcourseclassify;
 	var Allcourseaction = "AllcourseAction.do";
@@ -186,7 +186,8 @@ function selectAllcourse() {
 								return;
 							}
 							var json = "[{'mycoursecoach':'"+selectRows[0].data['allcoursecoach']
-							        			    +"','mycoursename':'"+selectRows[0].data['allcoursename']
+							        			    +"','mycoursecustomer':'"+customerid
+													+"','mycoursename':'"+selectRows[0].data['allcoursename']
 							        			    +"','mycourseproject':'"+selectRows[0].data['allcourseproject']
 							        			    +"','mycoursenum':'"+selectRows[0].data['allcoursenum']
 							        			    +"','mycoursemoney':'"+selectRows[0].data['allcoursemoney']

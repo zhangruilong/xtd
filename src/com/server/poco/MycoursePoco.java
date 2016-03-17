@@ -23,6 +23,7 @@ public class MycoursePoco
     */
    public static String[] CHINESENAME = {
 	 	"教练ID",
+	 	"会员ID",
 	 	"课程名",
 	 	"项目",
 	 	"课时",
@@ -37,6 +38,7 @@ public class MycoursePoco
 	 */
    public static final String[] FIELDNAME = {
 	 	"mycoursecoach",
+	 	"mycoursecustomer",
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
@@ -55,6 +57,7 @@ public class MycoursePoco
 	 */
    public static final String[] QUERYFIELDNAME = {
 	 	"mycoursecoach",
+	 	"mycoursecustomer",
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",

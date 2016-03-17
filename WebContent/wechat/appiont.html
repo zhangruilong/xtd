@@ -55,8 +55,9 @@
 		<!-- app -->
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
+			var customerid = window.localStorage.getItem("customerid");
 			$('#main_article').on('refreshInit', function(){//会员id
-				A.template('#template').renderReplace('../AppiontAction.do?method=selQuery&wheresql=appointcustomer=\'14514433424807691\'');
+				A.template('#template').renderReplace('../AppiontAction.do?method=selQuery&wheresql=appointcustomer=\''+customerid+'\'');
 			});
 		</script>
 	</body>

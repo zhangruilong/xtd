@@ -648,7 +648,8 @@ function getTabPanel(customerid){
 	        title: '预约记录',
 	        items: selectAppoint(customerid)
 	    },{
-	        title: '打卡记录'
+	        title: '打卡记录',
+	        items: selectNotes(customerid)
 	    }]
 	});
 	return tabs;
