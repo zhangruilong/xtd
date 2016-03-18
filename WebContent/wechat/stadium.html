@@ -23,7 +23,7 @@
 				</header>
 				<article data-role="article" id="main_article" data-scroll="verticle" class="active" style="top:44px;bottom:0px;">
 					<div class="scroller"> 
-						<img class="full-width" data-toggle="article" src="images/7.png">
+						<img id="stadiumcode" class="full-width" data-toggle="article" src="images/7.png">
 						<h1 id="stadiumname" align="center"  style="margin-top: 10px;margin-bottom: 10px;">新天地健身会所旗舰馆(青年路)</h1>
 						<ul class="listitem">
 					        <li class="sliver"></li>
@@ -43,7 +43,7 @@
 										<span class="iconfont iconline-chart-pie"></span>
 									</div>
 						    	</a>
-						    	<label class="grid-label">图文</label>
+						    	<label class="grid-label">活动</label>
 							</div>
 							<div class="grid-cell">
 								<a href="#place" data-toggle="html" class="navigate-right">						      		
@@ -83,6 +83,7 @@
 		<script type="text/javascript">
 		$(function(){
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
+			$('#stadiumcode').attr("src","../"+stadium.stadiumcode);
 			$('#stadiumname').html(stadium.stadiumname);
 			$('#stadiumstatue').html("电话："+stadium.stadiumstatue);
 			$('#stadiumaddress').html("地址："+stadium.stadiumaddress);

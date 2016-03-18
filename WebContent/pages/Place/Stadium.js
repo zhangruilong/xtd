@@ -25,7 +25,7 @@ function selectStadium() {
 			dataIndex : 'stadiumcode',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '名称',
@@ -49,7 +49,7 @@ function selectStadium() {
 			sortable : true
 		}
 		, {
-			header : '状态',
+			header : '电话',
 			dataIndex : 'stadiumstatue',
 			align : 'center',
 			width : 80,
