@@ -1,16 +1,21 @@
 <%@ page language="java" import="java.util.*"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta http-equiv="Pragma" content="no-cache" />
-<meta http-equiv="Cache-Control" content="no-cache" />
-<meta http-equiv="Expires" content="0" />
-<title>用户登录</title>
-<link href="sysstyle/style.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="sysjs/png.js"></script>
-<%@ include file="/common/common.jsp"%>
+<html xmlns="http://www.w3.org/1999/xhtml" class="  ext-strict"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>
+	新天地
+</title>
+<link href="login/blue.css" rel="stylesheet" text="text/css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="login/bootstrap.min.css">
+    <link rel="stylesheet" href="login/main.css">
+    <!-- JavaScript -->
+    <script type="text/javascript" src="login/jquery-2.1.3.min.js"></script>
+    <script src="login/bootstrap.min.js"></script>
+    <%@ include file="/common/common.jsp"%>
 <script type=text/javascript>
 if (top != window) top.location.href = window.location.href;
 function check() {
@@ -19,9 +24,6 @@ function check() {
 		return false;
 	}else if(document.getElementById('password').value==''||document.getElementById('password').value==null){
 		alert("密码不能为空");
-		return false;
-	}else if(document.getElementById('input').value==''||document.getElementById('input').value==null){
-		alert("验证码不能为空");
 		return false;
 	}else{
 		return true;
@@ -39,18 +41,12 @@ function submitdata() {
 		alert("密码不能为空");
 		return;
 	}
-	var input = document.getElementById('input').value;
-	if(input==''||input==null){
-		alert("验证码不能为空");
-		return;
-	}
 	Ext.Ajax.request({
 		url : 'System_userAction.do?method=login',
 		method : 'POST',
 		params : {
 			username : username,
-			password : password,
-			input : input
+			password : password
 		},
 		success : function(resp,opts) {
 			var respText = Ext.util.JSON.decode(resp.responseText); 
@@ -69,56 +65,42 @@ function keyLogin(){
 	}
 };
 </script>
+    <style type="text/css">
+        .mycheckbox
+        {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #9e9e9e;
+        }
+    </style>
 </head>
-
-<body class="login" onkeydown="keyLogin();">
-	<div class="login_top">
-		<div>
-			<img src="sysimages/danonglogo.png" width="154" height="25" class="logo" />
-			<h1>管理平台</h1>
-			<h6 class="clear"></h6>
-		</div>
-	</div>
-	<div class="login_main">
-		<div>
-			<table width="100%" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="100" align="right">用户名：</td>
-					<td><input type="text" name="username" id="username"
-						class="member" /></td>
-				</tr>
-				<tr>
-					<td align="right">&nbsp;</td>
-					<td height="25">&nbsp;</td>
-				</tr>
-				<tr>
-					<td align="right">密码：</td>
-					<td><input type="password" name="password" id="password"
-						class="pwd" /></td>
-				</tr>
-				<tr>
-					<td align="right">&nbsp;</td>
-					<td height="25">&nbsp;</td>
-				</tr>
-				<tr>
-					<td align="right">验证码：</td>
-					<td><blockquote class="test">
-							<input type="text" name="input" id="input" maxlength="4" /> <img
-								id="code" border="0" src="common/image.jsp"
-								onclick="javascript:var dt=new Date();document.getElementById('code').src='common/image.jsp?dt='+dt;" />
-						</blockquote></td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td height="25">&nbsp;</td>
-				</tr>
-				<tr>
-					<td>&nbsp;</td>
-					<td><input id="submitbutton" type="button" value="登录"
-						class="btn" onclick="submitdata()" /></td>
-				</tr>
-			</table>
-		</div>
-	</div>
+<body class=" ext-webkit ext-chrome bigfont" onkeydown="keyLogin();">
+    <div class="login">
+        <div class="container login_logo">
+            <img src="login/logo.png">
+        </div>
+        <div class="login_detail">
+            <img src="login/login_img.png" class="pull-left login_detail_img">
+            <!-- 登录框 -->
+            <div class="login_form pull-right">
+                <div class="form_head">
+                    <img src="login/login_form_logo.png">
+                                            登录管理平台
+                </div>
+                <div id="ctl09_wrapper"><div id="ctl09" class=" x-panel form_detail x-panel-noborder"><div class="x-panel-bwrap" id="ext-gen5"><div class="x-panel-body x-panel-body-noheader x-panel-body-noborder" id="ext-gen6" style="background-color: rgb(9, 34, 63);"><div id="ctl09_content" class="" style="visibility: visible; display: block;">
+                    <div class="form-group">
+                        <input name="username" type="text" id="username" class="form-control" placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <input name="password" type="password" id="password" class="form-control" placeholder="密码">
+                    </div>
+                    <div class="mycheckbox pull-left">
+                        <input id="ctl09_cbxRememberPassword" type="checkbox" name="ctl09$cbxRememberPassword" checked="checked"><span style="margin-left: 7px;">记住密码</span>
+                    </div>
+                    <input onclick="submitdata()" type="button" name="submitbutton" value="登录" id="submitbutton" class="btn btn-block" style="color:White;background-color:#43D0E5;font-size:16px;height:40px;">
+                </div></div></div></div></div>
+            </div>
+        </div>
+    </div>              
 </body>
 </html>
