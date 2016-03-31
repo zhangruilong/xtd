@@ -29,7 +29,7 @@
  </servlet>
  <servlet-mapping>
 	  <servlet-name>Oauth2</servlet-name>
-	  <url-pattern>/Oauth2</url-pattern>
+	  <url-pattern>/Oauth2.api</url-pattern>
  </servlet-mapping>
  
   <!-- wxpay -->
