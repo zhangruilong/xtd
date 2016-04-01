@@ -69,8 +69,8 @@ public class AppiontviewAction extends BaseAction {
 		queryinfo.setWheresql("appointcoursename='"+stadiumname+
 				"' and appointproject='"+projectname+
 				"' and appointdetail='"+placetimedetail
-				+"' and createtime like '"+appiontdate
-				+"%'");
+				+"' and appointbegin='"+appiontdate
+				+"'");
 		queryinfo.setOrder(AppiontviewPoco.ORDER);
 		cuss = (ArrayList<Appiontview>) DAO.selAll(queryinfo);
 		

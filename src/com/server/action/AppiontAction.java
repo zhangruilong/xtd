@@ -37,7 +37,6 @@ public class AppiontAction extends BaseAction {
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
 		for(Appiont temp:cuss){
-			temp.setCreator(getCurrentUsername(request));
 			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setAppointid(CommonUtil.getNewId());
 			result = DAO.insSingle(temp);

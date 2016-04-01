@@ -104,16 +104,16 @@ Ext.onReady(function() {
 		}
 		, {
 			header : '预约时间',
-			dataIndex : 'createtime',
+			dataIndex : 'appointbegin',
 			align : 'center',
 			width : 160,
 			sortable : true
 		}
 		, {
-			header : '预约人',
-			dataIndex : 'creator',
+			header : '创建时间',
+			dataIndex : 'createtime',
 			align : 'center',
-			width : 80,
+			width : 160,
 			sortable : true
 		}
 		]
@@ -192,7 +192,7 @@ Ext.onReady(function() {
 			format : 'Y-m-d',
 			allowBlank : false,
 			anchor : '95%'
-		},'->',{
+		},'-',{
 			text : "查询",
 			iconCls : 'select',
 			handler : function() {
@@ -202,6 +202,21 @@ Ext.onReady(function() {
 					placetimedetail:Ext.getCmp('placetimedetail').value,
 					appiontdate:Ext.getCmp('appiontdate').value
 				}});
+			}
+		},'->',{
+			text : "预约公共课",
+			iconCls : 'add',
+			handler : function() {
+				var selections = Appiontgrid.getSelectionModel().getSelections();
+				if (selections.length != 1 || selections[0].get("appointid")) {
+					Ext.Msg.alert('提示', '请选择一条未被预约的数据！', function() {
+					});
+					return;
+				}
+				//选择一张会员卡
+				selectCuscard(selections[0].get("appointplace"),selections[0].get("appointplacename")
+						,Ext.getCmp('stadiumname').value,Ext.getCmp('projectname').value
+						,Ext.getCmp('placetimedetail').value,Ext.getCmp('appiontdate').value);
 			}
 		}
 		]

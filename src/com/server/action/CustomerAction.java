@@ -111,7 +111,6 @@ public class CustomerAction extends BaseAction {
 		queryinfo.setType(Customer.class);
 		queryinfo.setWheresql("openid='"+temp.getOpenid()+"'");
 		if(DAO.getTotal(queryinfo)==0){
-			temp.setCreator(getCurrentUsername(request));
 			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setCustomerid(customerid);
 			result = DAO.insSingle(temp);
