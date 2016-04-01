@@ -55,6 +55,7 @@
 	<bean id="MycourseAction" class="com.server.action.MycourseAction" />
 	<bean id="PlacetimeAction" class="com.server.action.PlacetimeAction" />
 	
+	<bean id="AppiontviewAction" class="com.server.action.AppiontviewAction" />
 	<bean id="PlaceviewAction" class="com.server.action.PlaceviewAction" />
 	<bean id="EmpviewAction" class="com.server.action.EmpviewAction" />
 	<bean id="CoachviewAction" class="com.server.action.CoachviewAction" />

@@ -9,8 +9,7 @@ function selectPlace(customerid,cuscardid) {
 	        			    ,'placetimeend' 
 	        			    ,'placetimeproject' 
 	        			      ];// 全部字段
-	var Placetimekeycolumn = [ 'placetimeid' ];// 主键
-	var Placetimestore = dataStore(Placetimefields, basePath + Placetimeaction + "?method=selQuery");// 定义Placetimestore
+	var Placetimestore = dataStore(Placetimefields, basePath + Placetimeaction + "?method=selAll");// 定义Placetimestore
 	
 	var Placeclassify = "场地";
 	var Placetitle = "当前位置:业务管理》" + Placeclassify;
@@ -108,7 +107,7 @@ function selectPlace(customerid,cuscardid) {
 			anchor : '95%',
 			listeners : {'select':function(){
 				Placetimestore.load({params:{
-					query : Ext.getCmp('Placeplaceproject').value
+					wheresql : "placetimeproject='"+Ext.getCmp('projectname').value+"'"
 				}});
 				Ext.getCmp('Placetimeplacetimedetail').focus();
 			}

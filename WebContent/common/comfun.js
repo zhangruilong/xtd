@@ -1,14 +1,18 @@
 var statueStore = new Ext.data.ArrayStore({//状态下拉
-    	fields:["name"],
-    	data:[["启用"],["禁用"]]
-    });
+	fields:["name"],
+	data:[["启用"],["禁用"]]
+});
 var sexStore = new Ext.data.ArrayStore({//性别下拉
 	fields:["name"],
 	data:[["男"],["女"]]
 });
 var projectStore = new Ext.data.ArrayStore({//项目下拉
 	fields:["name"],
-	data:[["游泳"],["瑜伽"],["单车"],["羽毛球"]]
+	data:[["游泳"],["瑜伽"],["单车"],["羽毛球"],["健美操"]]
+});
+var stadiumStore = new Ext.data.ArrayStore({//场馆下拉
+	fields:["name"],
+	data:[["新天地旗舰馆"],["新天地二附馆"],["新天地东城馆"],["新天地皇家馆"],["新天地万科馆"]]
 });
 var cardStore = new Ext.data.ArrayStore({//卡种分类下拉
 	fields:["name"],

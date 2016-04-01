@@ -76,8 +76,8 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			var project = window.localStorage.getItem("project");
+			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			$('#main_article').on('refreshInit', function(){
-				var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 				if("all"==project){
 					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\'');
 					A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll');
@@ -103,7 +103,7 @@
 					    	var json = "[{'appointcustomer':'"+customerid  //会员id
 	        			    +"','appointplace':'"+placeid
 							+"','appointplacename':'"+placename
-	        			    +"','appointcard':'"+"0"       //会员卡id
+	        			    +"','appointcoursename':'"+stadium.stadiumname       //场馆
 	        			    +"','appointproject':'"+project
 							+"','appointdetail':'"+$('#placetime').val()
 	        			    +"'}]";

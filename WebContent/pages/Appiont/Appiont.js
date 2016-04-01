@@ -1,5 +1,17 @@
 Ext.onReady(function() {
-	var Appiontclassify = "我的预约";
+	var Placetimeaction = "PlacetimeAction.do";
+	var Placetimefields = ['placetimeid'
+	        			    ,'placetimecode' 
+	        			    ,'placetimename' 
+	        			    ,'placetimedetail' 
+	        			    ,'placetimestatue' 
+	        			    ,'placetimebegin' 
+	        			    ,'placetimeend' 
+	        			    ,'placetimeproject' 
+	        			      ];// 全部字段
+	var Placetimestore = dataStore(Placetimefields, basePath + Placetimeaction + "?method=selAll");// 定义Placetimestore
+	
+	var Appiontclassify = "项目维护";
 	var Appionttitle = "当前位置:业务管理》" + Appiontclassify;
 	var Appiontaction = "AppiontAction.do";
 	var Appiontfields = ['appointid'
@@ -7,6 +19,9 @@ Ext.onReady(function() {
 	        			    ,'appointcard' 
 	        			    ,'appointplace' 
 	        			    ,'appointcourse' 
+	        			    ,'appointplacename' 
+	        			    ,'appointcoursename' 
+	        			    ,'appointcoachname' 
 	        			    ,'appointproject' 
 	        			    ,'appointbegin' 
 	        			    ,'appointend' 
@@ -14,9 +29,16 @@ Ext.onReady(function() {
 	        			    ,'appointstatue' 
 	        			    ,'createtime' 
 	        			    ,'creator' 
+	        			    ,'customercode' 
+	        			    ,'openid' 
+	        			    ,'customername' 
+	        			    ,'customerphone' 
+	        			    ,'cuscardtype' 
+	        			    ,'cuscardno' 
+	        			    ,'cuscarddetail' 
 	        			      ];// 全部字段
 	var Appiontkeycolumn = [ 'appointid' ];// 主键
-	var Appiontstore = dataStore(Appiontfields, basePath + Appiontaction + "?method=selQuery");// 定义Appiontstore
+	var Appiontstore = dataStore(Appiontfields, basePath + "AppiontviewAction.do" + "?method=selAllplace");// 定义Appiontstore
 	var Appiontsm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Appiontcm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Appiontsm, {// 改
@@ -25,57 +47,50 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
-			header : '会员ID',
-			dataIndex : 'appointcustomer',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '会员卡ID',
-			dataIndex : 'appointcard',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '场地ID',
+			header : '位置',
 			dataIndex : 'appointplace',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
-			header : '课程ID',
-			dataIndex : 'appointcourse',
+			header : '位置',
+			dataIndex : 'appointplacename',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
-			header : '项目',
-			dataIndex : 'appointproject',
+			header : '会员编码',
+			dataIndex : 'customercode',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
-			header : '开始时间',
-			dataIndex : 'appointbegin',
+			header : '会员姓名',
+			dataIndex : 'customername',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
-			header : '结束时间',
-			dataIndex : 'appointend',
+			header : '会员手机',
+			dataIndex : 'customerphone',
+			align : 'center',
+			width : 100,
+			sortable : true
+		}
+		, {
+			header : '卡号',
+			dataIndex : 'cuscardno',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
-			header : '备注',
-			dataIndex : 'appointdetail',
+			header : '卡种',
+			dataIndex : 'cuscarddetail',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -88,14 +103,14 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '创建时间',
+			header : '预约时间',
 			dataIndex : 'createtime',
 			align : 'center',
-			width : 80,
+			width : 160,
 			sortable : true
 		}
 		, {
-			header : '创建人',
+			header : '预约人',
 			dataIndex : 'creator',
 			align : 'center',
 			width : 80,
@@ -103,155 +118,7 @@ Ext.onReady(function() {
 		}
 		]
 	});
-	var AppiontdataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
-		id:'AppiontdataForm',
-		labelAlign : 'right',
-		frame : true,
-		layout : 'column',
-		items : [ {
-			items : [ {
-				xtype : 'textfield',
-				id : 'Appiontappointid',
-				name : 'appointid',
-				hidden : true
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '会员ID',
-				id : 'Appiontappointcustomer',
-				name : 'appointcustomer',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '会员卡ID',
-				id : 'Appiontappointcard',
-				name : 'appointcard',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '场地ID',
-				id : 'Appiontappointplace',
-				name : 'appointplace',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '课程ID',
-				id : 'Appiontappointcourse',
-				name : 'appointcourse',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '项目',
-				id : 'Appiontappointproject',
-				name : 'appointproject',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '开始时间',
-				id : 'Appiontappointbegin',
-				name : 'appointbegin',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '结束时间',
-				id : 'Appiontappointend',
-				name : 'appointend',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '备注',
-				id : 'Appiontappointdetail',
-				name : 'appointdetail',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '状态',
-				id : 'Appiontappointstatue',
-				name : 'appointstatue',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Appiontcreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Appiontcreator',
-				name : 'creator',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		]
-	});
 	
-	var Appiontbbar = pagesizebar(Appiontstore);//定义分页
 	var Appiontgrid = new Ext.grid.GridPanel({
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
@@ -264,108 +131,82 @@ Ext.onReady(function() {
 		},
 		cm : Appiontcm,
 		sm : Appiontsm,
-		bbar : Appiontbbar,
 		tbar : [{
-				text : "新增",
-				iconCls : 'add',
-				handler : function() {
-					AppiontdataForm.form.reset();
-					createWindow(basePath + Appiontaction + "?method=insAll", "新增", AppiontdataForm, Appiontstore);
-				}
-			},'-',{
-				text : "修改",
-				iconCls : 'edit',
-				handler : function() {
-					var selections = Appiontgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
-						});
-						return;
-					}
-					createWindow(basePath + Appiontaction + "?method=updAll", "修改", AppiontdataForm, Appiontstore);
-					AppiontdataForm.form.loadRecord(selections[0]);
-				}
-			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Appiontgrid.getSelectionModel().getSelections();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请选择您要删除的数据！');
-						return;
-					}
-					commonDelete(basePath + Appiontaction + "?method=delAll",selections,Appiontstore,Appiontkeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Appiontaction + "?method=impAll","导入",Appiontstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Appiontaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Appiontgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Appiontgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Appiontkeycolumn.length;i++){
-						fid += selections[0].data[Appiontkeycolumn[i]] + ","
-					}
-					commonAttach(fid, Appiontclassify);
-				}
-			},'->',{
-				xtype : 'textfield',
-				id : 'query'+Appiontaction,
-				name : 'query',
-				emptyText : '模糊匹配',
-				width : 100,
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							if ("" == Ext.getCmp("query"+Appiontaction).getValue()) {
-								Appiontstore.load();
-							} else {
-								Appiontstore.load({
-									params : {
-										query : Ext.getCmp("query"+Appiontaction).getValue()
-									}
-								});
-							}
-						}
-					}
-				}
+			xtype : 'combo',
+			emptyText : '请选择',
+			store : stadiumStore,
+			mode : 'local',
+			triggerAction : 'all',
+			editable : false,
+			allowBlank : false,
+			displayField : 'name',
+			valueField : 'name',
+			hiddenName : 'stadiumname',
+			id : 'stadiumname',
+			name : 'stadiumname',
+			maxLength : 50,
+			anchor : '95%'
+		},'-',{
+			xtype : 'combo',
+			emptyText : '请选择',
+			store : projectStore,
+			mode : 'local',
+			triggerAction : 'all',
+			editable : false,
+			allowBlank : false,
+			displayField : 'name',
+			valueField : 'name',
+			hiddenName : 'projectname',
+			id : 'projectname',
+			name : 'projectname',
+			maxLength : 50,
+			anchor : '95%',
+			listeners : {'select':function(){
+				Placetimestore.load({params:{
+					wheresql : "placetimeproject='"+Ext.getCmp('projectname').value+"'"
+				}});
+				Ext.getCmp('placetimedetail').focus();
 			}
+			}
+		},'-',{
+			xtype : 'combo',
+			emptyText : '请选择',
+			store : Placetimestore,
+			mode : 'local',
+			triggerAction : 'all',
+			editable : false,
+			allowBlank : false,
+			displayField : 'placetimedetail',
+			valueField : 'placetimedetail',
+			hiddenName : 'placetimedetail',
+			id : 'placetimedetail',
+			name : 'placetimedetail',
+			maxLength : 50,
+			anchor : '95%'
+		},'-',{
+			xtype : 'datefield',
+			emptyText : '日期',
+			id : 'appiontdate',
+			name : 'appiontdate',
+			maxLength : 100,
+			format : 'Y-m-d',
+			allowBlank : false,
+			anchor : '95%'
+		},'->',{
+			text : "查询",
+			iconCls : 'select',
+			handler : function() {
+				Appiontstore.load({params:{
+					stadiumname:Ext.getCmp('stadiumname').value,
+					projectname:Ext.getCmp('projectname').value,
+					placetimedetail:Ext.getCmp('placetimedetail').value,
+					appiontdate:Ext.getCmp('appiontdate').value
+				}});
+			}
+		}
 		]
 	});
 	Appiontgrid.region = 'center';
-	Appiontstore.load();//加载数据
-	Appiontstore.on("beforeload",function(){ 
-		Appiontstore.baseParams = {
-				query : Ext.getCmp("query"+Appiontaction).getValue()
-		}; 
-	});
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',
