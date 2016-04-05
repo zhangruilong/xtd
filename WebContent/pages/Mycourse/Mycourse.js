@@ -1,19 +1,24 @@
-Ext.onReady(function() {
+function selectMycourse(customerid) {
 	var Mycourseclassify = "我的私教课";
 	var Mycoursetitle = "当前位置:业务管理》" + Mycourseclassify;
 	var Mycourseaction = "MycourseAction.do";
 	var Mycoursefields = ['mycourseid'
 	        			    ,'mycoursecoach' 
-	        			    ,'mycourseroject' 
+	        			    ,'mycoursecustomer' 
+	        			    ,'mycoursename' 
+	        			    ,'mycourseproject' 
 	        			    ,'mycoursenum' 
 	        			    ,'mycoursemoney' 
 	        			    ,'createtime' 
 	        			    ,'creator' 
 	        			    ,'updtime' 
 	        			    ,'updor' 
+	        			    ,'coachcode' 
+	        			    ,'coachname' 
+	        			    ,'coachphone' 
 	        			      ];// 全部字段
 	var Mycoursekeycolumn = [ 'mycourseid' ];// 主键
-	var Mycoursestore = dataStore(Mycoursefields, basePath + Mycourseaction + "?method=selQuery");// 定义Mycoursestore
+	var Mycoursestore = dataStore(Mycoursefields, basePath + "MycourseviewAction.do" + "?method=selAll");// 定义Mycoursestore
 	var Mycoursesm = new Ext.grid.CheckboxSelectionModel();// grid复选框模式
 	var Mycoursecm = new Ext.grid.ColumnModel({// 定义columnModel
 		columns : [ new Ext.grid.RowNumberer(), Mycoursesm, {// 改
@@ -22,15 +27,50 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
+			header : '会员id',
+			dataIndex : 'mycoursecustomer',
+			align : 'center',
+			width : 80,
+			hidden : true
+		}
+		, {
 			header : '教练',
 			dataIndex : 'mycoursecoach',
+			align : 'center',
+			width : 80,
+			hidden : true
+		}
+		, {
+			header : '教练编码',
+			dataIndex : 'coachcode',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '教练姓名',
+			dataIndex : 'coachname',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '教练手机',
+			dataIndex : 'coachphone',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '课程',
+			dataIndex : 'mycoursename',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
 			header : '项目',
-			dataIndex : 'mycourseroject',
+			dataIndex : 'mycourseproject',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -79,123 +119,10 @@ Ext.onReady(function() {
 		}
 		]
 	});
-	var MycoursedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
-		id:'MycoursedataForm',
-		labelAlign : 'right',
-		frame : true,
-		layout : 'column',
-		items : [ {
-			items : [ {
-				xtype : 'textfield',
-				id : 'Mycoursemycourseid',
-				name : 'mycourseid',
-				hidden : true
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '教练',
-				id : 'Mycoursemycoursecoach',
-				name : 'mycoursecoach',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '项目',
-				id : 'Mycoursemycourseroject',
-				name : 'mycourseroject',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '课时',
-				id : 'Mycoursemycoursenum',
-				name : 'mycoursenum',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '费用',
-				id : 'Mycoursemycoursemoney',
-				name : 'mycoursemoney',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建时间',
-				id : 'Mycoursecreatetime',
-				name : 'createtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '创建人',
-				id : 'Mycoursecreator',
-				name : 'creator',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新时间',
-				id : 'Mycourseupdtime',
-				name : 'updtime',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '更新人',
-				id : 'Mycourseupdor',
-				name : 'updor',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
-		]
-	});
 	
-	var Mycoursebbar = pagesizebar(Mycoursestore);//定义分页
 	var Mycoursegrid = new Ext.grid.GridPanel({
-		height : document.documentElement.clientHeight - 4,
+		height : document.documentElement.clientHeight - 30,
 		width : '100%',
-		title : Mycoursetitle,
 		store : Mycoursestore,
 		stripeRows : true,
 		frame : true,
@@ -204,112 +131,119 @@ Ext.onReady(function() {
 		},
 		cm : Mycoursecm,
 		sm : Mycoursesm,
-		bbar : Mycoursebbar,
 		tbar : [{
-				text : "新增",
-				iconCls : 'add',
-				handler : function() {
-					MycoursedataForm.form.reset();
-					createWindow(basePath + Mycourseaction + "?method=insAll", "新增", MycoursedataForm, Mycoursestore);
-				}
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : stadiumStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'stadiumname',
+				id : 'stadiumname',
+				name : 'stadiumname',
+				maxLength : 50,
+				anchor : '95%'
 			},'-',{
-				text : "修改",
-				iconCls : 'edit',
-				handler : function() {
-					var selections = Mycoursegrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
-						});
-						return;
-					}
-					createWindow(basePath + Mycourseaction + "?method=updAll", "修改", MycoursedataForm, Mycoursestore);
-					MycoursedataForm.form.loadRecord(selections[0]);
-				}
+				xtype : 'datefield',
+				emptyText : '日期',
+				id : 'appiontdate',
+				name : 'appiontdate',
+				maxLength : 100,
+				format : 'Y-m-d',
+				allowBlank : false,
+				anchor : '95%'
 			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Mycoursegrid.getSelectionModel().getSelections();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请选择您要删除的数据！');
-						return;
-					}
-					commonDelete(basePath + Mycourseaction + "?method=delAll",selections,Mycoursestore,Mycoursekeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Mycourseaction + "?method=impAll","导入",Mycoursestore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Mycourseaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Mycoursegrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Mycoursegrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Mycoursekeycolumn.length;i++){
-						fid += selections[0].data[Mycoursekeycolumn[i]] + ","
-					}
-					commonAttach(fid, Mycourseclassify);
-				}
-			},'->',{
-				xtype : 'textfield',
-				id : 'query'+Mycourseaction,
-				name : 'query',
-				emptyText : '模糊匹配',
+				xtype : 'timefield',
+				emptyText : '开始时间',
+				id : 'appointbegin',
+				name : 'appointbegin',
 				width : 100,
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							if ("" == Ext.getCmp("query"+Mycourseaction).getValue()) {
-								Mycoursestore.load();
-							} else {
-								Mycoursestore.load({
-									params : {
-										query : Ext.getCmp("query"+Mycourseaction).getValue()
-									}
-								});
-							}
-						}
-					}
-				}
+				allowBlank : false,
+				anchor : '95%'
+			},'-',{
+				xtype : 'timefield',
+				emptyText : '结束时间',
+				id : 'appointend',
+				name : 'appointend',
+				width : 100,
+				allowBlank : false,
+				anchor : '95%'
 			}
 		]
 	});
 	Mycoursegrid.region = 'center';
-	Mycoursestore.load();//加载数据
 	Mycoursestore.on("beforeload",function(){ 
 		Mycoursestore.baseParams = {
-				query : Ext.getCmp("query"+Mycourseaction).getValue()
+				wheresql : "mycoursecustomer='"+customerid+"'"
 		}; 
 	});
-	var win = new Ext.Viewport({//只能有一个viewport
-		resizable : true,
-		layout : 'border',
-		bodyStyle : 'padding:0px;',
-		items : [ Mycoursegrid ]
+	Mycoursestore.load();//加载数据
+	var selectgridWindow = new Ext.Window({
+		layout : 'fit', // 设置窗口布局模式
+		width : 820, // 窗口宽度
+		height : 580, // 窗口高度
+		modal : true,
+		title : Mycoursetitle,
+		closeAction: 'hide',
+		closable : true, // 是否可关闭
+		collapsible : true, // 是否可收缩
+		maximizable : true, // 设置是否可以最大化
+		border : false, // 边框线设置
+		constrain : true, // 设置窗口是否可以溢出父容器
+		animateTarget : Ext.getBody(),
+		pageY : 50, // 页面定位Y坐标
+		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
+		items : Mycoursegrid, // 嵌入的表单面板
+		buttons : [
+					{
+						text : '预约',
+						iconCls : 'ok',
+						handler : function() {
+							var selectRows = Mycoursegrid.getSelectionModel()
+									.getSelections();
+							if (selectRows.length != 1) {
+								Ext.Msg.alert('提示', '请选择一条！', function() {
+								});
+								return;
+							}
+							var json = "[{'appointcustomer':'"+customerid
+//		        			    +"','appointplace':'"+selectRows[0].data['placeid']
+		        			    +"','appointcourse':'"+selectRows[0].data['mycourseid']
+		        			    +"','appointplacename':'"+selectRows[0].data['mycoursename']+"-"+selectRows[0].data['coachname']
+	//	        			    +"','appointcoursename':'"+mycoursename
+	//	        			    +"','appointcoachname':'"+coachname
+								+"','appointproject':'"+selectRows[0].data['mycourseproject']
+								+"','appointcoursename':'"+Ext.getCmp('stadiumname').value
+								+"','appointbegin':'"+Ext.getCmp('appiontdate').value
+								+"','appointdetail':'"+Ext.getCmp('appointbegin').value+"~"+Ext.getCmp('appointend').value
+		        			    +"'}]";
+							Ext.Ajax.request({
+								url : basePath + "AppiontAction.do?method=insAll",
+								method : 'POST',
+								params : {
+									json : json
+								},
+								success : function(response) {
+									var resp = Ext.decode(response.responseText); 
+									Ext.Msg.alert('提示', resp.msg, function(){
+										selectgridWindow.close();
+									});
+								},
+								failure : function(response) {
+									Ext.Msg.alert('提示', '网络出现问题，请稍后再试');
+								}
+							});
+						}
+					}, '-', {
+						text : '关闭',
+						iconCls : 'close',
+						handler : function() {
+							selectgridWindow.close();
+						}
+					}]
 	});
-})
+	selectgridWindow.show();
+}
