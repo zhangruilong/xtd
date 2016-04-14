@@ -8,7 +8,7 @@ var sexStore = new Ext.data.ArrayStore({//性别下拉
 });
 var projectStore = new Ext.data.ArrayStore({//项目下拉
 	fields:["name"],
-	data:[["游泳"],["瑜伽"],["单车"],["羽毛球"],["健美操"]]
+	data:[["游泳"],["瑜伽"],["单车"],["羽毛球"],["有氧操"]]
 });
 var stadiumStore = new Ext.data.ArrayStore({//场馆下拉
 	fields:["name"],
