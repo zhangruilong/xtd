@@ -5,8 +5,49 @@ Ext.onReady(function() {
 		fields:["gender"],
 		data:[["男"],["女"]]
 	});
-	var CcoursedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
-		id:'CcoursedataForm',
+	var Customercuscardviewaction = "CustomercuscardviewAction.do";
+	var Customercuscardviewfields = ['cuscardid'
+	     	        			    ,'cuscardcustomer' 
+	     	        			    ,'cuscardtype' 
+	     	        			    ,'cuscardno' 
+	     	        			    ,'cuscardpsw' 
+	     	        			    ,'cuscardbegin' 
+	     	        			    ,'cuscardend' 
+	     	        			    ,'cuscardmoney' 
+	     	        			    ,'cuscardnums' 
+	     	        			    ,'cuscardtimes' 
+	     	        			    ,'cuscardint' 
+	     	        			    ,'cuscarddetail' 
+	     	        			    ,'cuscardstatue' 
+	     	        			    ,'createtime' 
+	     	        			    ,'creator' 
+	     	        			    ,'updtime' 
+	     	        			    ,'updor' 
+	     	        			    ,'customerstadium' 
+	     	        			    ,'customercode' 
+	     	        			    ,'customername' 
+	     	        			    ,'customerphone' 
+	     	        			    ,'openid' 
+	     	        			    ,'customersex' 
+	     	        			    ,'customerage' 
+	     	        			    ,'customercdcard' 
+	     	        			    ,'customerhome' 
+	     	        			    ,'customercompany' 
+	     	        			    ,'customerbirthday' 
+	     	        			    ,'customergoodday' 
+	     	        			    ,'customeremail' 
+	     	        			    ,'customerhow' 
+	     	        			    ,'customertime' 
+	     	        			    ,'customerimage' 
+	     	        			    ,'customeremp' 
+	     	        			    ,'customerlevel' 
+	     	        			    ,'customerdetail' 
+	     	        			    ,'customerstatue' 
+	     	        			      ];// 全部字段
+	var Customercuscardviewkeycolumn = [ 'cuscardid' ];// 主键
+	var Customercuscardviewstore = dataStore(Customercuscardviewfields, basePath + Customercuscardviewaction + "?method=selAll");// 定义Customercuscardviewstore
+	var CustomercuscardviewdataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
+		id:'CustomercuscardviewdataForm',
 		title:Ccoursetitle,
 		bodyStyle:'padding:50px;',
         renderTo:'divFormPanel',
@@ -16,8 +57,13 @@ Ext.onReady(function() {
 		items : [ {
 			items : [ {
 				xtype : 'textfield',
-				id : 'customerid',
-				name : 'customerid',
+				id : 'cuscardid',
+				name : 'cuscardid',
+				hidden : true
+			},{
+				xtype : 'textfield',
+				id : 'cuscardcustomer',
+				name : 'cuscardcustomer',
 				hidden : true
 			} ]
 		}
@@ -27,18 +73,44 @@ Ext.onReady(function() {
 			items : [ {
 				xtype : 'textfield',
 				fieldLabel : '卡号',
-				id : 'Ccourseccoursecustomer',
-				name : 'ccoursecustomer',
+				id : 'cuscardno',
+				name : 'cuscardno',
 				allowBlank : false,
 				maxLength : 100,
-				anchor : '100%'
+				anchor : '100%',
+				enableKeyEvents : true,
+				listeners : {
+					specialkey : function(field, e) {
+						if (e.getKey() == Ext.EventObject.ENTER) {
+							Customercuscardviewstore.load({
+								params : {
+									wheresql : "cuscardno like '%"+field.getValue()+"%'"
+								},
+								callback : formloadRecord
+							});
+						}
+					}
+				}
 			},{
 				xtype : 'textfield',
 				fieldLabel : '会员姓名',
 				id : 'customername',
 				name : 'customername',
 				maxLength : 100,
-				anchor : '100%'
+				anchor : '100%',
+				enableKeyEvents : true,
+				listeners : {
+					specialkey : function(field, e) {
+						if (e.getKey() == Ext.EventObject.ENTER) {
+							Customercuscardviewstore.load({
+								params : {
+									wheresql : "customername like '%"+field.getValue()+"%'"
+								},
+								callback : formloadRecord
+							});
+						}
+					}
+				}
 			},{
 				xtype : 'textfield',
 				fieldLabel : '证件号码',
@@ -73,9 +145,9 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
-				fieldLabel : '状态',
-				id : 'customerstatue',
-				name : 'customerstatue',
+				fieldLabel : '有效期',
+				id : 'cuscardpsw',
+				name : 'cuscardpsw',
 				maxLength : 100,
 				readOnly:true,
 				anchor : '100%'
@@ -111,6 +183,14 @@ Ext.onReady(function() {
 				readOnly:true,
 				maxLength : 100,
 				anchor : '100%'
+			},{
+				xtype : 'textfield',
+				fieldLabel : '状态',
+				id : 'customerstatue',
+				name : 'customerstatue',
+				maxLength : 100,
+				readOnly:true,
+				anchor : '100%'
 			} ]
 		}
 		, {
@@ -122,7 +202,20 @@ Ext.onReady(function() {
 				id : 'customercode',
 				name : 'customercode',
 				maxLength : 100,
-				anchor : '100%'
+				anchor : '100%',
+				enableKeyEvents : true,
+				listeners : {
+					specialkey : function(field, e) {
+						if (e.getKey() == Ext.EventObject.ENTER) {
+							Customercuscardviewstore.load({
+								params : {
+									wheresql : "customercode like '%"+field.getValue()+"%'"
+								},
+								callback : formloadRecord
+							});
+						}
+					}
+				}
 			},{
 				xtype : 'combo',
 				fieldLabel : '性别',
@@ -187,6 +280,14 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
+				fieldLabel : '卡种',
+				id : 'cuscarddetail',
+				name : 'cuscarddetail',
+				maxLength : 100,
+				readOnly:true,
+				anchor : '100%'
+			},{
+				xtype : 'textfield',
 				fieldLabel : '卡余额',
 				id : 'cuscardmoney',
 				name : 'cuscardmoney',
@@ -220,11 +321,7 @@ Ext.onReady(function() {
 				id : 'customerimage',
 				name : 'customerimage',
 				autoEl : {  
-	                tag : 'img',  
-	                src : '../../upload/dongcheng/coach/chengchao.png',  
-	                style : 'filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);',  
-	                complete : 'off',  
-	                id : 'imageBrowse'  
+	                tag : 'img'
 	            },
 				anchor : '100%'
 			}]
@@ -238,4 +335,11 @@ Ext.onReady(function() {
 		}
 	]
 	});
+	function formloadRecord() {
+		Customercuscardviewstore.each(function(record) {
+			CustomercuscardviewdataForm.form.loadRecord(record);
+			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
+		    return;
+		});
+	}
 })

@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.CuscardDao;
 import com.server.pojo.Cuscard;
+import com.server.pojo.Customer;
 import com.server.poco.CuscardPoco;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
@@ -15,6 +16,7 @@ import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
 import com.system.tools.util.DateUtils;
 import com.system.tools.util.FileUtil;
+import com.system.tools.util.TypeUtil;
 import com.system.tools.pojo.Pageinfo;
 
 /**
@@ -98,6 +100,36 @@ public class CuscardAction extends BaseAction {
 		queryinfo.setOrder(CuscardPoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//批量发卡
+	public void addAll(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		for(Cuscard temp:cuss){
+			int num = TypeUtil.stringToInt(temp.getCuscardid());
+			int mCuscardno = TypeUtil.stringToInt(temp.getCuscardno()) ;
+			String creator = getCurrentUsername(request);
+			String createtime = DateUtils.getDateTime();
+			for(int i=0;i<num;i++){
+				String newid = CommonUtil.getNewId();
+				temp.setCreator(creator);
+				temp.setCreatetime(createtime);
+				temp.setCuscardid(newid);
+				temp.setCuscardno(TypeUtil.intToString(mCuscardno));
+				temp.setCuscardcustomer(newid);
+				result = DAO.insSingle(temp);
+				if(CommonConst.SUCCESS.equals(result)){
+					Customer mCustomer = new Customer();
+					mCustomer.setCustomercode(TypeUtil.intToString(mCuscardno));
+					mCustomer.setCustomerid(newid);
+					mCustomer.setCustomername("批量发卡的用户");
+					mCustomer.setCreator(creator);
+					mCustomer.setCreatetime(createtime);
+					result = DAO.insSingle(mCustomer);
+				}
+				mCuscardno++;
+			}
+		}
 		responsePW(response, result);
 	}
 }

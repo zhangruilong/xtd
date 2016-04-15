@@ -195,7 +195,6 @@ function selectNotes(customerid) {
 	var Notesgrid = new Ext.grid.GridPanel({
 		height : document.documentElement.clientHeight - 4,
 		width : '100%',
-		title : Notestitle,
 		store : Notesstore,
 		stripeRows : true,
 		frame : true,

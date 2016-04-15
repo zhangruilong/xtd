@@ -66,5 +66,5 @@
 	<bean id="CuscardcontinueviewAction" class="com.server.action.CuscardcontinueviewAction" />
 	<bean id="CuscarduserviewAction" class="com.server.action.CuscarduserviewAction" />
 	<bean id="MycourseviewAction" class="com.server.action.MycourseviewAction" />
-	
+	<bean id="CustomercuscardviewAction" class="com.server.action.CustomercuscardviewAction" />
 </beans>

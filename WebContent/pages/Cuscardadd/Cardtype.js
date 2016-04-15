@@ -302,12 +302,12 @@ function selectCardtype() {
 								});
 								return;
 							} 
-							Ext.getCmp('Cuscardcuscarddetail').setValue(selectRows[0].get("cardtypename"));
-							Ext.getCmp('Cuscardcuscardtype').setValue(selectRows[0].get("cardtypeclass"));
-							Ext.getCmp('Cuscardcuscardpsw').setValue(selectRows[0].get("cardtypeday"));
-							Ext.getCmp('Cuscardcuscardmoney').setValue(selectRows[0].get("cardtypeprice"));
-							Ext.getCmp('Cuscardcuscardnums').setValue(selectRows[0].get("cardtypetimes"));
-							Ext.getCmp('Cuscardcuscardtimes').setValue(selectRows[0].get("cardtypetimes"));
+							Ext.getCmp('cuscarddetail').setValue(selectRows[0].get("cardtypename"));
+							Ext.getCmp('cuscardtype').setValue(selectRows[0].get("cardtypeclass"));
+							Ext.getCmp('cuscardpsw').setValue(selectRows[0].get("cardtypeday"));
+							Ext.getCmp('cuscardmoney').setValue(selectRows[0].get("cardtypeprice"));
+							Ext.getCmp('cuscardnums').setValue(selectRows[0].get("cardtypetimes"));
+							Ext.getCmp('cuscardtimes').setValue(selectRows[0].get("cardtypetimes"));
 							selectgridWindow.close();
 						}
 					}, '-', {
