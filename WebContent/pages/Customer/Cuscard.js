@@ -97,8 +97,22 @@ function selectCuscard(customerid) {
 			sortable : true
 		}
 		, {
-			header : '卡余额',
+			header : '原价',
 			dataIndex : 'cuscardmoney',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '折扣',
+			dataIndex : 'updtime',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '售价',
+			dataIndex : 'updor',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -148,20 +162,6 @@ function selectCuscard(customerid) {
 		, {
 			header : '创建人',
 			dataIndex : 'creator',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新时间',
-			dataIndex : 'updtime',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新人',
-			dataIndex : 'updor',
 			align : 'center',
 			width : 80,
 			sortable : true

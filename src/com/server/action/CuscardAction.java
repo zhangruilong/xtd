@@ -57,8 +57,6 @@ public class CuscardAction extends BaseAction {
 	//修改
 	public void updAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
-		cuss.get(0).setUpdor(getCurrentUsername(request));
-		cuss.get(0).setUpdtime(DateUtils.getDateTime());
 		result = DAO.updSingle(cuss.get(0),CuscardPoco.KEYCOLUMN);
 		responsePW(response, result);
 	}
@@ -131,5 +129,37 @@ public class CuscardAction extends BaseAction {
 			}
 		}
 		responsePW(response, result);
+	}
+	
+	public void addCuscardcustomer(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		String json = request.getParameter("json");
+		String newid = CommonUtil.getNewId();
+		String Createtime = DateUtils.getDateTime();
+		String Creator = getCurrentUsername(request);
+		java.lang.reflect.Type CustomerTYPE = new com.google.gson.reflect.TypeToken<ArrayList<Customer>>() {}.getType();
+		ArrayList<Customer> Customercuss = new ArrayList<Customer>();
+		if(CommonUtil.isNotEmpty(json)){
+			Customercuss = CommonConst.GSON.fromJson(json, CustomerTYPE);
+			cuss = CommonConst.GSON.fromJson(json, TYPE);
+		}
+		Cuscard mCuscard = cuss.get(0);
+		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+mCuscard.getCuscardno()+"'")>0){
+			responsePW(response, CommonConst.SAMELOGINNAME);
+		}else{
+			Customer mCustomer = Customercuss.get(0);
+			mCustomer.setCreatetime(Createtime);
+			mCustomer.setCreator(Creator);
+			mCustomer.setCustomerid(newid);
+			result = DAO.insSingle(mCustomer);
+			if(CommonConst.SUCCESS.equals(result)){
+				mCuscard.setCreator(Creator);
+				mCuscard.setCreatetime(Createtime);
+				mCuscard.setCuscardid(newid);
+				mCuscard.setCuscardcustomer(newid);
+				result = DAO.insSingle(mCuscard);
+			}
+			responsePW(response, result);
+		}
 	}
 }

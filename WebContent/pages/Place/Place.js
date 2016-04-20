@@ -45,26 +45,26 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '编码',
+			header : '场地',
 			dataIndex : 'placecode',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
 		, {
-			header : '名称',
+			header : '位置',
 			dataIndex : 'placename',
 			align : 'center',
 			width : 80,
 			sortable : true
 		}
-		, {
-			header : '人数',
-			dataIndex : 'placepeople',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '人数',
+//			dataIndex : 'placepeople',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '备注',
 			dataIndex : 'placedetail',
@@ -336,53 +336,68 @@ Ext.onReady(function() {
 					commonExp(Placegrid);
 				}
 			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Placegrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Placekeycolumn.length;i++){
-						fid += selections[0].data[Placekeycolumn[i]] + ","
-					}
-					commonAttach(fid, Placeclassify);
-				}
-			},'->',{
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : stadiumStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'stadiumname',
+				id : 'stadiumname',
+				name : 'stadiumname',
+				width : 120,
+				maxLength : 50,
+				anchor : '95%'
+			},'-',{
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : projectStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'projectname',
+				id : 'projectname',
+				name : 'projectname',
+				width : 100,
+				maxLength : 50,
+				anchor : '95%'
+			},'-',{
 				xtype : 'textfield',
 				id : 'query'+Placeaction,
 				name : 'query',
 				emptyText : '模糊匹配',
-				width : 100,
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							if ("" == Ext.getCmp("query"+Placeaction).getValue()) {
-								Placestore.load();
-							} else {
-								Placestore.load({
-									params : {
-										query : Ext.getCmp("query"+Placeaction).getValue()
-									}
-								});
+				width : 100
+			},'->',{
+				text : "查询",
+				iconCls : 'select',
+				handler : function() {
+					if ("" == Ext.getCmp("query"+Placeaction).getValue()) {
+						Placestore.load({
+							params : {
+								wheresql : "stadiumname='"+Ext.getCmp("stadiumname").getValue()+
+								"' and placeproject='"+Ext.getCmp("projectname").getValue()+"'"
 							}
-						}
+						});
+					} else {
+						Placestore.load({
+							params : {
+								query : Ext.getCmp("query"+Placeaction).getValue(),
+								wheresql : "stadiumname='"+Ext.getCmp("stadiumname").getValue()+
+								"' and placeproject='"+Ext.getCmp("projectname").getValue()+"'"
+							}
+						});
 					}
 				}
 			}
 		]
 	});
 	Placegrid.region = 'center';
-	Placestore.load();//加载数据
-	Placestore.on("beforeload",function(){ 
-		Placestore.baseParams = {
-				query : Ext.getCmp("query"+Placeaction).getValue()
-		}; 
-	});
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',

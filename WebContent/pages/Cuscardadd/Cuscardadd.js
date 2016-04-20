@@ -5,46 +5,6 @@ Ext.onReady(function() {
 		fields:["gender"],
 		data:[["男"],["女"]]
 	});
-	var Customercuscardviewaction = "CustomercuscardviewAction.do";
-	var Customercuscardviewfields = ['cuscardid'
-	     	        			    ,'cuscardcustomer' 
-	     	        			    ,'cuscardtype' 
-	     	        			    ,'cuscardno' 
-	     	        			    ,'cuscardpsw' 
-	     	        			    ,'cuscardbegin' 
-	     	        			    ,'cuscardend' 
-	     	        			    ,'cuscardmoney' 
-	     	        			    ,'cuscardnums' 
-	     	        			    ,'cuscardtimes' 
-	     	        			    ,'cuscardint' 
-	     	        			    ,'cuscarddetail' 
-	     	        			    ,'cuscardstatue' 
-	     	        			    ,'createtime' 
-	     	        			    ,'creator' 
-	     	        			    ,'updtime' 
-	     	        			    ,'updor' 
-	     	        			    ,'customerstadium' 
-	     	        			    ,'customercode' 
-	     	        			    ,'customername' 
-	     	        			    ,'customerphone' 
-	     	        			    ,'openid' 
-	     	        			    ,'customersex' 
-	     	        			    ,'customerage' 
-	     	        			    ,'customercdcard' 
-	     	        			    ,'customerhome' 
-	     	        			    ,'customercompany' 
-	     	        			    ,'customerbirthday' 
-	     	        			    ,'customergoodday' 
-	     	        			    ,'customeremail' 
-	     	        			    ,'customerhow' 
-	     	        			    ,'customertime' 
-	     	        			    ,'customerimage' 
-	     	        			    ,'customeremp' 
-	     	        			    ,'customerlevel' 
-	     	        			    ,'customerdetail' 
-	     	        			    ,'customerstatue' 
-	     	        			      ];// 全部字段
-	var Customercuscardviewstore = dataStore(Customercuscardviewfields, basePath + Customercuscardviewaction + "?method=selAll");// 定义Customercuscardviewstore
 	
 	var Cardtypeaction = "CardtypeAction.do";
 	var Cardtypefields = ['cardtypeid'
@@ -60,6 +20,7 @@ Ext.onReady(function() {
 	        			      ];// 全部字段
 	var Cardtypestore = dataStore(Cardtypefields, basePath + Cardtypeaction + "?method=selAll");// 定义Cardtypestore
 	Cardtypestore.load();
+	
 	var CustomercuscardviewdataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
 		id:'CustomercuscardviewdataForm',
 		title:Ccoursetitle,
@@ -90,22 +51,8 @@ Ext.onReady(function() {
 				id : 'customercode',
 				name : 'customercode',
 				maxLength : 100,
-				anchor : '100%',
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							Customercuscardviewstore.load({
-								params : {
-									wheresql : "customercode like '%"+field.getValue()+"%'"
-								},
-								callback : formloadRecord
-							});
-						}
-					}
-				}
-			}
-			,{
+				anchor : '100%'
+			},{
 				xtype : 'textfield',
 				fieldLabel : '卡号',
 				id : 'cuscardno',
@@ -119,7 +66,7 @@ Ext.onReady(function() {
 				id : 'cuscardpsw',
 				name : 'cuscardpsw',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'datefield',
@@ -145,12 +92,19 @@ Ext.onReady(function() {
 				maxLength : 100,
 				anchor : '100%'
 			},{
+				xtype : 'numberfield',
+				fieldLabel : '卡积分',
+				id : 'cuscardint',
+				name : 'cuscardint',
+				maxLength : 100,
+				anchor : '100%'
+			},{
 				xtype : 'textfield',
 				fieldLabel : '证件号码',
 				id : 'customercdcard',
 				name : 'customercdcard',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -158,7 +112,7 @@ Ext.onReady(function() {
 				id : 'customerbirthday',
 				name : 'customerbirthday',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -166,7 +120,7 @@ Ext.onReady(function() {
 				id : 'customerhow',
 				name : 'customerhow',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -174,7 +128,7 @@ Ext.onReady(function() {
 				id : 'customeremp',
 				name : 'customeremp',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -182,7 +136,7 @@ Ext.onReady(function() {
 				id : 'customerlevel',
 				name : 'customerlevel',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			} ]
 		}
@@ -195,27 +149,13 @@ Ext.onReady(function() {
 				id : 'customername',
 				name : 'customername',
 				maxLength : 100,
-				anchor : '100%',
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							Customercuscardviewstore.load({
-								params : {
-									wheresql : "customername like '%"+field.getValue()+"%'"
-								},
-								callback : formloadRecord
-							});
-						}
-					}
-				}
+				anchor : '100%'
 			},{
 				xtype : 'textfield',
 				fieldLabel : '卡种',
 				id : 'cuscarddetail',
 				name : 'cuscarddetail',
 				maxLength : 100,
-				readOnly:true,
 				anchor : '100%',
 				listeners : {
 					specialkey : function(field, e) {
@@ -230,7 +170,7 @@ Ext.onReady(function() {
 				id : 'cuscardtype',
 				name : 'cuscardtype',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'datefield',
@@ -242,16 +182,26 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'numberfield',
-				fieldLabel : '卡余额',
+				fieldLabel : '原价',
 				id : 'cuscardmoney',
 				name : 'cuscardmoney',
 				maxLength : 100,
 				anchor : '100%'
-			},{
+			}
+			,{
 				xtype : 'numberfield',
-				fieldLabel : '卡积分',
-				id : 'cuscardint',
-				name : 'cuscardint',
+				fieldLabel : '折扣',
+				id : 'updtime',
+				name : 'updtime',
+				maxLength : 100,
+				anchor : '100%'
+			}
+			,{
+				xtype : 'numberfield',
+				fieldLabel : '售价',
+				id : 'updor',
+				name : 'updor',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -264,7 +214,7 @@ Ext.onReady(function() {
 				mode : 'local',
 				displayField : 'gender',
 				valueField : 'gender',
-				hiddenName : 'gender',
+				hiddenName : 'customersex',
 				triggerAction : 'all',
 				maxLength : 100,
 				anchor : '100%'
@@ -274,7 +224,7 @@ Ext.onReady(function() {
 				id : 'customerphone',
 				name : 'customerphone',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -282,7 +232,7 @@ Ext.onReady(function() {
 				id : 'customergoodday',
 				name : 'customergoodday',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -290,16 +240,16 @@ Ext.onReady(function() {
 				id : 'customeremail',
 				name : 'customeremail',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			},{
-				xtype : 'textfield',
+				xtype : 'datefield',
 				fieldLabel : '入会时间',
 				id : 'customertime',
 				name : 'customertime',
 				format : 'Y-m-d',
 				maxLength : 100,
-				readOnly:true,
+				
 				anchor : '100%'
 			} ]
 		}
@@ -318,23 +268,23 @@ Ext.onReady(function() {
 			}]
 		}
 		],
-		tbar : [{
+		buttons : [{
 			text : "确认发卡",
 			iconCls : 'add',
 			handler : function() {
-				if(!Ext.getCmp('cuscardid').getValue()){
-					Ext.Msg.confirm('请确认', '<b>提示:</b>该用户已有一张会员卡,确定还要发卡？', function(btn, text) {
-						if (btn == 'yes') {
-							
-						}else{
-							return;
-						}
-					})
-				}
+//				if(!Ext.getCmp('cuscardid').getValue()){
+//					Ext.Msg.confirm('请确认', '<b>提示:</b>该用户已有一张会员卡,确定还要发卡？', function(btn, text) {
+//						if (btn == 'yes') {
+//							
+//						}else{
+//							return;
+//						}
+//					})
+//				}
 				if (CustomercuscardviewdataForm.form.isValid()) {
 					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getFieldValues(false)) + "]";
 					CustomercuscardviewdataForm.form.submit({
-						url : basePath + "CuscardAction.do?method=insAll",
+						url : basePath + "CuscardAction.do?method=addCuscardcustomer",
 						waitTitle : '提示',
 						params : {//改
 							json : json
@@ -355,11 +305,11 @@ Ext.onReady(function() {
 		}
 	]
 	});
-	function formloadRecord() {
-		Customercuscardviewstore.each(function(record) {
-			CustomercuscardviewdataForm.form.loadRecord(record);
-			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
-		    return;
-		});
-	}
+//	function formloadRecord() {
+//		Customercuscardviewstore.each(function(record) {
+//			CustomercuscardviewdataForm.form.loadRecord(record);
+//			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
+//		    return;
+//		});
+//	}
 })
