@@ -2,6 +2,7 @@
 <html>
   <head>
 	<%@ include file="/common/common.jsp" %>
+	<script type="text/javascript" src="Place.js"></script>
 	<script type="text/javascript" src="Placetime.js"></script>
   </head>
 </html>

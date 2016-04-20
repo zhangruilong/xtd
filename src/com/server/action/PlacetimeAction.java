@@ -36,8 +36,6 @@ public class PlacetimeAction extends BaseAction {
 		json2cuss(request);
 		for(Placetime temp:cuss){
 			temp.setPlacetimeid(CommonUtil.getNewId());
-			temp.setPlacetimedetail(temp.getPlacetimename()
-					+"("+temp.getPlacetimebegin()+"~"+temp.getPlacetimeend()+")");
 			result = DAO.insSingle(temp);
 		}
 		responsePW(response, result);

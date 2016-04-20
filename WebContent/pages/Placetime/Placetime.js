@@ -1,5 +1,5 @@
 Ext.onReady(function() {
-	var Placetimeclassify = "场次";
+	var Placetimeclassify = "排课";
 	var Placetimetitle = "当前位置:业务管理》" + Placetimeclassify;
 	var Placetimeaction = "PlacetimeAction.do";
 	var Placetimefields = ['placetimeid'
@@ -21,15 +21,15 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
-			header : '编码',
-			dataIndex : 'placetimecode',
+			header : '场馆',
+			dataIndex : 'placetimename',
 			align : 'center',
-			width : 80,
+			width : 120,
 			sortable : true
 		}
 		, {
-			header : '名称',
-			dataIndex : 'placetimename',
+			header : '场地',
+			dataIndex : 'placetimecode',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -49,19 +49,19 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '开始时间',
+			header : '日期',
 			dataIndex : 'placetimebegin',
 			align : 'center',
-			width : 80,
+			width : 90,
 			sortable : true
 		}
-		, {
-			header : '结束时间',
-			dataIndex : 'placetimeend',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
+//		, {
+//			header : '结束时间',
+//			dataIndex : 'placetimeend',
+//			align : 'center',
+//			width : 80,
+//			sortable : true
+//		}
 		, {
 			header : '项目',
 			dataIndex : 'placetimeproject',
@@ -85,15 +85,27 @@ Ext.onReady(function() {
 			} ]
 		}
 		, {
-			columnWidth : 1,
+			columnWidth : .9,
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '编码',
+				fieldLabel : '场地',
 				id : 'Placetimeplacetimecode',
 				name : 'placetimecode',
-				maxLength : 100,
+				readOnly:true,
 				anchor : '95%'
+			} ]
+		}
+		, {
+			columnWidth : .1,
+			layout : 'form',
+			items : [ {
+				xtype : 'button',
+				iconCls : 'select',
+				maxLength : 100,
+				handler : selectPlace.createCallback(),
+				scope : this,
+				anchor : '25%'
 			} ]
 		}
 		, {
@@ -101,7 +113,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '名称',
+				fieldLabel : '场馆',
 				id : 'Placetimeplacetimename',
 				name : 'placetimename',
 				maxLength : 100,
@@ -133,10 +145,10 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'timefield',
-				fieldLabel : '开始时间',
-				id : 'Placetimeplacetimebegin',
-				name : 'placetimebegin',
+				xtype : 'textfield',
+				fieldLabel : '备注',
+				id : 'Placetimeplacetimedetail',
+				name : 'placetimedetail',
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -145,14 +157,28 @@ Ext.onReady(function() {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'timefield',
-				fieldLabel : '结束时间',
-				id : 'Placetimeplacetimeend',
-				name : 'placetimeend',
+				xtype : 'datefield',
+				fieldLabel : '开始时间',
+				id : 'Placetimeplacetimebegin',
+				name : 'placetimebegin',
+				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
 		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'timefield',
+//				fieldLabel : '结束时间',
+//				id : 'Placetimeplacetimeend',
+//				name : 'placetimeend',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
@@ -223,75 +249,59 @@ Ext.onReady(function() {
 					commonDelete(basePath + Placetimeaction + "?method=delAll",selections,Placetimestore,Placetimekeycolumn);
 				}
 			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Placetimeaction + "?method=impAll","导入",Placetimestore);
-				}
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : stadiumStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'sstadiumname',
+				id : 'sstadiumname',
+				name : 'sstadiumname',
+				maxLength : 50,
+				anchor : '95%'
 			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Placetimeaction + "?method=expAll"; 
-						}
-					});
-				}
+				xtype : 'combo',
+				emptyText : '请选择',
+				store : projectStore,
+				mode : 'local',
+				triggerAction : 'all',
+				editable : false,
+				allowBlank : false,
+				displayField : 'name',
+				valueField : 'name',
+				hiddenName : 'sprojectname',
+				id : 'sprojectname',
+				name : 'sprojectname',
+				maxLength : 50,
+				anchor : '95%'
 			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Placetimegrid);
-				}
+				xtype : 'datefield',
+				emptyText : '日期',
+				id : 'appiontdate',
+				name : 'appiontdate',
+				maxLength : 100,
+				format : 'Y-m-d',
+				allowBlank : false,
+				anchor : '95%'
 			},'-',{
-				text : "附件",
-				iconCls : 'attach',
+				text : "查询",
+				iconCls : 'select',
 				handler : function() {
-					var selections = Placetimegrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Placetimekeycolumn.length;i++){
-						fid += selections[0].data[Placetimekeycolumn[i]] + ","
-					}
-					commonAttach(fid, Placetimeclassify);
-				}
-			},'->',{
-				xtype : 'textfield',
-				id : 'query'+Placetimeaction,
-				name : 'query',
-				emptyText : '模糊匹配',
-				width : 100,
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							if ("" == Ext.getCmp("query"+Placetimeaction).getValue()) {
-								Placetimestore.load();
-							} else {
-								Placetimestore.load({
-									params : {
-										query : Ext.getCmp("query"+Placetimeaction).getValue()
-									}
-								});
-							}
-						}
-					}
+					Placetimestore.load({params:{
+						wheresql:"placetimename='"+Ext.getCmp('sstadiumname').value+
+						"' and placetimeproject='"+Ext.getCmp('sprojectname').value+
+						"' and placetimebegin like '"+Ext.getCmp('appiontdate').value+
+						"%'"
+					}});
 				}
 			}
 		]
 	});
 	Placetimegrid.region = 'center';
-	Placetimestore.on("beforeload",function(){ 
-		Placetimestore.baseParams = {
-				query : Ext.getCmp("query"+Placetimeaction).getValue()
-		}; 
-	});
-	Placetimestore.load();//加载数据
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',
