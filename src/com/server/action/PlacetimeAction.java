@@ -1,6 +1,7 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -77,7 +78,7 @@ public class PlacetimeAction extends BaseAction {
 	//查询所有
 	public void selAll(HttpServletRequest request, HttpServletResponse response){
 		Queryinfo queryinfo = getQueryinfo(request);
-		queryinfo.setType(Placetime.class);
+;		queryinfo.setType(Placetime.class);
 		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
 		queryinfo.setOrder(PlacetimePoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
@@ -91,6 +92,24 @@ public class PlacetimeAction extends BaseAction {
 		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
 		queryinfo.setOrder(PlacetimePoco.ORDER);
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	//查询所有
+	public void mselAll(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placetime.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlacetimePoco.ORDER);
+		
+		String placetimename = request.getParameter("placetimename");
+		String placetimecode = request.getParameter("placetimecode");
+		String placetimebegin = request.getParameter("placetimebegin");
+		String wheresql = "placetimename='"+placetimename+"' and placetimecode='"+
+				placetimecode+"' and placetimebegin like '"+placetimebegin+"%'";
+		queryinfo.setWheresql(wheresql);
+		
+		Pageinfo pageinfo = new Pageinfo(0, DAO.selAll(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}

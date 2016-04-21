@@ -9,6 +9,7 @@
 		<link rel="stylesheet" href="assets/agile/css/flat/flat.component.css">
 		<link rel="stylesheet" href="assets/agile/css/flat/flat.color.css">
 		<link rel="stylesheet" href="assets/agile/css/flat/iconline.css">
+		<link rel="stylesheet" href="assets/component/timepicker/timepicker.css">
 		<link rel="stylesheet" href="assets/app/css/app.css">
 	</head>
 	<body>
@@ -20,29 +21,48 @@
 				    	<h1>场馆预约</h1>
 				    </div>
 				</header>
-				<article data-role="article" id="main_article" data-scroll="pull" class="active">
+				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:40px;bottom:0px;">
 				<div class="scroller">  
-					<img data-source="../upload/qijian/stadium/one.png" class="img" style="width:100%;"/> 
-					<ul class="listitem">
-						<li class="sliver">请选择场地：
-						<select name="select" id="placetime">
+				<form class="form-group">
+				  	<div data-role="date" class="card">
+				  		<label id="placetimebegin">请选择日期</label>
+				  		<input type="hidden"/>
+				  	</div>
+				  	<div data-role="select" class="card">
+						<select id="placecode" placeholder="请选择场地" onchange="placechange();">
+						<option>请选择场地</option>
+						<script id="templateplace" type="text/html">
+						<% for (i = 0; i < root.length; i ++) { %>
+							<option value="<%= root[i].placecode %>">
+							<%= root[i].placecode %></option>
+						<% } %>
+						</script>
+						</select>
+				  	</div>
+				  	<div data-role="select" class="card">
+				  		<select id="placetimedetail" placeholder="请选择场次">
+				  		<option>请选择场次</option>
 						<script id="templateplacetime" type="text/html">
 						<% for (i = 0; i < root.length; i ++) { %>
 							<option value="<%= root[i].placetimedetail %>">
 							<%= root[i].placetimedetail %></option>
 						<% } %>
 						</script>
-						    <!-- <option value="09:00~11:00">09:00~11:00</option>
-							<option value="13:00~15:00">13:00~15:00</option>
-							<option value="16:00~18:00">16:00~18:00</option> -->
 						</select>
+				  	</div>
+				</form>
+				
+				<div class="card noborder">
+					<button class="submit width-full" onclick="selplacename();">查看剩余位置</button>
+				</div>
+					<ul class="listitem">
+						<li class="sliver">
 						</li>
 						<script id="template" type="text/html">
 						<% for (i = 0; i < root.length; i ++) { %>
 						<li>
 							<button onclick="nextpage('<%= root[i].placeid %>'
-							,'<%= root[i].placename %>');" class="ricon">
-							约(剩余<%= root[i].placepeople %>)</button>
+							,'<%= root[i].placename %>');" class="ricon">约</button>
 				            <div class="text" style="line-height:28px;">
 				            	<span><%= root[i].placename %></span>
 				            </div>
@@ -73,22 +93,34 @@
 		<script type="text/javascript" src="assets/bridge/exmobi.js"></script>
 		<script type="text/javascript" src="assets/bridge/agile.exmobi.js"></script>
 		<!-- app -->
+		<script src="assets/component/timepicker/agile.timepicker.js"></script>	
+		<script type="text/javascript" src="assets/component/extend.js"></script>
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			var project = window.localStorage.getItem("project");
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			$('#main_article').on('refreshInit', function(){
 				if("all"==project){
-					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\'');
-					A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll');
+					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'');
 				}else{
-					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placeproject=\''+project+'\' and placestadium=\''+stadium.stadiumid+'\'');
-					A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=selAll&wheresql=placetimeproject=\''+project+'\'');
+					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'and placeproject=\''+project+'\'');
 				}
 			});
+			function placechange(){
+				A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=mselAll&placetimename='+
+						stadium.stadiumname+'&placetimecode='+
+						$("#placecode").val()+'&placetimebegin='+
+						$("#placetimebegin").text());
+			}
+			function selplacename(){
+				if("all"==project){
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\' and placecode=\''+$("#placecode").val()+'\'');
+				}else{
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placeproject=\''+project+'\' and placestadium=\''+stadium.stadiumid+'\' and placecode=\''+$("#placecode").val()+'\'');
+				}
+			}
 			function nextpage(placeid,placename){
 				if(!window.localStorage.getItem("customerid")){
-					
 					A.confirm('提示','请先填写姓名和手机号码',
 					    	function(){
 								window.location.href = "register.html";
