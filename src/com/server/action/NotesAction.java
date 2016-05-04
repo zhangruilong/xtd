@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.NotesDao;
 import com.server.pojo.Notes;
+import com.server.poco.CuscardPoco;
 import com.server.poco.NotesPoco;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
@@ -96,4 +97,35 @@ public class NotesAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//进场刷卡
+	public void ruchang(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Notes temp = cuss.get(0);
+		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+temp.getNotescard()+"'")==0){
+			result = "{success:true,code:400,msg:'该卡号不存在!'}";
+		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")!=0){
+			result = "{success:true,code:400,msg:'已经进场成功,不能重复进场!'}";
+		}else{
+			temp.setNotesid(CommonUtil.getNewId());
+			temp.setNotesbegin(DateUtils.getDateTime());
+			result = DAO.insSingle(temp);
+		}
+		responsePW(response, result);
+	}
+	//归还钥匙
+	public void guihuan(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Notes temp = cuss.get(0);
+		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+temp.getNotescard()+"'")==0){
+			result = "{success:true,code:400,msg:'该卡号不存在!'}";
+		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")==0){
+			result = "{success:true,code:400,msg:'还未进场刷卡,不能归还钥匙!'}";
+		}else{
+			temp.setNotesend(DateUtils.getDateTime());
+			String[] KEYCOLUMN = {"notescard"};
+			result = DAO.updSingle(temp,KEYCOLUMN);
+		}
+		responsePW(response, result);
+	}
+		
 }

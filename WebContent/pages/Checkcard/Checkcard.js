@@ -302,14 +302,14 @@ Ext.onReady(function() {
 				readOnly:true,
 				maxLength : 100,
 				anchor : '100%'
-			},{
-				xtype : 'textfield',
-				fieldLabel : '入场时间',
-				id : 'rctime',
-				name : 'rctime',
-				readOnly:true,
-				maxLength : 100,
-				anchor : '100%'
+//			},{
+//				xtype : 'textfield',
+//				fieldLabel : '入场时间',
+//				id : 'rctime',
+//				name : 'rctime',
+//				readOnly:true,
+//				maxLength : 100,
+//				anchor : '100%'
 			} ]
 		}
 		, {
@@ -331,6 +331,41 @@ Ext.onReady(function() {
 			text : "进场刷卡",
 			iconCls : 'add',
 			handler : function() {
+				Ext.Ajax.request({
+					url : basePath + "NotesAction.do?method=ruchang",
+					method : 'POST',
+					params : {
+						json : "[{notescard:'"+Ext.getCmp("cuscardno").getValue()+"'}]"
+					},
+					success : function(response) {
+						var resp = Ext.decode(response.responseText); 
+						Ext.Msg.alert('提示', resp.msg, function(){
+						});
+					},
+					failure : function(response) {
+						Ext.Msg.alert('提示', '网络出现问题，请稍后再试');
+					}
+				});
+			}
+		},{
+			text : "归还钥匙",
+			iconCls : 'delete',
+			handler : function() {
+				Ext.Ajax.request({
+					url : basePath + "NotesAction.do?method=guihuan",
+					method : 'POST',
+					params : {
+						json : "[{notescard:'"+Ext.getCmp("cuscardno").getValue()+"'}]"
+					},
+					success : function(response) {
+						var resp = Ext.decode(response.responseText); 
+						Ext.Msg.alert('提示', resp.msg, function(){
+						});
+					},
+					failure : function(response) {
+						Ext.Msg.alert('提示', '网络出现问题，请稍后再试');
+					}
+				});
 			}
 		}
 	]
