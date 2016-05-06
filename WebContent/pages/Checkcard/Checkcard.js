@@ -89,6 +89,12 @@ Ext.onReady(function() {
 								callback : formloadRecord
 							});
 						}
+					},
+					focus : function(field, e) {
+						timer = setInterval(myrefresh,2000); //指定2秒刷新一次
+					},
+					blur : function(field, e) {
+						clearInterval(timer);
 					}
 				}
 			},{
@@ -370,11 +376,34 @@ Ext.onReady(function() {
 		}
 	]
 	});
+	
 	function formloadRecord() {
+		CustomercuscardviewdataForm.form.reset();
 		Customercuscardviewstore.each(function(record) {
 			CustomercuscardviewdataForm.form.loadRecord(record);
 			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
 		    return;
 		});
+		Ext.getCmp("cuscardno").setValue(bb);
+	}
+	
+	MWRFATL.CloseReader();
+	aa = MWRFATL.LastRet;
+	bb = MWRFATL.OpenReader(0,115200);
+
+	function myrefresh(){ 
+		MWRFATL.MF_Reset(5);
+		bb=MWRFATL.OpenCard(1);
+		aa=MWRFATL.LastRet;
+		if(aa==0){
+			Customercuscardviewstore.load({
+				params : {
+					wheresql : "cuscardno like '%"+bb+"%'"
+				},
+				callback : formloadRecord
+			});
+			bb=MWRFATL.RF_Beep(10);		//传入参数：设备单次蜂鸣时间
+			aa=MWRFATL.LastRet;
+		}
 	}
 })

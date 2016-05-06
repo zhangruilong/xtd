@@ -7,33 +7,36 @@
 		body, html,#allmap {width: 100%;height: 100%;overflow: hidden;margin:0;font-family:"微软雅黑";}
 	</style>
 	<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=OeQ8WGmLf4FxQnRmz5dtmNT2hphcyxnc"></script>
-	<title>带文字标签的覆盖物</title>
+	<title>新天地</title>
 </head>
 <body>
 	<div id="allmap"></div>
 </body>
 </html>
 <script type="text/javascript">  
-  // 百度地图API功能
-	var map = new BMap.Map("allmap");
-	var point = new BMap.Point(116.404, 39.915);
-	map.centerAndZoom(point, 15);
 	// 编写自定义函数,创建标注
-	function addMarker(point){
+	function addMarker(point,name){
 	  var marker = new BMap.Marker(point);
-      var label = new BMap.Label("人流量：1000人",{offset:new BMap.Size(20,-10)});
-	marker.setLabel(label);
+      var label = new BMap.Label(name+"<br>人流量：1000人",{offset:new BMap.Size(20,-10)});
+	  marker.setLabel(label);
 	  map.addOverlay(marker);
-      
 	}
-	// 随机向地图添加25个标注
-	var bounds = map.getBounds();
-	var sw = bounds.getSouthWest();
-	var ne = bounds.getNorthEast();
-	var lngSpan = Math.abs(sw.lng - ne.lng);
-	var latSpan = Math.abs(ne.lat - sw.lat);
-	for (var i = 0; i < 5; i ++) {
-		var point = new BMap.Point(sw.lng + lngSpan * (Math.random() * 0.7), ne.lat - latSpan * (Math.random() * 0.7));
-		addMarker(point);
-	}
+	// 向地图添加标注
+	var map = new BMap.Map("allmap");
+	var point = new BMap.Point(120.911895,32.023707);
+	map.centerAndZoom(point, 14);
+	
+	var point1 = new BMap.Point(120.94101,32.021281);
+	addMarker(point1,"东城体育馆店");
+	
+	var point2 = new BMap.Point(120.87428,32.020587);
+	addMarker(point2,"皇家馆");
+	
+	var point3 = new BMap.Point(120.874132,32.02597);
+	addMarker(point3,"二附体育馆");
+	
+	var point4 = new BMap.Point(120.871678,32.011575);
+	addMarker(point4,"新天地健身会所");
+	
+	
 </script>
