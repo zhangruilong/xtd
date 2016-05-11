@@ -120,47 +120,51 @@
 				}
 			}
 			function nextpage(placeid,placename){
-				if(!window.localStorage.getItem("customerid")){
+				var customerid = window.localStorage.getItem("customerid");
+	    		if(!customerid){
 					A.confirm('提示','请先填写姓名和手机号码',
-					    	function(){
-								window.location.href = "register.html";
-					    	},
-					    	function(){
-					    		A.alarmToast('你选择了“取消”');
-					    	});
-				}else{
-					var customerid = window.localStorage.getItem("customerid");
-				    A.confirm('提示','确定预约'+placename,
 				    	function(){
-					    	var json = "[{'appointcustomer':'"+customerid  //会员id
-	        			    +"','appointplace':'"+placeid
-							+"','appointplacename':'"+placename
-	        			    +"','appointcoursename':'"+stadium.stadiumname       //场馆
-	        			    +"','appointproject':'"+project
-							+"','appointdetail':'"+$('#placetime').val()
-	        			    +"'}]";
-					    	$.ajax({
-								url : "../AppiontAction.do?method=insAll",
-								data : {
-									json : json
-								},
-								success : function(resp) {
-									var respText = eval('('+resp+')'); 
-					    			if(respText.success == false) 
-					    				alert(respText.msg);
-					    			else {
-					    				A.showToast('预约成功！');
-					    			}
-								},
-								error : function(resp) {
-									alert('网络出现问题，请稍后再试');
-								}
-							});
+							window.location.href = "register.html";
 				    	},
 				    	function(){
 				    		A.alarmToast('你选择了“取消”');
-				    	});
+				    		return;
+				    });
 				}
+	    		if(!$('#placetime').val()){
+	    			alert('请先选择场次,若没有场馆未安排场次请联系相应场馆');
+	    			return;
+	    		}
+			    A.confirm('提示','确定预约'+placename,
+			    	function(){
+				    	var json = "[{'appointcustomer':'"+customerid  //会员id
+        			    +"','appointplace':'"+placeid
+						+"','appointplacename':'"+placename
+        			    +"','appointcoursename':'"+stadium.stadiumname       //场馆
+        			    +"','appointproject':'"+project
+						+"','appointdetail':'"+$('#placetime').val()
+        			    +"'}]";
+				    	$.ajax({
+							url : "../AppiontAction.do?method=insAll",
+							data : {
+								json : json
+							},
+							success : function(resp) {
+								var respText = eval('('+resp+')'); 
+				    			if(respText.success == false) 
+				    				alert(respText.msg);
+				    			else {
+				    				A.showToast('预约成功！');
+				    			}
+							},
+							error : function(resp) {
+								alert('网络出现问题，请稍后再试');
+							}
+						});
+			    	},
+			    	function(){
+			    		A.alarmToast('你选择了“取消”');
+			    	});
 			}
 		</script>
 	</body>

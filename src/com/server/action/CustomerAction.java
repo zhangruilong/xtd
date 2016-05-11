@@ -103,14 +103,18 @@ public class CustomerAction extends BaseAction {
 	}
 	//注册
 	public void register(HttpServletRequest request, HttpServletResponse response){
-		json2cuss(request);
+		String json = request.getParameter("json1");
+		System.out.println("json : " + json);
+		if(CommonUtil.isNotEmpty(json)) cuss = CommonConst.GSON.fromJson(json, TYPE);
 		Customer temp = cuss.get(0);
 		//判断是否已注册
 		String customerid = CommonUtil.getNewId();
 		Queryinfo queryinfo = getQueryinfo();
 		queryinfo.setType(Customer.class);
-		queryinfo.setWheresql("openid='"+temp.getOpenid()+"'");
-		if(DAO.getTotal(queryinfo)==0){
+		queryinfo.setWheresql("customerphone='"+temp.getCustomerphone()+
+				"' and customername='"+temp.getCustomername()+"'");
+		ArrayList<Customer> sCustomer = (ArrayList<Customer>) DAO.selAll(queryinfo);
+		if(sCustomer.size()==0){
 			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setCustomerid(customerid);
 			result = DAO.insSingle(temp);
@@ -124,8 +128,24 @@ public class CustomerAction extends BaseAction {
 			else
 				responsePW(response, result);
 		}else{
-			responsePW(response, "{success:true,code:400,msg:'该账号已存在'}");
+			Customer mCustomer = sCustomer.get(0);
+			mCustomer.setOpenid(temp.getOpenid());
+			responsePW(response, "{success:true,code:201,msg:'"+mCustomer.getCustomerid()+"'}");
 		}
 		
+	}
+	//查询所有
+	public void selCustomer(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Customer.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(CustomerPoco.ORDER);
+		cuss = (ArrayList<Customer>) DAO.selAll(queryinfo);
+		if(cuss.size()==0){
+			result = "{success:true,code:403,msg:'请先注册'}";
+		}else{
+			result = "{success:true,code:202,msg:'"+cuss.get(0).getCustomerid()+"'}";
+		}
+		responsePW(response, result);
 	}
 }

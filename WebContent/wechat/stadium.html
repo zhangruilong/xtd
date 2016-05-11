@@ -87,6 +87,16 @@
 			$('#stadiumname').html(stadium.stadiumname);
 			$('#stadiumstatue').html("电话："+stadium.stadiumstatue);
 			$('#stadiumaddress').html("地址："+stadium.stadiumaddress);
+			
+			if(!window.localStorage.getItem("customerid")){
+				A.confirm('提示','请先填写姓名和手机号码',
+			    	function(){
+						window.location.href = "register.html";
+			    	},
+			    	function(){
+			    		A.alarmToast('你选择了“取消”');
+			    });
+			}
 		});
 		</script>
 	</body>

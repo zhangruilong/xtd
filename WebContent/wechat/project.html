@@ -45,10 +45,87 @@
 		<!-- app -->
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
-			function nextpage(project){
-				window.localStorage.setItem("project",project);
-				setTimeout(function(){window.location.href = "stadiumlist.html";}, 300);
+		$(function(){
+			//openid
+			if(!window.localStorage.getItem("openid")||"null"==window.localStorage.getItem("openid")){
+				getOpenid();
+				window.localStorage.setItem("openid",getParamValue("openid"));
+			}else{
+				$.ajax({
+					url : "../CustomerAction.do?method=selCustomer",
+					data : {
+						wheresql : "openid='"+window.localStorage.getItem("openid")+"'"
+					},
+					success : function(resp) {
+						var respText = eval('('+resp+')'); 
+		    			if(respText.code == 403){
+		    				localStorage.removeItem("customerid");
+		    				/* A.confirm('提示','现在注册吗?',
+	    				    	function(){
+	    							window.location.href = "register.html";
+	    				    	},
+	    				    	function(){
+	    				    		A.alarmToast('你选择了“取消”');
+	    				    }); */
+		    			}else if(respText.code == 202){
+		    				window.localStorage.setItem("customerid",respText.msg);
+		    			}
+					},
+					error : function(resp) {
+						alert('网络出现问题，请稍后再试');
+					}
+				});
 			}
+		});
+		//openid
+		function getOpenid()
+		{
+		  var thisUrl = location.href;
+		  location.href="../web/snsapi-base.api?redir="+encodeURIComponent(thisUrl);
+		}
+		//openid
+		function getParamValue(name)
+		{
+		  try {
+		    return(
+		      location.search.match(new RegExp("[\?&]"+name+"=[^&#]*"))[0].split("=")[1]
+		    );
+		  } catch (ex) {
+		    return(null);
+		  }
+		}
+		function initCustomer(data){			//将customer(客户信息放入缓存)
+			window.localStorage.setItem("customerid",JSON.stringify(data.root[0].customerid));
+		}
+		function nextpage(project){
+			window.localStorage.setItem("project",project);
+			setTimeout(function(){window.location.href = "stadiumlist.html";}, 300);
+		}
+		function successCB(r, cb) {
+			cb && cb(r);
+		}
+		function getJson(url, param, sCallback, fCallBack) {
+			try
+			{
+				$.ajax({
+					url: url,
+					data: param,
+					dataType:"json",
+					success: function(r) {
+						successCB(r, sCallback);
+						successCB(r, fCallBack);
+					},
+					error:function(r) {
+						var resp = eval(r); 
+						alert(resp.msg);
+					}
+				});
+			}
+			catch (ex)
+			{
+				alert(ex);
+			}
+		}
 		</script>
 	</body>
 </html>

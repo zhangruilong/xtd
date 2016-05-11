@@ -39,7 +39,6 @@ public class CuscardAction extends BaseAction {
 	public void insAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
 		for(Cuscard temp:cuss){
-			temp.setCreator(getCurrentUsername(request));
 			temp.setCreatetime(DateUtils.getDateTime());
 			temp.setCuscardid(CommonUtil.getNewId());
 			result = DAO.insSingle(temp);
