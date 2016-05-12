@@ -22,26 +22,22 @@
 				    </div>
 				</header>
 				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:40px;bottom:0px;">
-				<form class="form-group">
-				  	<div data-role="date" class="card">
-				  		<label id="placetimebegin">请选择日期</label>
-				  		<input type="hidden"/>
-				  	</div>
-				  	<div data-role="select" class="card">
-						<select id="placecode" placeholder="请选择场地">
-						<option>请选择场地</option>
-						<script id="templateplace" type="text/html">
+				<div class="scroller">  
+					<ul class="listitem">
+						<li class="sliver">
+						</li>
+						<script id="template" type="text/html">
 						<% for (i = 0; i < root.length; i ++) { %>
-							<option value="<%= root[i].placecode %>">
-							<%= root[i].placecode %></option>
+						<li>
+							<button type="button" onclick="nextpage('<%= root[i].placeid %>'
+							,'<%= root[i].placename %>');" class="ricon">约</button>
+				            <div class="text" style="line-height:28px;">
+				            	<span><%= root[i].placename %></span>
+				            </div>
+						</li>
 						<% } %>
 						</script>
-						</select>
-				  	</div>
-				</form>
-				
-				<div class="card noborder">
-					<button class="submit width-full" onclick="nextpage();">查看场次</button>
+				    </ul>
 				</div>
 				</article>
 			</section>
@@ -63,28 +59,57 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			var project = window.localStorage.getItem("project");
+			var appiont = JSON.parse(window.localStorage.getItem("appiont"));
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			$('#main_article').on('refreshInit', function(){
 				if("all"==project){
-					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'');
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\' and placecode=\''+appiont.placecode+'\'');
 				}else{
-					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'and placeproject=\''+project+'\'');
+					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placeproject=\''+project+'\' and placestadium=\''+stadium.stadiumid+'\' and placecode=\''+appiont.placecode+'\'');
 				}
 			});
-			function nextpage(){
-				if($('#placetimebegin').text()=="请选择日期"){
-					A.showToast('请选择日期！');
+			function nextpage(placeid,placename){
+				var customerid = window.localStorage.getItem("customerid");
+	    		if(!customerid){
+					A.confirm('提示','请先填写姓名和手机号码',
+				    	function(){
+							window.location.href = "register.html";
+				    	},
+				    	function(){
+				    		A.alarmToast('你选择了“取消”');
+				    });
 					return;
 				}
-				if($('#placecode').val()=="请选择场地"){
-					A.showToast('请选择场地！');
-					return;
-				}
-				var appiont = new Object();
-				appiont.placecode = $("#placecode").val();
-				appiont.placetimebegin = $("#placetimebegin").text();
-				window.localStorage.setItem("appiont",JSON.stringify(appiont));
-				window.location.href = "placetime.html";
+			    A.confirm('提示','确定预约'+placename,
+			    	function(){
+				    	var json = "[{'appointcustomer':'"+customerid  //会员id
+        			    +"','appointplace':'"+placeid
+						+"','appointplacename':'"+placename
+        			    +"','appointcoursename':'"+stadium.stadiumname       //场馆
+        			    +"','appointproject':'"+project
+						+"','appointdetail':'"+appiont.placetimebegin
+        			    +"'}]";
+				    	$.ajax({
+							url : "../AppiontAction.do?method=insAll",
+							data : {
+								json : json
+							},
+							success : function(resp) {
+								var respText = eval('('+resp+')'); 
+				    			if(respText.success == false) 
+				    				alert(respText.msg);
+				    			else {
+				    				A.showToast('预约成功！');
+				    			}
+							},
+							error : function(resp) {
+								alert('网络出现问题，请稍后再试');
+							}
+						});
+			    	},
+			    	function(){
+			    		A.alarmToast('你选择了“取消”');
+			    	});
 			}
 		</script>
 	</body>

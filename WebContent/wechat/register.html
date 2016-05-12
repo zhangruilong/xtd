@@ -61,6 +61,14 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script type="text/javascript">
 		function nextpage(){
+			if(!$('#customername').val()){
+				A.showToast('请填写姓名！');
+				return;
+			}
+			if(!$('#customerphone').val()){
+				A.showToast('请填写手机！');
+				return;
+			}
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			var openid = window.localStorage.getItem("openid");
 			var json = "[{'customerstadium':'"+stadium.stadiumid

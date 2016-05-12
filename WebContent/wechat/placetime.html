@@ -18,30 +18,25 @@
 				<header>
 				    <div class="titlebar">
 				    	<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
-				    	<h1>场馆预约</h1>
+				    	<h1>选择场次</h1>
 				    </div>
 				</header>
 				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:40px;bottom:0px;">
-				<form class="form-group">
-				  	<div data-role="date" class="card">
-				  		<label id="placetimebegin">请选择日期</label>
-				  		<input type="hidden"/>
-				  	</div>
-				  	<div data-role="select" class="card">
-						<select id="placecode" placeholder="请选择场地">
-						<option>请选择场地</option>
-						<script id="templateplace" type="text/html">
+				<div class="scroller">  
+					<ul class="listitem">
+						<li class="sliver">
+						</li>
+						<script id="templateplacetime" type="text/html">
 						<% for (i = 0; i < root.length; i ++) { %>
-							<option value="<%= root[i].placecode %>">
-							<%= root[i].placecode %></option>
+						<li>
+							<button type="button" onclick="nextpage('<%= root[i].placetimedetail %>');" class="ricon">选择</button>
+				            <div class="text" style="line-height:28px;">
+				            	<span><%= root[i].placetimedetail %></span>
+				            </div>
+						</li>
 						<% } %>
 						</script>
-						</select>
-				  	</div>
-				</form>
-				
-				<div class="card noborder">
-					<button class="submit width-full" onclick="nextpage();">查看场次</button>
+				    </ul>
 				</div>
 				</article>
 			</section>
@@ -62,29 +57,18 @@
 		<script type="text/javascript" src="assets/component/extend.js"></script>
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
-			var project = window.localStorage.getItem("project");
+			var appiont = JSON.parse(window.localStorage.getItem("appiont"));
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			$('#main_article').on('refreshInit', function(){
-				if("all"==project){
-					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'');
-				}else{
-					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'and placeproject=\''+project+'\'');
-				}
+				A.template('#templateplacetime').renderReplace('../PlacetimeAction.do?method=mselAll&placetimename='+
+						stadium.stadiumname+'&placetimecode='+
+						appiont.placecode+'&placetimebegin='+
+						appiont.placetimebegin);
 			});
-			function nextpage(){
-				if($('#placetimebegin').text()=="请选择日期"){
-					A.showToast('请选择日期！');
-					return;
-				}
-				if($('#placecode').val()=="请选择场地"){
-					A.showToast('请选择场地！');
-					return;
-				}
-				var appiont = new Object();
-				appiont.placecode = $("#placecode").val();
-				appiont.placetimebegin = $("#placetimebegin").text();
+			function nextpage(placetimedetail){
+				appiont.placetimedetail = placetimedetail;
 				window.localStorage.setItem("appiont",JSON.stringify(appiont));
-				window.location.href = "placetime.html";
+				window.location.href = "placedetail.html";
 			}
 		</script>
 	</body>
