@@ -14,6 +14,6 @@
 codeBase=MwRFReader.cab#version=1,0,0,2
 data=data:application/x-oleobject;base64,VPpLUhUXNkSyudxeJIvBwwADAAAAAAAAAAAAAA== 
 classid=CLSID:524BFA54-1715-4436-B2B9-DC5E248BC1C3></OBJECT> 
-  <div id="divFormPanel" style="height: 100%"></div>
+  <div id="divFormPanel" style="height: 200px;"></div>
   </body>
 </html>

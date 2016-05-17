@@ -6,7 +6,6 @@ Ext.onReady(function() {
 		id:'CustomercuscardviewdataForm',
 		title:Ccoursetitle,
 		bodyStyle:'padding:50px;',
-        renderTo:'divFormPanel',
 		labelAlign : 'right',
 		frame : true,
 		layout : 'column',
@@ -154,11 +153,12 @@ Ext.onReady(function() {
 		}
 	]
 	});
-	function formloadRecord() {
-		Customercuscardviewstore.each(function(record) {
-			CustomercuscardviewdataForm.form.loadRecord(record);
-			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
-		    return;
-		});
-	}
+
+	var win = new Ext.Viewport({//只能有一个viewport
+		resizable : true,
+		layout : 'fit',
+		bodyStyle : 'padding:0px;',
+        renderTo:'divFormPanel',
+		items : [ CustomercuscardviewdataForm ]
+	});
 })

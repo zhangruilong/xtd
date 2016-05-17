@@ -6,6 +6,6 @@
 	<script type="text/javascript" src="Cuscardadd.js"></script>
   </head>
   <body>
-  <div id="divFormPanel" style="height: 100%"></div>
+  <div id="divFormPanel"></div>
   </body>
 </html>

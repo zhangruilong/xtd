@@ -50,7 +50,6 @@ Ext.onReady(function() {
 		id:'CustomercuscardviewdataForm',
 		title:Ccoursetitle,
 		bodyStyle:'padding:50px;',
-        renderTo:'divFormPanel',
 		labelAlign : 'right',
 		frame : true,
 		layout : 'column',
@@ -384,13 +383,31 @@ Ext.onReady(function() {
 			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
 		    return;
 		});
-		Ext.getCmp("cuscardno").setValue(bb);
 	}
+	
+	var win = new Ext.Viewport({//只能有一个viewport
+		resizable : true,
+		layout : 'fit',
+		bodyStyle : 'padding:0px;',
+        renderTo:'divFormPanel',
+		items : [ CustomercuscardviewdataForm ]
+	});
 	
 	MWRFATL.CloseReader();
 	aa = MWRFATL.LastRet;
 	bb = MWRFATL.OpenReader(0,115200);
 
+
+	function myrefreshcallback() {
+		CustomercuscardviewdataForm.form.reset();
+		Customercuscardviewstore.each(function(record) {
+			CustomercuscardviewdataForm.form.loadRecord(record);
+			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
+		    return;
+		});
+		Ext.getCmp("cuscardno").setValue(bb);
+	}
+	
 	function myrefresh(){ 
 		MWRFATL.MF_Reset(5);
 		bb=MWRFATL.OpenCard(1);
@@ -400,7 +417,7 @@ Ext.onReady(function() {
 				params : {
 					wheresql : "cuscardno like '%"+bb+"%'"
 				},
-				callback : formloadRecord
+				callback : myrefreshcallback
 			});
 			bb=MWRFATL.RF_Beep(10);		//传入参数：设备单次蜂鸣时间
 			aa=MWRFATL.LastRet;
