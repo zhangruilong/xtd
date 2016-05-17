@@ -21,24 +21,17 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
-			header : '门店照片',
-			dataIndex : 'stadiumcode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '名称',
 			dataIndex : 'stadiumname',
 			align : 'center',
-			width : 80,
+			width : 100,
 			sortable : true
 		}
 		, {
 			header : '地址',
 			dataIndex : 'stadiumaddress',
 			align : 'center',
-			width : 180,
+			width : 200,
 			sortable : true
 		}
 		, {
@@ -52,7 +45,7 @@ Ext.onReady(function() {
 			header : '电话',
 			dataIndex : 'stadiumstatue',
 			align : 'center',
-			width : 80,
+			width : 120,
 			sortable : true
 		}
 		, {
@@ -67,6 +60,13 @@ Ext.onReady(function() {
 			dataIndex : 'stadiumy',
 			align : 'center',
 			width : 80,
+			sortable : true
+		}
+		, {
+			header : '门店照片',
+			dataIndex : 'stadiumcode',
+			align : 'center',
+			width : 180,
 			sortable : true
 		}
 		]

@@ -419,11 +419,17 @@ Ext.onReady(function() {
         width: 555
     });
 	editPanel.region = 'east';
+//	var win = new Ext.Viewport({//只能有一个viewport
+//		resizable : true,
+//		layout : 'border',
+//		bodyStyle : 'padding:0px;',
+//		items : [ Coachgrid,editPanel ]
+//	});
 	var win = new Ext.Viewport({//只能有一个viewport
 		resizable : true,
 		layout : 'border',
 		bodyStyle : 'padding:0px;',
-		items : [ Coachgrid,editPanel ]
+		items : [ Coachgrid ]
 	});
 })
 function editeInfo(params){

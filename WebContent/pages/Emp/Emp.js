@@ -47,7 +47,7 @@ Ext.onReady(function() {
 			header : '场馆',
 			dataIndex : 'stadiumname',
 			align : 'center',
-			width : 80,
+			width : 100,
 			sortable : true
 		}
 		, {
