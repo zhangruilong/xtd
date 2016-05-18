@@ -18,7 +18,6 @@ Ext.onReady(function() {
 		width : 170,
 		containerScroll : true,
 		animate : false,
-		singleExpand : true,
 		useArrows : false,
 		border : true
 	});

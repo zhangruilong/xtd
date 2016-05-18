@@ -97,4 +97,13 @@ public class AppiontAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//新增
+	public void addMycourse(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		Appiont temp = cuss.get(0);
+		temp.setCreatetime(DateUtils.getDateTime());
+		temp.setAppointid(CommonUtil.getNewId());
+		result = DAO.insSingle(temp);
+		responsePW(response, result);
+	}
 }

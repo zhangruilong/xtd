@@ -2,6 +2,7 @@
 <html>
   <head>
 	<%@ include file="/common/common.jsp" %>
+	<script type="text/javascript" src="Appoint.js"></script>
 	<script type="text/javascript" src="Mycourse.js"></script>
 	<script type="text/javascript" src="Allcourse.js"></script>
 	<script type="text/javascript" src="Cuscard.js"></script>

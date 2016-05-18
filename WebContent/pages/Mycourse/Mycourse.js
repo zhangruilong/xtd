@@ -187,7 +187,6 @@ function selectMycourse(customerid) {
 		height : 580, // 窗口高度
 		modal : true,
 		title : Mycoursetitle,
-		closeAction: 'hide',
 		closable : true, // 是否可关闭
 		collapsible : true, // 是否可收缩
 		maximizable : true, // 设置是否可以最大化
@@ -209,6 +208,26 @@ function selectMycourse(customerid) {
 								});
 								return;
 							}
+							if(!Ext.getCmp('stadiumname').value){
+								Ext.Msg.alert('提示', '请选择场馆！', function() {
+								});
+								return;
+							}
+							if(!Ext.getCmp('appiontdate').value){
+								Ext.Msg.alert('提示', '请选择日期！', function() {
+								});
+								return;
+							}
+							if(!Ext.getCmp('appointbegin').value){
+								Ext.Msg.alert('提示', '请选择开始时间！', function() {
+								});
+								return;
+							}
+							if(!Ext.getCmp('appointend').value){
+								Ext.Msg.alert('提示', '请选择结束时间！', function() {
+								});
+								return;
+							}
 							var json = "[{'appointcustomer':'"+customerid
 //		        			    +"','appointplace':'"+selectRows[0].data['placeid']
 		        			    +"','appointcourse':'"+selectRows[0].data['mycourseid']
@@ -221,7 +240,7 @@ function selectMycourse(customerid) {
 								+"','appointdetail':'"+Ext.getCmp('appointbegin').value+"~"+Ext.getCmp('appointend').value
 		        			    +"'}]";
 							Ext.Ajax.request({
-								url : basePath + "AppiontAction.do?method=insAll",
+								url : basePath + "AppiontAction.do?method=addMycourse",
 								method : 'POST',
 								params : {
 									json : json

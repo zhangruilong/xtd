@@ -109,7 +109,7 @@ function selectAppoint(customerid) {
 			dataIndex : 'appointstatue',
 			align : 'center',
 			width : 80,
-			sortable : true
+			hidden : true
 		}
 		, {
 			header : '创建时间',
@@ -354,5 +354,22 @@ function selectAppoint(customerid) {
 	});
 	Appiontstore.load();//加载数据
 	
-	return Appiontgrid;
+	var selectgridWindow = new Ext.Window({
+		layout : 'fit', // 设置窗口布局模式
+		width : 820, // 窗口宽度
+		height : 580, // 窗口高度
+		modal : true,
+		title : Appionttitle,
+		closeAction: 'hide',
+		closable : true, // 是否可关闭
+		collapsible : true, // 是否可收缩
+		maximizable : true, // 设置是否可以最大化
+		border : false, // 边框线设置
+		constrain : true, // 设置窗口是否可以溢出父容器
+		animateTarget : Ext.getBody(),
+		pageY : 50, // 页面定位Y坐标
+		pageX : document.body.clientWidth / 2 - 820 / 2, // 页面定位X坐标
+		items : Appiontgrid
+	});
+	selectgridWindow.show();
 }

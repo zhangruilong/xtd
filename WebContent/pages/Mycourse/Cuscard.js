@@ -122,6 +122,18 @@ Ext.onReady(function() {
 				}
 				selectMycourse(selections[0].data['cuscardcustomer']);
 			}
+		},'-',{
+			text : "查看预约记录",
+			iconCls : 'select',
+			handler : function() {
+				var selections = Cuscardgrid.getSelectionModel().getSelections();
+				if (selections.length != 1) {
+					Ext.Msg.alert('提示', '请选择一条记录！', function() {
+					});
+					return;
+				}
+				selectAppoint(selections[0].data['cuscardcustomer']);
+			}
 		},'->',{
 				xtype : 'textfield',
 				id : 'query'+Cuscardaction,

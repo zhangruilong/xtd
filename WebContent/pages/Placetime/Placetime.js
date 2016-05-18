@@ -35,7 +35,7 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '备注',
+			header : '场次',
 			dataIndex : 'placetimedetail',
 			align : 'center',
 			width : 180,
@@ -146,7 +146,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '备注',
+				fieldLabel : '场次',
 				id : 'Placetimeplacetimedetail',
 				name : 'placetimedetail',
 				maxLength : 100,
@@ -158,10 +158,15 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'datefield',
-				fieldLabel : '开始时间',
+				fieldLabel : '日期',
 				id : 'Placetimeplacetimebegin',
 				name : 'placetimebegin',
 				format : 'Y-m-d',
+				submitFormat : 'Y-m-d',
+				minValue : new Date(),
+//				getValue: function(value) {
+//		            return Ext.Date.format(new Date(value),'Y-m-d'); 
+//		        },
 				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
@@ -222,7 +227,7 @@ Ext.onReady(function() {
 				iconCls : 'add',
 				handler : function() {
 					PlacetimedataForm.form.reset();
-					createWindow(basePath + Placetimeaction + "?method=insAll", "新增", PlacetimedataForm, Placetimestore);
+					createTextWindow(basePath + Placetimeaction + "?method=insAll", "新增", PlacetimedataForm, Placetimestore);
 				}
 			},'-',{
 				text : "修改",
@@ -234,7 +239,7 @@ Ext.onReady(function() {
 						});
 						return;
 					}
-					createWindow(basePath + Placetimeaction + "?method=updAll", "修改", PlacetimedataForm, Placetimestore);
+					createTextWindow(basePath + Placetimeaction + "?method=updAll", "修改", PlacetimedataForm, Placetimestore);
 					PlacetimedataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{

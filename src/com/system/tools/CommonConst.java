@@ -8,8 +8,8 @@ import com.google.gson.GsonBuilder;
 public class CommonConst {
 	//GSON
 	public static final Gson GSON = new GsonBuilder().registerTypeAdapter(Date.class,new UtilDateSerializer()).setDateFormat("yyyy-MM-dd").create();
-	//public static final Gson GSON = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
-	//public static final Gson GSON = new Gson();
+	public static final Gson GSONDATE = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+	public static final Gson GSONNORMAL = new Gson();
 	//SUCCESS
 	public static final String SUCCESS = "{success:true,code:202,msg:'操作成功'}";
 	//FAILURE
