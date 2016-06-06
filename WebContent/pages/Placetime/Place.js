@@ -29,7 +29,8 @@ function selectPlace() {
 			align : 'center',
 			width : 80,
 			sortable : true
-		}, {
+		}
+		, {
 			header : '项目',
 			dataIndex : 'placeproject',
 			sortable : true
