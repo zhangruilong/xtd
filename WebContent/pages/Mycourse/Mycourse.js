@@ -8,6 +8,7 @@ function selectMycourse(customerid) {
 	        			    ,'mycoursename' 
 	        			    ,'mycourseproject' 
 	        			    ,'mycoursenum' 
+	        			    ,'mycoursenuma' 
 	        			    ,'mycoursemoney' 
 	        			    ,'createtime' 
 	        			    ,'creator' 
@@ -78,6 +79,13 @@ function selectMycourse(customerid) {
 		, {
 			header : '课时',
 			dataIndex : 'mycoursenum',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '剩余课时',
+			dataIndex : 'mycoursenuma',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -207,6 +215,10 @@ function selectMycourse(customerid) {
 								Ext.Msg.alert('提示', '请选择一条！', function() {
 								});
 								return;
+							}else if(selectRows[0].data['mycoursenuma']==0){
+								Ext.Msg.alert('提示', '剩余课时为0', function() {
+								});
+								return;
 							}
 							if(!Ext.getCmp('stadiumname').value){
 								Ext.Msg.alert('提示', '请选择场馆！', function() {
@@ -239,11 +251,13 @@ function selectMycourse(customerid) {
 								+"','appointbegin':'"+Ext.getCmp('appiontdate').value
 								+"','appointdetail':'"+Ext.getCmp('appointbegin').value+"~"+Ext.getCmp('appointend').value
 		        			    +"'}]";
+							var mycoursenuma = parseInt(selectRows[0].data['mycoursenuma']) - 1;
 							Ext.Ajax.request({
 								url : basePath + "AppiontAction.do?method=addMycourse",
 								method : 'POST',
 								params : {
-									json : json
+									json : json,
+									mycoursenuma : mycoursenuma
 								},
 								success : function(response) {
 									var resp = Ext.decode(response.responseText); 

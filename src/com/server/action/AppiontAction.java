@@ -103,7 +103,13 @@ public class AppiontAction extends BaseAction {
 		Appiont temp = cuss.get(0);
 		temp.setCreatetime(DateUtils.getDateTime());
 		temp.setAppointid(CommonUtil.getNewId());
-		result = DAO.insSingle(temp);
+		
+		String sqlAppiont = DAO.getInsSingleSql(temp);
+		String mycoursenuma = request.getParameter("mycoursenuma");
+		String sqlMycourse = "update Mycourse set mycoursenuma='"
+		+mycoursenuma+"' where Mycourseid='"+temp.getAppointcourse()+"'";
+		
+		result = DAO.doAll(sqlAppiont,sqlMycourse);
 		responsePW(response, result);
 	}
 }

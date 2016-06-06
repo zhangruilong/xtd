@@ -22,11 +22,13 @@ public class MycoursePoco
     * 实体中文字段
     */
    public static String[] CHINESENAME = {
+   		"ID",
 	 	"教练ID",
 	 	"会员ID",
 	 	"课程名",
 	 	"项目",
 	 	"课时",
+	 	"剩余课时",
 	 	"费用",
 	 	"创建时间",
 	 	"创建人",
@@ -37,11 +39,13 @@ public class MycoursePoco
 	 * 实体英文字段
 	 */
    public static final String[] FIELDNAME = {
+   		"mycourseid",
 	 	"mycoursecoach",
 	 	"mycoursecustomer",
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
+	 	"mycoursenuma",
 	 	"mycoursemoney",
 	 	"createtime",
 	 	"creator",
@@ -61,6 +65,7 @@ public class MycoursePoco
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
+	 	"mycoursenuma",
 	 	"mycoursemoney",
 	 	"createtime",
 	 	"creator",

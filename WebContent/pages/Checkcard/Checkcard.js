@@ -336,6 +336,11 @@ Ext.onReady(function() {
 			text : "进场刷卡",
 			iconCls : 'add',
 			handler : function() {
+				if(Ext.getCmp("cuscardtimes").getValue()==0){
+					Ext.Msg.alert('提示', '剩余卡次为0', function() {
+					});
+					return;
+				}
 				Ext.Ajax.request({
 					url : basePath + "NotesAction.do?method=ruchang",
 					method : 'POST',

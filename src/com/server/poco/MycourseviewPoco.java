@@ -22,11 +22,13 @@ public class MycourseviewPoco
     * 实体中文字段
     */
    public static String[] CHINESENAME = {
+   		"mycourseid",
 	 	"mycoursecoach",
 	 	"mycoursecustomer",
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
+	 	"mycoursenuma",
 	 	"mycoursemoney",
 	 	"createtime",
 	 	"creator",
@@ -40,11 +42,13 @@ public class MycourseviewPoco
 	 * 实体英文字段
 	 */
    public static final String[] FIELDNAME = {
+   		"mycourseid",
 	 	"mycoursecoach",
 	 	"mycoursecustomer",
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
+	 	"mycoursenuma",
 	 	"mycoursemoney",
 	 	"createtime",
 	 	"creator",
@@ -67,6 +71,7 @@ public class MycourseviewPoco
 	 	"mycoursename",
 	 	"mycourseproject",
 	 	"mycoursenum",
+	 	"mycoursenuma",
 	 	"mycoursemoney",
 	 	"createtime",
 	 	"creator",

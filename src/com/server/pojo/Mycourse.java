@@ -15,7 +15,10 @@ public class Mycourse
     * 教练ID
     */
    private String mycoursecoach;   
-   private String mycoursecustomer; 
+   /**
+    * 会员ID
+    */
+   private String mycoursecustomer;   
    /**
     * 课程名
     */
@@ -28,6 +31,10 @@ public class Mycourse
     * 课时
     */
    private String mycoursenum;   
+   /**
+    * 剩余课时
+    */
+   private String mycoursenuma;   
    /**
     * 费用
     */
@@ -84,6 +91,23 @@ public class Mycourse
 	}	   
 
 	/**
+	 *设置"会员ID"属性
+	 *@param mycoursecustomer 实体的Mycoursecustomer属性
+	 */
+	public void setMycoursecustomer(String mycoursecustomer)
+	{
+		this.mycoursecustomer = mycoursecustomer;
+	}
+	
+	/**
+	 *获取"会员ID"属性
+	 */
+	public String getMycoursecustomer()
+	{
+		return this.mycoursecustomer;
+	}	   
+
+	/**
 	 *设置"课程名"属性
 	 *@param mycoursename 实体的Mycoursename属性
 	 */
@@ -132,6 +156,23 @@ public class Mycourse
 	public String getMycoursenum()
 	{
 		return this.mycoursenum;
+	}	   
+
+	/**
+	 *设置"剩余课时"属性
+	 *@param mycoursenuma 实体的Mycoursenuma属性
+	 */
+	public void setMycoursenuma(String mycoursenuma)
+	{
+		this.mycoursenuma = mycoursenuma;
+	}
+	
+	/**
+	 *获取"剩余课时"属性
+	 */
+	public String getMycoursenuma()
+	{
+		return this.mycoursenuma;
 	}	   
 
 	/**
@@ -229,6 +270,7 @@ public class Mycourse
 	 	,String mycoursename
 	 	,String mycourseproject
 	 	,String mycoursenum
+	 	,String mycoursenuma
 	 	,String mycoursemoney
 	 	,String createtime
 	 	,String creator
@@ -242,19 +284,12 @@ public class Mycourse
 	 	this.mycoursename = mycoursename;
 	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
+	 	this.mycoursenuma = mycoursenuma;
 	 	this.mycoursemoney = mycoursemoney;
 	 	this.createtime = createtime;
 	 	this.creator = creator;
 	 	this.updtime = updtime;
 	 	this.updor = updor;
-	}
-
-	public String getMycoursecustomer() {
-		return mycoursecustomer;
-	}
-
-	public void setMycoursecustomer(String mycoursecustomer) {
-		this.mycoursecustomer = mycoursecustomer;
 	}
 }
 

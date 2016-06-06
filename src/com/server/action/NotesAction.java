@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.NotesDao;
+import com.server.pojo.Cuscard;
 import com.server.pojo.Notes;
 import com.server.poco.CuscardPoco;
 import com.server.poco.NotesPoco;
@@ -101,14 +102,35 @@ public class NotesAction extends BaseAction {
 	public void ruchang(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
 		Notes temp = cuss.get(0);
-		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+temp.getNotescard()+"'")==0){
+		
+		Queryinfo queryinfo = getQueryinfo();
+		queryinfo.setType(Cuscard.class);
+		queryinfo.setWheresql("cuscardno='"+temp.getNotescard()+"'");
+		ArrayList<Cuscard> cussCuscard = (ArrayList<Cuscard>) DAO.selAll(queryinfo);
+		
+		if(cussCuscard.size()==0){
 			result = "{success:true,code:400,msg:'该卡号不存在!'}";
 		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")!=0){
 			result = "{success:true,code:400,msg:'已经进场成功,不能重复进场!'}";
 		}else{
 			temp.setNotesid(CommonUtil.getNewId());
 			temp.setNotesbegin(DateUtils.getDateTime());
-			result = DAO.insSingle(temp);
+			//判断是否为次卡
+			Cuscard mCuscard = cussCuscard.get(0);
+			if("次卡".equals(mCuscard.getCuscardtype())){
+				if(mCuscard.getCuscardtimes()==0){
+					result = "{success:true,code:400,msg:'该卡的剩余次数为0，不能进场!'}";
+				}else{
+					String sqlNotes = DAO.getInsSingleSql(temp);
+					int Cuscardtimes = mCuscard.getCuscardtimes()-1;
+					String sqlCuscard = "update Cuscard set Cuscardtimes="
+					+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
+					result = DAO.doAll(sqlNotes,sqlCuscard);
+				}
+			}else{
+				result = DAO.insSingle(temp);
+			}
+			
 		}
 		responsePW(response, result);
 	}

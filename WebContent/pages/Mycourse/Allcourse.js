@@ -190,6 +190,7 @@ function selectAllcourse(customerid ) {
 													+"','mycoursename':'"+selectRows[0].data['allcoursename']
 							        			    +"','mycourseproject':'"+selectRows[0].data['allcourseproject']
 							        			    +"','mycoursenum':'"+selectRows[0].data['allcoursenum']
+													+"','mycoursenuma':'"+selectRows[0].data['allcoursenum']
 							        			    +"','mycoursemoney':'"+selectRows[0].data['allcoursemoney']
 							        			    +"'}]";
 							Ext.Ajax.request({

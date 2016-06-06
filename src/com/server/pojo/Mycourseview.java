@@ -2,7 +2,7 @@ package com.server.pojo;
 
 import java.sql.Date;
 /**
- * 我的私教课 实体类
+ * mycourseview 实体类
  *@author ZhangRuiLong
  */
 public class Mycourseview
@@ -14,8 +14,11 @@ public class Mycourseview
    /**
     * mycoursecoach
     */
-   private String mycoursecoach;  
-   private String mycoursecustomer;
+   private String mycoursecoach;   
+   /**
+    * mycoursecustomer
+    */
+   private String mycoursecustomer;   
    /**
     * mycoursename
     */
@@ -28,6 +31,10 @@ public class Mycourseview
     * mycoursenum
     */
    private String mycoursenum;   
+   /**
+    * mycoursenuma
+    */
+   private String mycoursenuma;   
    /**
     * mycoursemoney
     */
@@ -96,6 +103,23 @@ public class Mycourseview
 	}	   
 
 	/**
+	 *设置"mycoursecustomer"属性
+	 *@param mycoursecustomer 实体的Mycoursecustomer属性
+	 */
+	public void setMycoursecustomer(String mycoursecustomer)
+	{
+		this.mycoursecustomer = mycoursecustomer;
+	}
+	
+	/**
+	 *获取"mycoursecustomer"属性
+	 */
+	public String getMycoursecustomer()
+	{
+		return this.mycoursecustomer;
+	}	   
+
+	/**
 	 *设置"mycoursename"属性
 	 *@param mycoursename 实体的Mycoursename属性
 	 */
@@ -144,6 +168,23 @@ public class Mycourseview
 	public String getMycoursenum()
 	{
 		return this.mycoursenum;
+	}	   
+
+	/**
+	 *设置"mycoursenuma"属性
+	 *@param mycoursenuma 实体的Mycoursenuma属性
+	 */
+	public void setMycoursenuma(String mycoursenuma)
+	{
+		this.mycoursenuma = mycoursenuma;
+	}
+	
+	/**
+	 *获取"mycoursenuma"属性
+	 */
+	public String getMycoursenuma()
+	{
+		return this.mycoursenuma;
 	}	   
 
 	/**
@@ -292,6 +333,7 @@ public class Mycourseview
 	 	,String mycoursename
 	 	,String mycourseproject
 	 	,String mycoursenum
+	 	,String mycoursenuma
 	 	,String mycoursemoney
 	 	,String createtime
 	 	,String creator
@@ -308,6 +350,7 @@ public class Mycourseview
 	 	this.mycoursename = mycoursename;
 	 	this.mycourseproject = mycourseproject;
 	 	this.mycoursenum = mycoursenum;
+	 	this.mycoursenuma = mycoursenuma;
 	 	this.mycoursemoney = mycoursemoney;
 	 	this.createtime = createtime;
 	 	this.creator = creator;
@@ -316,14 +359,6 @@ public class Mycourseview
 	 	this.coachcode = coachcode;
 	 	this.coachname = coachname;
 	 	this.coachphone = coachphone;
-	}
-
-	public String getMycoursecustomer() {
-		return mycoursecustomer;
-	}
-
-	public void setMycoursecustomer(String mycoursecustomer) {
-		this.mycoursecustomer = mycoursecustomer;
 	}
 }
 
