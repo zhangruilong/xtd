@@ -1,11 +1,13 @@
 package com.server.action;
 
 import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.server.dao.StadiumDao;
 import com.server.pojo.Stadium;
+import com.server.pojo.Stadiums;
 import com.server.poco.StadiumPoco;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
@@ -93,5 +95,62 @@ public class StadiumAction extends BaseAction {
 		Pageinfo pageinfo = new Pageinfo(DAO.getTotal(queryinfo), DAO.selQuery(queryinfo));
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
+	}
+	//查询所有
+	public void selStadiums(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Stadium.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(StadiumPoco.ORDER);
+		cuss = (ArrayList<Stadium>) DAO.selAll(queryinfo);
+		ArrayList<Stadiums> sStadiums = new ArrayList<Stadiums>();
+		for(Stadium mStadium:cuss){
+			double dis = distance(Double.parseDouble(mStadium.getStadiumx()), Double.parseDouble(mStadium.getStadiumy()), 1, 1);
+			String disstr;
+			if(dis<1000){
+				disstr = "<1km";
+			}else{
+				disstr = ">"+Math.round(dis/1000)+"km";
+			}
+			Stadiums mStadiums = new Stadiums(mStadium.getStadiumid(), mStadium.getStadiumcode(), 
+					mStadium.getStadiumname(), mStadium.getStadiumaddress(), 
+					mStadium.getStadiumdetail(), mStadium.getStadiumstatue(), 
+					mStadium.getStadiumx(), mStadium.getStadiumy(), disstr);
+			sStadiums.add(mStadiums);
+		}
+		Pageinfo pageinfo = new Pageinfo(0, sStadiums);
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
+	/**
+	 * 计算地球上任意两点(经纬度)距离
+	 * 
+	 * @param long1
+	 *            第一点经度
+	 * @param lat1
+	 *            第一点纬度
+	 * @param long2
+	 *            第二点经度
+	 * @param lat2
+	 *            第二点纬度
+	 * @return 返回距离 单位：米
+	 */
+	public double distance(double long1, double lat1, double long2,
+			double lat2) {
+		double a, b, R;
+		R = 6378137; // 地球半径
+		lat1 = lat1 * Math.PI / 180.0;
+		lat2 = lat2 * Math.PI / 180.0;
+		a = lat1 - lat2;
+		b = (long1 - long2) * Math.PI / 180.0;
+		double d;
+		double sa2, sb2;
+		sa2 = Math.sin(a / 2.0);
+		sb2 = Math.sin(b / 2.0);
+		d = 2
+				* R
+				* Math.asin(Math.sqrt(sa2 * sa2 + Math.cos(lat1)
+						* Math.cos(lat2) * sb2 * sb2));
+		return d;
 	}
 }
