@@ -1,9 +1,17 @@
 package com.server.action;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.json.JSONObject;
 
 import com.server.dao.StadiumDao;
 import com.server.pojo.Stadium;
@@ -15,6 +23,7 @@ import com.system.tools.pojo.Fileinfo;
 import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
 import com.system.tools.util.FileUtil;
+import com.system.tools.util.HttpXmlClient;
 import com.system.tools.pojo.Pageinfo;
 
 /**
@@ -122,6 +131,69 @@ public class StadiumAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	
+	public void getIndex(HttpServletRequest request, HttpServletResponse response){  
+//		ModelAndView mav = new ModelAndView("index");  
+		//获取access_token
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("corpid","wx7099477f2de8aded");
+		params.put("corpsecret","4clWzENvHVmpcyuA4toys0URkfYanIqWtxZ5plbisn6Cd5AVTF0thpaK6UAhjIvN");
+		String xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/gettoken",params);
+		JSONObject jsonMap  = JSONObject.fromObject(xml);
+		Map<String, String> map = new HashMap<String, String>();
+	    Iterator<String> it = jsonMap.keys();  
+	    while(it.hasNext()) {  
+	        String key = (String) it.next();  
+	        String u = jsonMap.get(key).toString();
+	        map.put(key, u);  
+	    }
+	    String access_token = map.get("access_token");
+	    
+	    //获取ticket
+	    params.put("access_token",access_token);
+	    xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket",params); 
+	    jsonMap  = JSONObject.fromObject(xml);
+		map = new HashMap<String, String>();
+	    it = jsonMap.keys();  
+	    while(it.hasNext()) {  
+	        String key = (String) it.next();  
+	        String u = jsonMap.get(key).toString();
+	        map.put(key, u);  
+	    }
+	    String jsapi_ticket = map.get("ticket");
+	    
+	    
+	    //获取签名signature
+	    String noncestr = UUID.randomUUID().toString();
+	    String timestamp = Long.toString(System.currentTimeMillis() / 1000);
+	    //获取请求url
+	    String path = request.getContextPath();
+	    //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
+        String url = request.getScheme() + "://" + request.getServerName() +  path + "/";  
+	    String str = "jsapi_ticket=" + jsapi_ticket +
+                "&noncestr=" + noncestr +
+                "&timestamp=" + timestamp +
+                "&url=" + url;
+	    //sha1加密
+	    String signature = HttpXmlClient.SHA1(str);
+//        mav.addObject("signature", signature);   
+//        mav.addObject("timestamp", timestamp);   
+//        mav.addObject("noncestr", noncestr);   
+//        mav.addObject("appId", "wx7099477f2de8aded"); 
+	    request.setAttribute("signature", signature);   
+	    request.setAttribute("timestamp", timestamp);   
+	    request.setAttribute("noncestr", noncestr);   
+	    request.setAttribute("appId", "wx7099477f2de8aded"); 
+	    
+        System.out.println("jsapi_ticket=" + jsapi_ticket);
+        System.out.println("noncestr=" + noncestr);
+        System.out.println("timestamp=" + timestamp);
+        System.out.println("url=" + url);
+        System.out.println("str=" + str);
+        System.out.println("signature=" + signature);
+        nextpage(request, response, "index.jsp");
+//        return mav;    
+    } 
 	/**
 	 * 计算地球上任意两点(经纬度)距离
 	 * 

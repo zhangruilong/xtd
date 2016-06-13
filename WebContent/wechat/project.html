@@ -14,8 +14,8 @@
 	<body>
 		<div id="section_container">
 			<section id="lazyload_section" data-role="section" class="active">
-				<article data-role="article" id="main_article" data-scroll="verticle" class="active" style="bottom:0px;">
-					<div class="scroller">  
+				<article data-role="article" id="main_article" class="active" style="bottom:0px;">
+					<div class="scroller">
 						<img onclick="nextpage('all');" data-source="images/allcourse.png" class="img" style="width:100%;"/>
 						<img onclick="nextpage('瑜伽');" data-source="images/yujia.png" class="left img" style="width:50%;"/>
 						<img onclick="nextpage('游泳');" data-source="images/youyong.png" class="right img" style="width:50%;"/>
@@ -27,7 +27,6 @@
 						<img onclick="nextpage('篮球');" data-source="images/lanqiu.png" class="right img" style="width:50%;"/>
 						<img onclick="nextpage('增肌');" data-source="images/zengji.png" class="img" style="width:100%;"/>
     				</div>  
-
 				</article>
 			</section>
 		</div>
@@ -76,6 +75,25 @@
 					}
 				});
 			}
+			
+			/* navigator.geolocation.getCurrentPosition( // 该函数有如下三个参数
+			        function(pos){ // 如果成果则执行该回调函数
+			            alert(
+			                '  经度：' + pos.coords.latitude +
+			                '  纬度：' + pos.coords.longitude +
+			                '  高度：' + pos.coords.altitude +
+			                '  精确度(经纬)：' + pos.coords.accuracy +
+			                '  精确度(高度)：' + pos.coords.altitudeAccuracy +
+			                '  速度：' + pos.coords.speed
+			            );
+			        }, function(err){ // 如果失败则执行该回调函数
+			            alert(err.message);
+			        }, { // 附带参数
+			            enableHighAccuracy: false, // 提高精度(耗费资源)
+			            timeout: 3000, // 超过timeout则调用失败的回调函数
+			            maximumAge: 1000 // 获取到的地理信息的有效期，超过有效期则重新获取一次位置信息
+			        }
+			    ); */
 		});
 		//openid
 		function getOpenid()
@@ -99,7 +117,8 @@
 		}
 		function nextpage(project){
 			window.localStorage.setItem("project",project);
-			setTimeout(function(){window.location.href = "stadiumlist.html";}, 300);
+			/* setTimeout(function(){window.location.href = "stadiumlist.html";}, 300); */
+			window.location.href = "../StadiumAction.do?method=getIndex";
 		}
 		function successCB(r, cb) {
 			cb && cb(r);
