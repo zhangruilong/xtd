@@ -113,4 +113,24 @@ public class PlacetimeAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//查询所有
+	public void mselTotal(HttpServletRequest request, HttpServletResponse response){
+		Queryinfo queryinfo = getQueryinfo(request);
+		queryinfo.setType(Placetime.class);
+		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
+		queryinfo.setOrder(PlacetimePoco.ORDER);
+		
+		String placetimename = request.getParameter("placetimename");
+		String placetimecode = request.getParameter("placetimecode");
+		String placetimebegin = request.getParameter("placetimebegin");
+		String wheresql = "placetimename='"+placetimename+"' and placetimecode='"+
+				placetimecode+"' and placetimebegin like '"+placetimebegin+"%'";
+		queryinfo.setWheresql(wheresql);
+		if(DAO.getTotal(queryinfo)>0){
+			result = CommonConst.SUCCESS;
+		}else{
+			result = "{success:true,code:403,msg:'场馆暂未编排课程,请选择其他场地和日期'}";
+		}
+		responsePW(response, result);
+	}
 }

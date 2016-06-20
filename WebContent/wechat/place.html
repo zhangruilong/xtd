@@ -18,10 +18,10 @@
 				<header>
 				    <div class="titlebar">
 				    	<a data-toggle="back" href="#"><i class="iconfont iconline-arrow-left"></i></a>
-				    	<h1>场馆预约</h1>
+				    	<h1>选择场地</h1>
 				    </div>
 				</header>
-				<article data-role="article" id="main_article" data-scroll="pull" class="active" style="top:40px;bottom:0px;">
+				<article data-role="article" id="main_article" data-scroll="pulldown" class="active" style="top:40px;bottom:0px;">
 				<form class="form-group">
 				  	<div data-role="date" class="card">
 				  		<label id="placetimebegin">请选择日期</label>
@@ -80,11 +80,29 @@
 					A.showToast('请选择场地！');
 					return;
 				}
-				var appiont = new Object();
-				appiont.placecode = $("#placecode").val();
-				appiont.placetimebegin = $("#placetimebegin").text();
-				window.localStorage.setItem("appiont",JSON.stringify(appiont));
-				window.location.href = "placetime.html";
+				$.ajax({
+					url : '../PlacetimeAction.do?method=mselTotal&placetimename='+
+					stadium.stadiumname+'&placetimecode='+
+					$("#placecode").val()+'&placetimebegin='+
+					$("#placetimebegin").text(),
+					data : {
+					},
+					success : function(resp) {
+						var respText = eval('('+resp+')'); 
+		    			if(respText.code == 403){
+		    				A.showToast('场馆暂未编排课程,请选择其他场地和日期!');
+		    			}else if(respText.code == 202){
+		    				var appiont = new Object();
+		    				appiont.placecode = $("#placecode").val();
+		    				appiont.placetimebegin = $("#placetimebegin").text();
+		    				window.localStorage.setItem("appiont",JSON.stringify(appiont));
+		    				window.location.href = "placetime.html";
+		    			}
+					},
+					error : function(resp) {
+						alert('网络出现问题，请稍后再试');
+					}
+				});
 			}
 		</script>
 	</body>

@@ -101,7 +101,6 @@ public class HttpXmlClient {
 
 	public static void main(String[] args) {
 		
-		//��ȡaccess_token
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("corpid","wx5f24fa0db1819ea2");
 		params.put("corpsecret","uQtWzF0bQtl2KRHX0amekjpq8L0aO96LSpSNfctOBLRbuYPO4DUBhMn0_v2jHS-9");
@@ -117,7 +116,6 @@ public class HttpXmlClient {
 	    String access_token = map.get("access_token");
 	    System.out.println("access_token=" + access_token);
 	    
-	    //��ȡticket
 	    params.put("access_token",access_token);
 	    xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket",params); 
 	    jsonMap  = JSONObject.fromObject(xml);
@@ -131,7 +129,6 @@ public class HttpXmlClient {
 	    String jsapi_ticket = map.get("ticket");
 	    System.out.println("jsapi_ticket=" + jsapi_ticket);
 	    
-	    //��ȡǩ��signature
 	    String noncestr = UUID.randomUUID().toString();
 	    String timestamp = Long.toString(System.currentTimeMillis() / 1000);
 	    String url="http://mp.weixin.qq.com";
@@ -139,30 +136,20 @@ public class HttpXmlClient {
                 "&noncestr=" + noncestr +
                 "&timestamp=" + timestamp +
                 "&url=" + url;
-	    //sha1����
 	    String signature = SHA1(str);
 	    System.out.println("noncestr=" + noncestr);
 	    System.out.println("timestamp=" + timestamp);
 	    System.out.println("signature=" + signature);
-	    //���ջ�õ���΢��js�ӿ���֤��Ҫ���������noncestr��timestamp��signature
 	}
 	
-	   /** 
-     * @author���޹�� 
-     * @date�� 2015��12��17�� ����9:24:43 
-     * @description�� SHA��SHA1����
-     * @parameter��   str��������ַ�
-     * @return��  ���ܴ�
-    **/
     public static String SHA1(String str) {
         try {
             MessageDigest digest = java.security.MessageDigest
-                    .getInstance("SHA-1"); //�����SHA����ֻ��Ҫ��"SHA-1"�ĳ�"SHA"����
+                    .getInstance("SHA-1"); 
             digest.update(str.getBytes());
             byte messageDigest[] = digest.digest();
             // Create Hex String
             StringBuffer hexStr = new StringBuffer();
-            // �ֽ�����ת��Ϊ ʮ����� ��
             for (int i = 0; i < messageDigest.length; i++) {
                 String shaHex = Integer.toHexString(messageDigest[i] & 0xFF);
                 if (shaHex.length() < 2) {

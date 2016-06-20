@@ -16,7 +16,7 @@
 			<section id="lazyload_section" data-role="section" class="active">
 				<header>
 				    <div class="titlebar">
-				    	<a data-toggle="close" href="#slideup"><i class="iconfont iconline-arrow-left"></i></a>
+				    	<a href="project.html"><i class="iconfont iconline-arrow-left"></i></a>
 				    	<h1>场馆列表</h1>
 				    </div>
 				</header>
@@ -73,7 +73,9 @@
 		<script type="text/javascript" src="assets/app/js/app.js"></script>
 		<script>
 			$('#main_article').on('refreshInit', function(){
-				A.template('#template').renderReplace('../StadiumAction.do?method=selStadiums');
+				A.template('#template').renderReplace('../StadiumAction.do?method=selStadiums&latitude='+
+						window.localStorage.getItem("latitude")+"&longitude="+
+						window.localStorage.getItem("longitude"));
 			});
 			function nextpage(stadiumid,stadiumcode,stadiumname,stadiumaddress
 					,stadiumstatue,stadiumx,stadiumy){

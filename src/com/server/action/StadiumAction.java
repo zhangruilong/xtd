@@ -2,6 +2,8 @@ package com.server.action;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -112,9 +114,11 @@ public class StadiumAction extends BaseAction {
 		queryinfo.setQuery(DAO.getQuerysql(queryinfo.getQuery()));
 		queryinfo.setOrder(StadiumPoco.ORDER);
 		cuss = (ArrayList<Stadium>) DAO.selAll(queryinfo);
+		String latitude = request.getParameter("latitude");
+		String longitude = request.getParameter("longitude");
 		ArrayList<Stadiums> sStadiums = new ArrayList<Stadiums>();
 		for(Stadium mStadium:cuss){
-			double dis = distance(Double.parseDouble(mStadium.getStadiumx()), Double.parseDouble(mStadium.getStadiumy()), 1, 1);
+			double dis = distance(Double.parseDouble(mStadium.getStadiumx()), Double.parseDouble(mStadium.getStadiumy()), Double.parseDouble(longitude), Double.parseDouble(latitude));
 			String disstr;
 			if(dis<1000){
 				disstr = "<1km";
@@ -124,9 +128,10 @@ public class StadiumAction extends BaseAction {
 			Stadiums mStadiums = new Stadiums(mStadium.getStadiumid(), mStadium.getStadiumcode(), 
 					mStadium.getStadiumname(), mStadium.getStadiumaddress(), 
 					mStadium.getStadiumdetail(), mStadium.getStadiumstatue(), 
-					mStadium.getStadiumx(), mStadium.getStadiumy(), disstr);
+					mStadium.getStadiumx(), mStadium.getStadiumy(), disstr,dis);
 			sStadiums.add(mStadiums);
 		}
+		Collections.sort(sStadiums, new SortBydis());
 		Pageinfo pageinfo = new Pageinfo(0, sStadiums);
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
@@ -135,10 +140,14 @@ public class StadiumAction extends BaseAction {
 	public void getIndex(HttpServletRequest request, HttpServletResponse response){  
 //		ModelAndView mav = new ModelAndView("index");  
 		//获取access_token
-		Map<String, String> params = new HashMap<String, String>();
-		params.put("corpid","wx7099477f2de8aded");
-		params.put("corpsecret","4clWzENvHVmpcyuA4toys0URkfYanIqWtxZ5plbisn6Cd5AVTF0thpaK6UAhjIvN");
-		String xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/gettoken",params);
+		String gettokenUrl = "https://api.weixin.qq.com/cgi-bin/token?grant_type=client_credential&appid=APPID&secret=APPSECRET";
+		gettokenUrl = gettokenUrl.replace("APPID", "wx56c4d105fec9dbbc");
+		gettokenUrl = gettokenUrl.replace("APPSECRET", "9100795d7bf6c05371857f80c0ee74b3");
+		String xml = HttpXmlClient.get(gettokenUrl);
+//		Map<String, String> params = new HashMap<String, String>();
+//		params.put("corpid","wx56c4d105fec9dbbc");
+//		params.put("corpsecret","9100795d7bf6c05371857f80c0ee74b3");
+//		String xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/gettoken",params);
 		JSONObject jsonMap  = JSONObject.fromObject(xml);
 		Map<String, String> map = new HashMap<String, String>();
 	    Iterator<String> it = jsonMap.keys();  
@@ -148,10 +157,11 @@ public class StadiumAction extends BaseAction {
 	        map.put(key, u);  
 	    }
 	    String access_token = map.get("access_token");
-	    
-	    //获取ticket
-	    params.put("access_token",access_token);
-	    xml = HttpXmlClient.post("https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket",params); 
+	    //根据token获取jsapi
+	    String jsapiUrl = "https://api.weixin.qq.com/cgi-bin/ticket/getticket?access_token=ACCESS_TOKEN&type=jsapi";
+	    jsapiUrl = jsapiUrl.replace("ACCESS_TOKEN", access_token);
+//	    params.put("access_token",access_token);
+	    xml = HttpXmlClient.get(jsapiUrl); 
 	    jsonMap  = JSONObject.fromObject(xml);
 		map = new HashMap<String, String>();
 	    it = jsonMap.keys();  
@@ -169,7 +179,7 @@ public class StadiumAction extends BaseAction {
 	    //获取请求url
 	    String path = request.getContextPath();
 	    //以为我配置的菜单是http://yo.bbdfun.com/first_maven_project/，最后是有"/"的，所以url也加上了"/"
-        String url = request.getScheme() + "://" + request.getServerName() +  path + "/";  
+        String url = request.getScheme() + "://" + request.getServerName() +  path + "/StadiumAction.do?method=getIndex";  
 	    String str = "jsapi_ticket=" + jsapi_ticket +
                 "&noncestr=" + noncestr +
                 "&timestamp=" + timestamp +
@@ -183,7 +193,7 @@ public class StadiumAction extends BaseAction {
 	    request.setAttribute("signature", signature);   
 	    request.setAttribute("timestamp", timestamp);   
 	    request.setAttribute("noncestr", noncestr);   
-	    request.setAttribute("appId", "wx7099477f2de8aded"); 
+	    request.setAttribute("appId", "wx56c4d105fec9dbbc"); 
 	    
         System.out.println("jsapi_ticket=" + jsapi_ticket);
         System.out.println("noncestr=" + noncestr);
@@ -191,7 +201,7 @@ public class StadiumAction extends BaseAction {
         System.out.println("url=" + url);
         System.out.println("str=" + str);
         System.out.println("signature=" + signature);
-        nextpage(request, response, "index.jsp");
+        nextpage(request, response, "wechat/index.jsp");
 //        return mav;    
     } 
 	/**
@@ -225,4 +235,13 @@ public class StadiumAction extends BaseAction {
 						* Math.cos(lat2) * sb2 * sb2));
 		return d;
 	}
+}
+class SortBydis implements Comparator {
+	 public int compare(Object o1, Object o2) {
+		 Stadiums s1 = (Stadiums) o1;
+		 Stadiums s2 = (Stadiums) o2;
+	  if (s1.getStadiumdis() > s2.getStadiumdis())
+	   return 1;
+	  return 0;
+	 }
 }

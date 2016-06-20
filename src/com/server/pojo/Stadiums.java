@@ -44,6 +44,10 @@ public class Stadiums
     * 距离
     */
    private String stadiumdistance;
+   /**
+    * 距离
+    */
+   private double stadiumdis;
     //属性方法	    
      /**
 	 *设置主键"ID"属性
@@ -193,9 +197,19 @@ public class Stadiums
 		this.stadiumdistance = stadiumdistance;
 	}
 
+
+	public double getStadiumdis() {
+		return stadiumdis;
+	}
+
+	public void setStadiumdis(double stadiumdis) {
+		this.stadiumdis = stadiumdis;
+	}
+
 	public Stadiums(String stadiumid, String stadiumcode, String stadiumname,
 			String stadiumaddress, String stadiumdetail, String stadiumstatue,
-			String stadiumx, String stadiumy, String stadiumdistance) {
+			String stadiumx, String stadiumy, String stadiumdistance,
+			double stadiumdis) {
 		super();
 		this.stadiumid = stadiumid;
 		this.stadiumcode = stadiumcode;
@@ -206,6 +220,7 @@ public class Stadiums
 		this.stadiumx = stadiumx;
 		this.stadiumy = stadiumy;
 		this.stadiumdistance = stadiumdistance;
+		this.stadiumdis = stadiumdis;
 	}
 	
 	

@@ -1,1 +1,6 @@
+/.svn/
+/GeoTrustGlobalCA.crt
 /com/
+/ds.config.xml
+/wxcp.properties
+/wxpay.properties
