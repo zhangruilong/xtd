@@ -44,6 +44,16 @@ public class MycourseAction extends BaseAction {
 		}
 		responsePW(response, result);
 	}
+	//新增
+	public void minsAll(HttpServletRequest request, HttpServletResponse response){
+		json2cuss(request);
+		for(Mycourse temp:cuss){
+			temp.setCreatetime(DateUtils.getDateTime());
+			temp.setMycourseid(CommonUtil.getNewId());
+			result = DAO.insSingle(temp);
+		}
+		responsePW(response, result);
+	}
 	//删除
 	public void delAll(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);

@@ -16,16 +16,16 @@
 			<section id="lazyload_section" data-role="section" class="active">
 				<article data-role="article" id="main_article" data-scroll="verticle" class="active" style="bottom:0px;">
 					<div class="scroller">
-						<img onclick="nextpage('all');" data-source="images/allcourse.png" class="img" style="width:100%;"/>
-						<img onclick="nextpage('瑜伽');" data-source="images/yujia.png" class="left img" style="width:50%;"/>
-						<img onclick="nextpage('游泳');" data-source="images/youyong.png" class="right img" style="width:50%;"/>
-						<img onclick="nextpage('羽毛球');" data-source="images/yumaoqiu.png" class="right img" style="width:50%;"/>
-						<img onclick="nextpage('健美');" data-source="images/jianmei.png" class="left img" style="width:50%;"/>
-						<img onclick="nextpage('单车');" data-source="images/danche.png" class="right img" style="width:50%;"/>
-						<img onclick="nextpage('减脂');" data-source="images/jianzi.png" class="left img" style="width:50%;"/>
-						<img onclick="nextpage('乒乓');" data-source="images/pinpan.png" class="left img" style="width:50%;"/>
-						<img onclick="nextpage('篮球');" data-source="images/lanqiu.png" class="right img" style="width:50%;"/>
-						<img onclick="nextpage('增肌');" data-source="images/zengji.png" class="img" style="width:100%;"/>
+						<img id="nextpage1" data-source="images/allcourse.png" class="img" style="width:100%;"/>
+						<img id="nextpage2" data-source="images/yujia.png" class="left img" style="width:50%;"/>
+						<img id="nextpage3" data-source="images/youyong.png" class="right img" style="width:50%;"/>
+						<img id="nextpage4" data-source="images/yumaoqiu.png" class="right img" style="width:50%;"/>
+						<img id="nextpage5" data-source="images/jianmei.png" class="left img" style="width:50%;"/>
+						<img id="nextpage6" data-source="images/danche.png" class="right img" style="width:50%;"/>
+						<img id="nextpage7" data-source="images/jianzi.png" class="left img" style="width:50%;"/>
+						<img id="nextpage8" data-source="images/pinpan.png" class="left img" style="width:50%;"/>
+						<img id="nextpage9" data-source="images/lanqiu.png" class="right img" style="width:50%;"/>
+						<img id="nextpage10" data-source="images/zengji.png" class="img" style="width:100%;"/>
     				</div>  
 				</article>
 			</section>
@@ -115,6 +115,46 @@
 		function initCustomer(data){			//将customer(客户信息放入缓存)
 			window.localStorage.setItem("customerid",JSON.stringify(data.root[0].customerid));
 		}
+		$('#nextpage1').on(A.options.clickEvent,function(){
+			nextpage('all');
+            return false;
+        });
+		$('#nextpage2').on(A.options.clickEvent,function(){
+			nextpage('瑜伽');
+            return false;
+        });
+		$('#nextpage3').on(A.options.clickEvent,function(){
+			nextpage('游泳');
+            return false;
+        });
+		$('#nextpage4').on(A.options.clickEvent,function(){
+			nextpage('羽毛球');
+            return false;
+        });
+		$('#nextpage5').on(A.options.clickEvent,function(){
+			nextpage('健美操');
+            return false;
+        });
+		$('#nextpage6').on(A.options.clickEvent,function(){
+			nextpage('减脂');
+            return false;
+        });
+		$('#nextpage7').on(A.options.clickEvent,function(){
+			nextpage('单车');
+            return false;
+        });
+		$('#nextpage8').on(A.options.clickEvent,function(){
+			nextpage('乒乓球');
+            return false;
+        });
+		$('#nextpage9').on(A.options.clickEvent,function(){
+			nextpage('篮球');
+            return false;
+        });
+		$('#nextpage10').on(A.options.clickEvent,function(){
+			nextpage('增肌');
+            return false;
+        });
 		function nextpage(project){
 			window.localStorage.setItem("project",project);
 			/* setTimeout(function(){window.location.href = "stadiumlist.html";}, 300); */
