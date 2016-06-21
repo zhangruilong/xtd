@@ -63,9 +63,9 @@
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
 			$('#main_article').on('refreshInit', function(){
 				if("all"==project){
-					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placestadium=\''+stadium.stadiumid+'\' and placecode=\''+appiont.placecode+'\'');
+					A.template('#template').renderReplace('../AppiontviewAction.do?method=mselAllplace&stadiumname='+stadium.stadiumname+'&placetimedetail='+appiont.placetimedetail+'&appiontdate='+appiont.placetimebegin+'&placecode='+appiont.placecode);
 				}else{
-					A.template('#template').renderReplace('../PlaceAction.do?method=selAll&wheresql=placeproject=\''+project+'\' and placestadium=\''+stadium.stadiumid+'\' and placecode=\''+appiont.placecode+'\'');
+					A.template('#template').renderReplace('../AppiontviewAction.do?method=mselAllplace&stadiumname='+stadium.stadiumname+'&projectname='+project+'&placetimedetail='+appiont.placetimedetail+'&appiontdate='+appiont.placetimebegin+'&placecode='+appiont.placecode);
 				}
 			});
 			function nextpage(placeid,placename){
@@ -87,7 +87,8 @@
 						+"','appointplacename':'"+placename
         			    +"','appointcoursename':'"+stadium.stadiumname       //场馆
         			    +"','appointproject':'"+project
-						+"','appointdetail':'"+appiont.placetimebegin
+						+"','appointbegin':'"+appiont.placetimebegin
+						+"','appointdetail':'"+appiont.placetimedetail
         			    +"'}]";
 				    	$.ajax({
 							url : "../AppiontAction.do?method=insAll",

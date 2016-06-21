@@ -115,7 +115,9 @@ public class StadiumAction extends BaseAction {
 		queryinfo.setOrder(StadiumPoco.ORDER);
 		cuss = (ArrayList<Stadium>) DAO.selAll(queryinfo);
 		String latitude = request.getParameter("latitude");
+		if(CommonUtil.isNull(latitude)) latitude = "1";
 		String longitude = request.getParameter("longitude");
+		if(CommonUtil.isNull(longitude)) longitude = "1";
 		ArrayList<Stadiums> sStadiums = new ArrayList<Stadiums>();
 		for(Stadium mStadium:cuss){
 			double dis = distance(Double.parseDouble(mStadium.getStadiumx()), Double.parseDouble(mStadium.getStadiumy()), Double.parseDouble(longitude), Double.parseDouble(latitude));

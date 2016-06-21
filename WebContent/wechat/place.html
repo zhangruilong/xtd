@@ -21,7 +21,7 @@
 				    	<h1>选择场地</h1>
 				    </div>
 				</header>
-				<article data-role="article" id="main_article" data-scroll="pulldown" class="active" style="top:40px;bottom:0px;">
+				<article data-role="article" id="main_article" data-scroll="verticle" class="active" style="top:40px;bottom:0px;">
 				<form class="form-group">
 				  	<div data-role="date" class="card">
 				  		<label id="placetimebegin">请选择日期</label>
@@ -41,7 +41,7 @@
 				</form>
 				
 				<div class="card noborder">
-					<button class="submit width-full" onclick="nextpage();">查看场次</button>
+					<button class="submit width-full" id="nextpage">查看场次</button>
 				</div>
 				</article>
 			</section>
@@ -64,13 +64,17 @@
 		<script>
 			var project = window.localStorage.getItem("project");
 			var stadium = JSON.parse(window.localStorage.getItem("stadium"));
-			$('#main_article').on('refreshInit', function(){
+			$('#main_article').on('articleload', function(){
 				if("all"==project){
 					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'');
 				}else{
 					A.template('#templateplace').renderReplace('../PlacetimeviewAction.do?method=selAll&wheresql=stadiumname=\''+stadium.stadiumname+'\'and placeproject=\''+project+'\'');
 				}
 			});
+			$('#nextpage').on(A.options.clickEvent,function(){
+				nextpage();
+                return false;
+            });
 			function nextpage(){
 				if($('#placetimebegin').text()=="请选择日期"){
 					A.showToast('请选择日期！');

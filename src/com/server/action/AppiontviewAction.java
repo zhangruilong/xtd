@@ -94,4 +94,38 @@ public class AppiontviewAction extends BaseAction {
 		result = CommonConst.GSON.toJson(pageinfo);
 		responsePW(response, result);
 	}
+	//查询所有
+	public void mselAllplace(HttpServletRequest request, HttpServletResponse response){
+		String stadiumname = request.getParameter("stadiumname");
+		String projectname = request.getParameter("projectname");
+		String placetimedetail = request.getParameter("placetimedetail");
+		String appiontdate = request.getParameter("appiontdate");
+		String placecode = request.getParameter("placecode");
+		//取出预约记录
+		Queryinfo queryinfo = getQueryinfo();
+		queryinfo.setType(Appiontview.class);
+		queryinfo.setWheresql("appointcoursename='"+stadiumname+
+				"' and appointproject='"+projectname+
+				"' and appointdetail='"+placetimedetail
+				+"' and appointbegin='"+appiontdate
+				+"'");
+		queryinfo.setOrder(AppiontviewPoco.ORDER);
+		cuss = (ArrayList<Appiontview>) DAO.selAll(queryinfo);
+		//取出所有位置
+		String wheresql = "stadiumname='"+stadiumname+
+				"' and placeproject='"+projectname+
+				"' and placecode='"+placecode+
+				"'";
+		for(Appiontview mAppiontview:cuss){
+			wheresql += " and placeid !='"+mAppiontview.getAppointplace()+"'";
+		}
+		Queryinfo queryinfoplace = getQueryinfo();
+		queryinfoplace.setType(Placeview.class);
+		queryinfoplace.setWheresql(wheresql);
+		queryinfoplace.setOrder(PlaceviewPoco.ORDER);
+		ArrayList<Placeview> cussplace = (ArrayList<Placeview>) DAO.selAll(queryinfoplace);
+		Pageinfo pageinfo = new Pageinfo(0, cussplace);
+		result = CommonConst.GSON.toJson(pageinfo);
+		responsePW(response, result);
+	}
 }
