@@ -149,5 +149,60 @@ public class NotesAction extends BaseAction {
 		}
 		responsePW(response, result);
 	}
+	//闸机接口
+	public void checkcardin(HttpServletRequest request, HttpServletResponse response){
+		String cardno = request.getParameter("cardno");
+		System.out.println("闸机cardno : " + cardno);
 		
+		Queryinfo queryinfo = getQueryinfo();
+		queryinfo.setType(Cuscard.class);
+		queryinfo.setWheresql("cuscardno='"+cardno+"'");
+		ArrayList<Cuscard> cussCuscard = (ArrayList<Cuscard>) DAO.selAll(queryinfo);
+		
+		if(cussCuscard.size()==0){
+			result = "{success:false,code:400,msg:'该卡号不存在!'}";
+		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")!=0){
+			result = "{success:false,code:500,msg:'已经进场成功,不能重复进场!'}";
+		}else{
+			Notes temp = new Notes();
+			temp.setNotescard(cardno);
+			temp.setNotesid(CommonUtil.getNewId());
+			temp.setNotesbegin(DateUtils.getDateTime());
+			//判断是否为次卡
+			Cuscard mCuscard = cussCuscard.get(0);
+			if("次卡".equals(mCuscard.getCuscardtype())){
+				if(mCuscard.getCuscardtimes()==0){
+					result = "{success:false,code:401,msg:'该卡的剩余次数为0，不能进场!'}";
+				}else{
+					String sqlNotes = DAO.getInsSingleSql(temp);
+					int Cuscardtimes = mCuscard.getCuscardtimes()-1;
+					String sqlCuscard = "update Cuscard set Cuscardtimes="
+					+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
+					result = DAO.doAll(sqlNotes,sqlCuscard);
+				}
+			}else{
+				result = DAO.insSingle(temp);
+			}
+			
+		}
+		responsePW(response, result);
+	}
+	//闸机接口
+	public void checkcardout(HttpServletRequest request, HttpServletResponse response){
+		String cardno = request.getParameter("cardno");
+		System.out.println("闸机cardno : " + cardno);
+		
+		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+cardno+"'")==0){
+			result = "{success:false,code:400,msg:'该卡号不存在!'}";
+		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")==0){
+			result = "{success:false,code:401,msg:'还未进场刷卡!'}";
+		}else{
+			Notes temp = new Notes();
+			temp.setNotescard(cardno);
+			temp.setNotesend(DateUtils.getDateTime());
+			String[] KEYCOLUMN = {"notescard"};
+			result = DAO.updSingle(temp,KEYCOLUMN);
+		}
+		responsePW(response, result);
+	}
 }
