@@ -385,7 +385,7 @@ Ext.onReady(function() {
 		CustomercuscardviewdataForm.form.reset();
 		Customercuscardviewstore.each(function(record) {
 			CustomercuscardviewdataForm.form.loadRecord(record);
-			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
+			Ext.getCmp("customerimage").getEl().dom.src = "../../"+record.data["customerimage"];
 		    return;
 		});
 	}
@@ -407,7 +407,7 @@ Ext.onReady(function() {
 		CustomercuscardviewdataForm.form.reset();
 		Customercuscardviewstore.each(function(record) {
 			CustomercuscardviewdataForm.form.loadRecord(record);
-			Ext.getCmp("customerimage").getEl().dom.src = record.data["customerimage"];
+			Ext.getCmp("customerimage").getEl().dom.src = "../../"+record.data["customerimage"];
 		    return;
 		});
 		Ext.getCmp("cuscardno").setValue(bb);

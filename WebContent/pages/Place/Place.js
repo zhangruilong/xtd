@@ -156,7 +156,7 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '编码',
+				fieldLabel : '场地',
 				id : 'Placeplacecode',
 				name : 'placecode',
 				maxLength : 100,
@@ -168,25 +168,25 @@ Ext.onReady(function() {
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
-				fieldLabel : '名称',
+				fieldLabel : '位置',
 				id : 'Placeplacename',
 				name : 'placename',
 				maxLength : 100,
 				anchor : '95%'
 			} ]
 		}
-		, {
-			columnWidth : 1,
-			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '人数',
-				id : 'Placeplacepeople',
-				name : 'placepeople',
-				maxLength : 100,
-				anchor : '95%'
-			} ]
-		}
+//		, {
+//			columnWidth : 1,
+//			layout : 'form',
+//			items : [ {
+//				xtype : 'textfield',
+//				fieldLabel : '人数',
+//				id : 'Placeplacepeople',
+//				name : 'placepeople',
+//				maxLength : 100,
+//				anchor : '95%'
+//			} ]
+//		}
 		, {
 			columnWidth : 1,
 			layout : 'form',
