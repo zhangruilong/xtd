@@ -113,24 +113,31 @@ public class NotesAction extends BaseAction {
 		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")!=0){
 			result = "{success:true,code:400,msg:'已经进场成功,不能重复进场!'}";
 		}else{
-			temp.setNotesid(CommonUtil.getNewId());
-			temp.setNotesbegin(DateUtils.getDateTime());
-			//判断是否为次卡
 			Cuscard mCuscard = cussCuscard.get(0);
-			if("次卡".equals(mCuscard.getCuscardtype())){
-				if(mCuscard.getCuscardtimes()==0){
-					result = "{success:true,code:400,msg:'该卡的剩余次数为0，不能进场!'}";
+			//判断是否过期
+			int isend = DateUtils.compareSqlDate(DateUtils.getDate(), mCuscard.getCuscardend());
+			if(1==isend){
+				temp.setNotesid(CommonUtil.getNewId());
+				temp.setNotesbegin(DateUtils.getDateTime());
+				//判断是否为次卡
+				if("次卡".equals(mCuscard.getCuscardtype())){
+					if(mCuscard.getCuscardtimes()==0){
+						result = "{success:true,code:400,msg:'该卡的剩余次数为0，不能进场!'}";
+					}else{
+						String sqlNotes = DAO.getInsSingleSql(temp);
+						int Cuscardtimes = mCuscard.getCuscardtimes()-1;
+						String sqlCuscard = "update Cuscard set Cuscardtimes="
+						+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
+						result = DAO.doAll(sqlNotes,sqlCuscard);
+					}
 				}else{
-					String sqlNotes = DAO.getInsSingleSql(temp);
-					int Cuscardtimes = mCuscard.getCuscardtimes()-1;
-					String sqlCuscard = "update Cuscard set Cuscardtimes="
-					+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
-					result = DAO.doAll(sqlNotes,sqlCuscard);
+					result = DAO.insSingle(temp);
 				}
-			}else{
-				result = DAO.insSingle(temp);
+			}else if(2==isend){
+				result = "{success:true,code:400,msg:'该卡已到期,请续费!'}";
+			}else if(0==isend){
+				result = "{success:true,code:202,msg:'该卡明天到期,请续费!'}";
 			}
-			
 		}
 		responsePW(response, result);
 	}

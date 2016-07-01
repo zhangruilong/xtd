@@ -300,8 +300,7 @@ Ext.onReady(function() {
 //					})
 //				}
 				if (CustomercuscardviewdataForm.form.isValid()) {
-					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getFieldValues(false)) + "]";
-					alert(json);
+					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getValues(false)) + "]";
 					CustomercuscardviewdataForm.form.submit({
 						url : basePath + "CuscardAction.do?method=addCuscardcustomer",
 						waitTitle : '提示',

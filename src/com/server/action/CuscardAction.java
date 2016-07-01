@@ -145,7 +145,7 @@ public class CuscardAction extends BaseAction {
 		}
 		Cuscard mCuscard = cuss.get(0);
 		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+mCuscard.getCuscardno()+"'")>0){
-			responsePW(response, CommonConst.SAMELOGINNAME);
+			responsePW(response, "{success:true,code:403,msg:'该卡号已存在'}");
 		}else{
 			//新增会员
 			Customer mCustomer = Customercuss.get(0);

@@ -35,8 +35,36 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	    java.sql.Date sqlDate=new java.sql.Date(utilDate.getTime()); 
 		return sqlDate;
 	}
-	
-	//比较日期
+	/**
+	 * 比较日期yyyy-MM-dd
+	 * dt1 在dt2前return 1
+	 * dt1在dt2后return 2
+	 * 相等return 0
+	 * 错误return -1
+	 */
+	public static int compareSqlDate(String firstdate,String lastdate) {  
+        try {
+        	if (java.sql.Date.valueOf(firstdate).before(java.sql.Date.valueOf(lastdate))) {
+                System.out.println("dt1 在dt2前");
+                return 1;
+            } else if(java.sql.Date.valueOf(firstdate).after(java.sql.Date.valueOf(lastdate))){ 
+        		System.out.println("dt1在dt2后");
+                return 2;
+        	} else {
+                return 0;
+            }
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        return -1;
+    }
+	/**
+	 * 比较日期
+	 * dt1 在dt2前return 1
+	 * dt1在dt2后return 2
+	 * 相等return 0
+	 * 错误return -1
+	 */
 	public static int compareSqlDate(java.sql.Date firstdate,java.sql.Date lastdate) {  
         try {
             if (firstdate.getTime() > lastdate.getTime()) {
@@ -259,6 +287,9 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	 * @throws ParseException
 	 */
 	public static void main(String[] args) throws ParseException {
+		
+		System.out.println(compareSqlDate(getDate(), "2016-04-15T00:00:00"));
+		
 		Date date = new Date();
 		date = parseDate("2014-03-05");
 //		System.out.println(getFirstDayOfWeek(date));
