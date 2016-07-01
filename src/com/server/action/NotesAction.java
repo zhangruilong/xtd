@@ -136,7 +136,9 @@ public class NotesAction extends BaseAction {
 			}else if(2==isend){
 				result = "{success:true,code:400,msg:'该卡已到期,请续费!'}";
 			}else if(0==isend){
-				result = "{success:true,code:202,msg:'该卡明天到期,请续费!'}";
+				result = "{success:true,code:202,msg:'操作成功！该卡明天到期。'}";
+			}else{
+				result = "{success:true,code:400,msg:'该卡有效期异常!'}";
 			}
 		}
 		responsePW(response, result);

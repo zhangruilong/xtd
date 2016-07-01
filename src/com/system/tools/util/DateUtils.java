@@ -42,7 +42,7 @@ public class DateUtils extends org.apache.commons.lang.time.DateUtils {
 	 * 相等return 0
 	 * 错误return -1
 	 */
-	public static int compareSqlDate(String firstdate,String lastdate) {  
+	public static int compareSqlDate(String firstdate,String lastdate) {
         try {
         	if (java.sql.Date.valueOf(firstdate).before(java.sql.Date.valueOf(lastdate))) {
                 System.out.println("dt1 在dt2前");
