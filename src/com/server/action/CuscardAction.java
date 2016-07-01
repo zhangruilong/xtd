@@ -9,6 +9,7 @@ import com.server.dao.CuscardDao;
 import com.server.pojo.Cuscard;
 import com.server.pojo.Customer;
 import com.server.poco.CuscardPoco;
+import com.system.pojo.System_attach;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
 import com.system.tools.pojo.Fileinfo;
@@ -146,17 +147,36 @@ public class CuscardAction extends BaseAction {
 		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+mCuscard.getCuscardno()+"'")>0){
 			responsePW(response, CommonConst.SAMELOGINNAME);
 		}else{
+			//新增会员
 			Customer mCustomer = Customercuss.get(0);
 			mCustomer.setCreatetime(Createtime);
 			mCustomer.setCreator(Creator);
 			mCustomer.setCustomerid(newid);
-			result = DAO.insSingle(mCustomer);
-			if(CommonConst.SUCCESS.equals(result)){
-				mCuscard.setCreator(Creator);
-				mCuscard.setCreatetime(Createtime);
-				mCuscard.setCuscardid(newid);
-				mCuscard.setCuscardcustomer(newid);
-				result = DAO.insSingle(mCuscard);
+			mCustomer.setCustomerstatue("启用");
+			String sqlCustomer = DAO.getInsSingleSql(mCustomer);
+			//新增会员卡
+			mCuscard.setCreator(Creator);
+			mCuscard.setCreatetime(Createtime);
+			mCuscard.setCuscardid(newid);
+			mCuscard.setCuscardcustomer(newid);
+			String sqlCuscard = DAO.getInsSingleSql(mCuscard);
+			
+			result = DAO.doAll(sqlCustomer,sqlCuscard);
+			
+			//新增照片附件
+			if(CommonUtil.isNotNull(mCustomer.getCustomerimage())){
+				Fileinfo fileinfo = FileUtil.upload(request,0,null,null,"upload");
+				System_attach mSystem_attach = new System_attach();
+				mSystem_attach.setFid(newid+",");
+				mSystem_attach.setCode(newid);
+				mSystem_attach.setClassify("会员");
+				mSystem_attach.setId(newid);
+				mSystem_attach.setName(fileinfo.getFullname());
+				mSystem_attach.setAttachsize(String.valueOf(fileinfo.getSize()/1024)+"KB");
+				mSystem_attach.setType(fileinfo.getType());
+				mSystem_attach.setCreator(Creator);
+				mSystem_attach.setCreatetime(Createtime);
+				result = DAO.insSingle(mSystem_attach);
 			}
 			responsePW(response, result);
 		}

@@ -26,6 +26,7 @@ Ext.onReady(function() {
 		title:Ccoursetitle,
 		bodyStyle:'padding:50px;',
 		labelAlign : 'right',
+		fileUpload : true,
 		frame : true,
 		layout : 'column',
 		items : [ {
@@ -81,6 +82,7 @@ Ext.onReady(function() {
 				fieldLabel : '卡余次',
 				id : 'cuscardtimes',
 				name : 'cuscardtimes',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -88,6 +90,7 @@ Ext.onReady(function() {
 				fieldLabel : '卡总次数',
 				id : 'cuscardnums',
 				name : 'cuscardnums',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -95,6 +98,8 @@ Ext.onReady(function() {
 				fieldLabel : '卡积分',
 				id : 'cuscardint',
 				name : 'cuscardint',
+				allowBlank : false,
+				value : 0,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -147,6 +152,7 @@ Ext.onReady(function() {
 				fieldLabel : '会员姓名',
 				id : 'customername',
 				name : 'customername',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -154,6 +160,7 @@ Ext.onReady(function() {
 				fieldLabel : '卡种',
 				id : 'cuscarddetail',
 				name : 'cuscarddetail',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%',
 				listeners : {
@@ -184,6 +191,7 @@ Ext.onReady(function() {
 				fieldLabel : '原价',
 				id : 'cuscardmoney',
 				name : 'cuscardmoney',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			}
@@ -192,6 +200,8 @@ Ext.onReady(function() {
 				fieldLabel : '折扣',
 				id : 'updtime',
 				name : 'updtime',
+				allowBlank : false,
+				value : 0,
 				maxLength : 100,
 				anchor : '100%'
 			}
@@ -256,15 +266,24 @@ Ext.onReady(function() {
 			columnWidth : .3,
 			layout : 'form',
 			items : [ {
-				xtype : 'box',
+				xtype : 'textfield',
 				fieldLabel : '照片',
 				id : 'customerimage',
 				name : 'customerimage',
-				autoEl : {  
-	                tag : 'img'  
-	            },
-				anchor : '100%'
-			}]
+				inputType : 'file',
+				anchor : '95%'
+			}
+//			,{
+//				xtype : 'box',
+//				fieldLabel : '照片',
+//				id : 'customerimage',
+//				name : 'customerimage',
+//				autoEl : {  
+//	                tag : 'img'  
+//	            },
+//				anchor : '100%'
+//			}
+			]
 		}
 		],
 		buttons : [{
@@ -282,9 +301,12 @@ Ext.onReady(function() {
 //				}
 				if (CustomercuscardviewdataForm.form.isValid()) {
 					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getFieldValues(false)) + "]";
+					alert(json);
 					CustomercuscardviewdataForm.form.submit({
 						url : basePath + "CuscardAction.do?method=addCuscardcustomer",
 						waitTitle : '提示',
+						waitMsg : '正在处理数据,请稍候...',
+						method : 'GET',
 						params : {//改
 							json : json
 						},

@@ -21,38 +21,31 @@ function selectStadium() {
 			hidden : true
 		}
 		, {
-			header : '编码',
-			dataIndex : 'stadiumcode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '名称',
 			dataIndex : 'stadiumname',
 			align : 'center',
-			width : 80,
+			width : 100,
 			sortable : true
 		}
 		, {
 			header : '地址',
 			dataIndex : 'stadiumaddress',
 			align : 'center',
-			width : 80,
+			width : 200,
 			sortable : true
 		}
 		, {
 			header : '备注',
 			dataIndex : 'stadiumdetail',
 			align : 'center',
-			width : 80,
+			width : 180,
 			sortable : true
 		}
 		, {
-			header : '状态',
+			header : '电话',
 			dataIndex : 'stadiumstatue',
 			align : 'center',
-			width : 80,
+			width : 120,
 			sortable : true
 		}
 		]
