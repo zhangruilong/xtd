@@ -164,10 +164,8 @@ Ext.onReady(function() {
 				maxLength : 100,
 				anchor : '100%',
 				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							selectCardtype();
-						}
+					focus : function(field, e) {
+						selectCardtype();
 					}
 				}
 			},{
