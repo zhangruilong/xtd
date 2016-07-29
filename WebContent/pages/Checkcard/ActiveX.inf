@@ -1,0 +1,20 @@
+[version]
+    signature="$CHICAGO$"
+    AdvancedINF=1.0
+ [Add.Code]
+    ActiveX.ocx=ActiveX.ocx
+    mwrf32.dll=mwrf32.dll
+ 
+ [ActiveX.ocx]
+    file-win32-x86=thiscab
+    clsid={9431AA21-1C52-43CF-B0CD-886497990F92}
+    DestDir=11
+    FileVersion=1,0,0,1
+    RegisterServer=yes
+
+ [mwrf32.dll]
+    file-win32-x86=thiscab
+    DestDir=11
+    FileVersion=1,0,0,1
+    RegisterServer=yes
+ 

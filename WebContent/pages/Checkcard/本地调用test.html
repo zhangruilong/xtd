@@ -1,0 +1,309 @@
+<html>
+<head>
+<title>TEST</title>
+<body>
+<OBJECT classid=clsid:9431AA21-1C52-43CF-B0CD-886497990F92 width=0 height=0 align="center" codebase="ActiveX.cab#version=1,0,0,1" id="CActiveXCtrl" HSPACE=0 VSPACE=0>
+</OBJECT>
+</body>
+<center><h3> ActiveX OCX控件演示网页 </h3></center>
+
+<fieldset>
+<legend>设备操作函数组</legend>
+硬件版本号：
+<input type="text" name="Version" id="Account" maxlength="100" size="40" > 
+产品序列号：
+<input type="text" name="Serial" id="Account" maxlength="100" size="40"> 
+句柄信息：
+<input type="text" name="DeviceHandle" id="Account" maxlength="100" size="10" value="-1"> 
+数据转换：
+<input type="text" name="Test1" id="Account" maxlength="255" size="20" value="C9EEDBDAC3F7CCA9"> 
+
+<form name="设备操作">
+<input type="button" onclick="javascript:OpenDevice()" value="打开设备" >
+<input type="button" onclick="javascript:CloseDevice()" value="关闭设备" >
+<input type="button" onclick="javascript:RfBeep()" value="蜂鸣" >
+<input type="button" onclick="javascript:Hexasc()" value="hex_asc" >
+<input type="button" onclick="javascript:Aschex()" value="asc_hex" >
+
+
+</form>
+</fieldset>
+
+</br>
+
+<fieldset>
+<legend>操作M1卡函数组</legend>
+<label>密码类型：
+  <select name="keytypem1" id="keytypem1" >
+    <option value="0" SELECTED>A密码</option>
+    <option value="1">B密码</option>
+   </select>
+</label>
+密码：
+<input type="text" name="PwdM1" id="Account" maxlength="12" size="20" value="FFFFFFFFFFFF"> 
+块地址：
+<input type="text" name="BlockM1" id="Account" maxlength="130" size="5" value="10">  
+卡片UID：
+<input type="text" name="UidM1" id="Account" maxlength="130" size="20"> 
+当前块值：
+<input type="text" name="NowValueM1" id="Account" maxlength="130" size="5" >  
+值操作：
+<input type="text" name="NewValueM1" id="Account" maxlength="3000" size="5" value="100"> 
+射频复位时间：
+<input type="text" name="resettime" id="Account" maxlength="300" size="5" value="10"> 
+写入数据：
+<input type="text" name="WriteDataM1" id="Account" maxlength="3000" size="60" value="00112233445566778899AABBCCDDEEFF"> 
+读出数据：
+<input type="text" name="ReadDataM1" id="Account" maxlength="3000" size="60"> 
+<form name="M1卡操作">
+	<input type="button" onclick="javascript:RfReset()" value="射频复位" >
+<input type="button" onclick="javascript:RfCard()" value="寻卡" >
+<input type="button" onclick="javascript:RfAuthenticationKey()" value="校验密码" >
+<input type="button" onclick="javascript:RfRead()" value="读数据" >
+<input type="button" onclick="javascript:RfWrite()" value="写数据" >
+<input type="button" onclick="javascript:RfInitval()" value="初始化块值" >
+<input type="button" onclick="javascript:RfReadval()" value="读块值" >
+<input type="button" onclick="javascript:RfIncrement()" value="加值" >
+<input type="button" onclick="javascript:RfDecrement()" value="减值" >
+<input type="button" onclick="javascript:RfTransfer()" value="传送" >
+<input type="button" onclick="javascript:RfRestore()" value="回传" >
+<input type="button" onclick="javascript:RfHalt()" value="中止卡片" >
+</form>
+</fieldset>
+
+
+
+
+<script language="javascript">
+	
+
+function OpenDevice()//打开设备
+{
+	var st = CActiveXCtrl.OpenDevice();
+	if((st == 0 || st < 0) && CActiveXCtrl.lErrorCode != 0)
+	{
+		Version.value = "";
+		Serial.value = "";
+		DeviceHandle.value = "-1";
+		alert("打开设备失败");
+	}
+	else
+	{
+		DeviceHandle.value = st;
+		var sver = CActiveXCtrl.GetVersion(DeviceHandle.value);
+		if(CActiveXCtrl.lErrorCode == 0)
+			Version.value = sver;
+		else
+			Version.value = "";
+			
+		var snr = CActiveXCtrl.GetSnr(DeviceHandle.value,16);
+		if(CActiveXCtrl.lErrorCode == 0)
+			Serial.value = snr;
+		else
+			Serial.value = "";
+                alert("打开设备成功");
+	}
+}
+
+function CloseDevice()//关闭设备
+{
+	var ret = CActiveXCtrl.CloseDevice(DeviceHandle.value);
+	Version.value = "";
+	Serial.value = "";
+	DeviceHandle.value = "-1";
+	if(ret == 0)
+		alert("关闭设备成功");
+	else
+		alert("关闭设备失败，错误码为：" + ret);
+}
+	
+function RfBeep()
+{
+	var ret = CActiveXCtrl.RfBeep(DeviceHandle.value,20);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		alert("蜂鸣成功");
+	}
+	else
+	{
+		alert("蜂鸣失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function Hexasc()
+{
+	var ret = CActiveXCtrl.Hexasc(Test1.value,16);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		alert("Hexasc转换值为："+ret);
+	}
+	else
+	{
+		alert("转换失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function Aschex()
+{
+	var ret = CActiveXCtrl.Aschex(Test1.value,16);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		alert("Aschex转换值为："+ret);
+	}
+	else
+	{
+		alert("转换失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+//----------------------------------------------			M1卡操作			-----------------------------------------------//
+
+function RfReset()
+{
+	var ret = CActiveXCtrl.RfReset(DeviceHandle.value,resettime.value);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		alert("射频复位成功");
+	}
+	else
+	{
+		alert("射频复位失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfCard()
+{
+	var ret = CActiveXCtrl.RfCard(DeviceHandle.value,0);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		//UidM1.value = CZx_32Ctrl.HexAsc(ret,4);
+		UidM1.value = ret;
+		alert("寻卡成功");
+	}
+	else
+	{
+		UidM1.value = "";
+		alert("寻卡失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfAuthenticationKey()
+{
+	var keytype = document.getElementById('keytypem1').value;	//获取下拉框当前选值
+	var ret = CActiveXCtrl.RfAuthenticationKey(DeviceHandle.value,keytype,BlockM1.value,PwdM1.value);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		alert("校验密码成功");
+	}
+	else
+	{
+		alert("校验密码失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfRead()
+{
+	var ret = CActiveXCtrl.RfRead(DeviceHandle.value,BlockM1.value);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		ReadDataM1.value = ret;//CZx_32Ctrl.HexAsc(ret,17)
+		alert("读数据成功");
+	}
+	else
+	{
+		ReadDataM1.value = "";
+		alert("读数据失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfWrite()
+{
+	var ret = CActiveXCtrl.RfWrite(DeviceHandle.value,BlockM1.value,WriteDataM1.value);
+	if(ret == 0)
+	{
+		alert("写数据成功");
+	}
+	else
+	{
+		alert("写数据失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfInitval()
+{
+	var ret = CActiveXCtrl.RfInitval(DeviceHandle.value,BlockM1.value,NewValueM1.value);
+	if(ret == 0)
+	{
+		alert("初始化值成功");
+	}
+	else
+	{
+		alert("初始化值失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfReadval()
+{
+	var ret = CActiveXCtrl.RfReadval(DeviceHandle.value,BlockM1.value);
+	if(CActiveXCtrl.lErrorCode == 0)
+	{
+		NowValueM1.value = ret;
+		alert("读值成功");
+	}
+	else
+	{
+		NowValueM1.value = "";
+		alert("读值失败，错误码为：" + CActiveXCtrl.lErrorCode);
+	}
+}
+
+function RfIncrement()
+{
+	var ret = CActiveXCtrl.RfIncrement(DeviceHandle.value,BlockM1.value,NewValueM1.value);
+	if(ret == 0)
+		alert("加值成功");
+	else
+		alert("加值失败，错误码为：" + CActiveXCtrl.lErrorCode);
+}
+
+function RfDecrement()
+{
+	var ret = CActiveXCtrl.RfDecrement(DeviceHandle.value,BlockM1.value,NewValueM1.value);
+	if(ret == 0)
+		alert("减值成功");
+	else
+		alert("减值失败，错误码为：" + CActiveXCtrl.lErrorCode);
+}
+
+function RfTransfer()
+{
+	var ret = CActiveXCtrl.RfTransfer(DeviceHandle.value,BlockM1.value);
+	if(ret == 0)
+		alert("传送成功");
+	else
+		alert("传送失败，错误码为：" + CActiveXCtrl.lErrorCode);
+}
+
+function RfRestore()
+{
+	var ret = CActiveXCtrl.RfRestore(DeviceHandle.value,BlockM1.value);
+	if(ret == 0)
+		alert("回传成功");
+	else
+		alert("回传失败，错误码为：" + CActiveXCtrl.lErrorCode);
+}
+
+function RfHalt()
+{
+	var ret = CActiveXCtrl.RfHalt(DeviceHandle.value);
+	if(ret == 0)
+		alert("中止卡片成功");
+	else
+		alert("中止卡片失败，错误码为：" + CActiveXCtrl.lErrorCode);
+}
+
+
+
+</script>
+        
+</head> 
+</html>

@@ -400,36 +400,52 @@ Ext.onReady(function() {
 		items : [ CustomercuscardviewdataForm ]
 	});
 	
-	MWRFATL.CloseReader();
-	aa = MWRFATL.LastRet;
-	bb = MWRFATL.OpenReader(0,115200);
+//	MWRFATL.CloseReader();
+//	aa = MWRFATL.LastRet;
+//	bb = MWRFATL.OpenReader(0,115200);
 
-
+	var ret;
 	function myrefreshcallback() {
 		CustomercuscardviewdataForm.form.reset();
 		Customercuscardviewstore.each(function(record) {
 			CustomercuscardviewdataForm.form.loadRecord(record);
 			Ext.getCmp("customerimage").getEl().dom.src = "../../"+record.data["customerimage"];
+			Ext.getCmp("cuscardno").setValue(ret);
+			//进场刷卡
+			ruchang();
 		    return;
 		});
-		Ext.getCmp("cuscardno").setValue(bb);
-		//进场刷卡
-		ruchang();
+//		Ext.getCmp("cuscardno").setValue(bb);
+		
 	}
 	
 	function myrefresh(){ 
-		MWRFATL.MF_Reset(5);
-		bb=MWRFATL.OpenCard(1);
-		aa=MWRFATL.LastRet;
-		if(aa==0){
+//		MWRFATL.MF_Reset(5);
+//		bb=MWRFATL.OpenCard(1);
+//		aa=MWRFATL.LastRet;
+//		if(aa==0){
+//			Customercuscardviewstore.load({
+//				params : {
+//					wheresql : "cuscardno like '%"+bb+"%'"
+//				},
+//				callback : myrefreshcallback
+//			});
+//			bb=MWRFATL.RF_Beep(10);		//传入参数：设备单次蜂鸣时间
+//			aa=MWRFATL.LastRet;
+//		}
+		var st = CActiveXCtrl.OpenDevice();//打开设备
+		ret = CActiveXCtrl.RfCard(st,0);
+		if(CActiveXCtrl.lErrorCode == 0)
+		{
+			//UidM1.value = CZx_32Ctrl.HexAsc(ret,4);
+//			UidM1.value = ret;
 			Customercuscardviewstore.load({
 				params : {
-					wheresql : "cuscardno like '%"+bb+"%'"
+					wheresql : "cuscardno like '%"+ret+"%'"
 				},
 				callback : myrefreshcallback
 			});
-			bb=MWRFATL.RF_Beep(10);		//传入参数：设备单次蜂鸣时间
-			aa=MWRFATL.LastRet;
+			CActiveXCtrl.RfBeep(st,20);//蜂鸣
 		}
 	}
 })
