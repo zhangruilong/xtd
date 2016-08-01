@@ -64,13 +64,6 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '会员编码',
-			dataIndex : 'customercode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '会员姓名',
 			dataIndex : 'customername',
 			align : 'center',

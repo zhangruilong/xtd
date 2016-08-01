@@ -42,13 +42,6 @@ function selectMycourse(customerid) {
 			hidden : true
 		}
 		, {
-			header : '教练编码',
-			dataIndex : 'coachcode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '教练姓名',
 			dataIndex : 'coachname',
 			align : 'center',

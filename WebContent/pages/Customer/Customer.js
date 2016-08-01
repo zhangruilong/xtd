@@ -60,13 +60,6 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '编码',
-			dataIndex : 'customercode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : 'OPENID',
 			dataIndex : 'openid',
 			align : 'center',

@@ -9,6 +9,7 @@ import com.server.dao.CuscardDao;
 import com.server.pojo.Cuscard;
 import com.server.pojo.Customer;
 import com.server.poco.CuscardPoco;
+import com.server.poco.CustomerPoco;
 import com.system.pojo.System_attach;
 import com.system.tools.CommonConst;
 import com.system.tools.base.BaseAction;
@@ -144,11 +145,13 @@ public class CuscardAction extends BaseAction {
 			cuss = CommonConst.GSON.fromJson(json, TYPE);
 		}
 		Cuscard mCuscard = cuss.get(0);
+		Customer mCustomer = Customercuss.get(0);
 		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+mCuscard.getCuscardno()+"'")>0){
 			responsePW(response, "{success:true,code:403,msg:'该卡号已存在'}");
+		}else if(DAO.getTotal(CustomerPoco.TABLE, "customerphone='"+mCustomer.getCustomerphone()+"'")>0){
+			responsePW(response, "{success:true,code:403,msg:'手机号已存在'}");
 		}else{
 			//新增会员
-			Customer mCustomer = Customercuss.get(0);
 			mCustomer.setCreatetime(Createtime);
 			mCustomer.setCreator(Creator);
 			mCustomer.setCustomerid(newid);

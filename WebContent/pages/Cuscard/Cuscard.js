@@ -41,13 +41,6 @@ Ext.onReady(function() {
 			hidden : true
 		}
 		, {
-			header : '会员编码',
-			dataIndex : 'customercode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '会员姓名',
 			dataIndex : 'customername',
 			align : 'center',
@@ -76,7 +69,7 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '密码',
+			header : '有效期',
 			dataIndex : 'cuscardpsw',
 			align : 'center',
 			width : 80,
@@ -97,8 +90,22 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '卡余额',
+			header : '卡原价',
 			dataIndex : 'cuscardmoney',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '折扣',
+			dataIndex : 'updtime',
+			align : 'center',
+			width : 80,
+			sortable : true
+		}
+		, {
+			header : '售价',
+			dataIndex : 'updor',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -148,20 +155,6 @@ Ext.onReady(function() {
 		, {
 			header : '创建人',
 			dataIndex : 'creator',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新时间',
-			dataIndex : 'updtime',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
-			header : '更新人',
-			dataIndex : 'updor',
 			align : 'center',
 			width : 80,
 			sortable : true
@@ -343,75 +336,6 @@ Ext.onReady(function() {
 		sm : Cuscardsm,
 		bbar : Cuscardbbar,
 		tbar : [{
-				text : "新增",
-				iconCls : 'add',
-				handler : function() {
-					CuscarddataForm.form.reset();
-					createWindow(basePath + Cuscardaction + "?method=insAll", "新增", CuscarddataForm, Cuscardstore);
-				}
-			},'-',{
-				text : "修改",
-				iconCls : 'edit',
-				handler : function() {
-					var selections = Cuscardgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条要修改的记录！', function() {
-						});
-						return;
-					}
-					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
-					CuscarddataForm.form.loadRecord(selections[0]);
-				}
-			},'-',{
-				text : "删除",
-				iconCls : 'delete',
-				handler : function() {
-					var selections = Cuscardgrid.getSelectionModel().getSelections();
-					if (Ext.isEmpty(selections)) {
-						Ext.Msg.alert('提示', '请选择您要删除的数据！');
-						return;
-					}
-					commonDelete(basePath + Cuscardaction + "?method=delAll",selections,Cuscardstore,Cuscardkeycolumn);
-				}
-			},'-',{
-				text : "导入",
-				iconCls : 'imp',
-				handler : function() {
-					commonImp(basePath + Cuscardaction + "?method=impAll","导入",Cuscardstore);
-				}
-			},'-',{
-				text : "后台导出",
-				iconCls : 'exp',
-				handler : function() {
-					Ext.Msg.confirm('请确认', '<b>提示:</b>请确认要导出当前数据？', function(btn, text) {
-						if (btn == 'yes') {
-							window.location.href = basePath + Cuscardaction + "?method=expAll"; 
-						}
-					});
-				}
-			},'-',{
-				text : "前台导出",
-				iconCls : 'exp',
-				handler : function() {
-					commonExp(Cuscardgrid);
-				}
-			},'-',{
-				text : "附件",
-				iconCls : 'attach',
-				handler : function() {
-					var selections = Cuscardgrid.getSelectionModel().getSelections();
-					if (selections.length != 1) {
-						Ext.Msg.alert('提示', '请选择一条您要上传附件的数据！', function() {
-						});
-						return;
-					}
-					var fid = '';
-					for (var i=0;i<Cuscardkeycolumn.length;i++){
-						fid += selections[0].data[Cuscardkeycolumn[i]] + ","
-					}
-					commonAttach(fid, Cuscardclassify);
-				}
-			},'->',{
 				xtype : 'textfield',
 				id : 'query'+Cuscardaction,
 				name : 'query',

@@ -16,7 +16,7 @@ var stadiumStore = new Ext.data.ArrayStore({//场馆下拉
 });
 var cardStore = new Ext.data.ArrayStore({//卡种分类下拉
 	fields:["name"],
-	data:[["年卡"],["次卡"],["羽毛球卡"]]
+	data:[["时间卡"],["次数卡"],["特殊卡"],["后付费卡"]]
 });
 //定义store
 function dataStore(fields,url) {

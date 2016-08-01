@@ -1,11 +1,6 @@
 Ext.onReady(function() {
 	var Ccourseclassify = "发卡操作";
 	var Ccoursetitle = "当前位置:业务管理》" + Ccourseclassify;
-	var genderStore = new Ext.data.ArrayStore({//
-		fields:["gender"],
-		data:[["男"],["女"]]
-	});
-	
 	var Cardtypeaction = "CardtypeAction.do";
 	var Cardtypefields = ['cardtypeid'
 	        			    ,'cardtypecode' 
@@ -45,14 +40,7 @@ Ext.onReady(function() {
 		, {
 			columnWidth : .3,
 			layout : 'form',
-			items : [ {
-				xtype : 'textfield',
-				fieldLabel : '会员编号',
-				id : 'customercode',
-				name : 'customercode',
-				maxLength : 100,
-				anchor : '100%'
-			},{
+			items : [{
 				xtype : 'textfield',
 				fieldLabel : '卡号',
 				id : 'cuscardno',
@@ -62,12 +50,17 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
-				fieldLabel : '有效期',
-				id : 'cuscardpsw',
-				name : 'cuscardpsw',
+				fieldLabel : '卡种',
+				id : 'cuscarddetail',
+				name : 'cuscarddetail',
+				allowBlank : false,
 				maxLength : 100,
-				
-				anchor : '100%'
+				anchor : '100%',
+				listeners : {
+					focus : function(field, e) {
+						selectCardtype();
+					}
+				}
 			},{
 				xtype : 'datefield',
 				fieldLabel : '有效期开始',
@@ -76,11 +69,19 @@ Ext.onReady(function() {
 				format : 'Y-m-d',
 				maxLength : 100,
 				anchor : '100%'
-			}
-			,{
+			},{
+				xtype : 'textfield',
+				fieldLabel : '有效期',
+				id : 'cuscardpsw',
+				name : 'cuscardpsw',
+				maxLength : 100,
+				readOnly:true,
+				anchor : '100%'
+			},{
 				xtype : 'numberfield',
 				fieldLabel : '卡余次',
 				id : 'cuscardtimes',
+				readOnly:true,
 				name : 'cuscardtimes',
 				allowBlank : false,
 				maxLength : 100,
@@ -89,6 +90,7 @@ Ext.onReady(function() {
 				xtype : 'numberfield',
 				fieldLabel : '卡总次数',
 				id : 'cuscardnums',
+				readOnly:true,
 				name : 'cuscardnums',
 				allowBlank : false,
 				maxLength : 100,
@@ -111,12 +113,12 @@ Ext.onReady(function() {
 				
 				anchor : '100%'
 			},{
-				xtype : 'textfield',
+				xtype : 'datefield',
 				fieldLabel : '生日',
 				id : 'customerbirthday',
 				name : 'customerbirthday',
 				maxLength : 100,
-				
+				format : 'Y-m-d',
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
@@ -128,12 +130,16 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
-				fieldLabel : '顾问',
+				fieldLabel : '会籍',
 				id : 'customeremp',
 				name : 'customeremp',
 				maxLength : 100,
-				
-				anchor : '100%'
+				anchor : '100%',
+				listeners : {
+					focus : function(field, e) {
+						selectEmp();
+					}
+				}
 			},{
 				xtype : 'textfield',
 				fieldLabel : '等级',
@@ -157,24 +163,11 @@ Ext.onReady(function() {
 				anchor : '100%'
 			},{
 				xtype : 'textfield',
-				fieldLabel : '卡种',
-				id : 'cuscarddetail',
-				name : 'cuscarddetail',
-				allowBlank : false,
-				maxLength : 100,
-				anchor : '100%',
-				listeners : {
-					focus : function(field, e) {
-						selectCardtype();
-					}
-				}
-			},{
-				xtype : 'textfield',
 				fieldLabel : '分类',
 				id : 'cuscardtype',
 				name : 'cuscardtype',
 				maxLength : 100,
-				
+				readOnly:true,
 				anchor : '100%'
 			},{
 				xtype : 'datefield',
@@ -190,6 +183,7 @@ Ext.onReady(function() {
 				id : 'cuscardmoney',
 				name : 'cuscardmoney',
 				allowBlank : false,
+				readOnly:true,
 				maxLength : 100,
 				anchor : '100%'
 			}
@@ -201,7 +195,12 @@ Ext.onReady(function() {
 				allowBlank : false,
 				value : 0,
 				maxLength : 100,
-				anchor : '100%'
+				anchor : '100%',
+				listeners : {
+					blur : function(field, e) {
+						Ext.getCmp("updor").setValue(Ext.getCmp("cuscardmoney").getValue()-Ext.getCmp("updtime").getValue());
+					}
+				}
 			}
 			,{
 				xtype : 'numberfield',
@@ -217,12 +216,19 @@ Ext.onReady(function() {
 				id : 'customersex',
 				name : 'customersex',
 				emptyText : '请选择',
-				store : genderStore,
+				store : sexStore,
 				mode : 'local',
-				displayField : 'gender',
-				valueField : 'gender',
+				displayField : 'name',
+				valueField : 'name',
 				hiddenName : 'customersex',
 				triggerAction : 'all',
+				maxLength : 100,
+				anchor : '100%'
+			},{
+				xtype : 'numberfield',
+				fieldLabel : '年龄',
+				id : 'customerage',
+				name : 'customerage',
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -231,15 +237,15 @@ Ext.onReady(function() {
 				id : 'customerphone',
 				name : 'customerphone',
 				maxLength : 100,
-				
+				allowBlank : false,
 				anchor : '100%'
 			},{
-				xtype : 'textfield',
+				xtype : 'datefield',
 				fieldLabel : '纪念日',
 				id : 'customergoodday',
 				name : 'customergoodday',
 				maxLength : 100,
-				
+				format : 'Y-m-d',
 				anchor : '100%'
 			},{
 				xtype : 'textfield',

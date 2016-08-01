@@ -1,10 +1,6 @@
 Ext.onReady(function() {
 	var Ccourseclassify = "会员检票";
 	var Ccoursetitle = "当前位置:业务管理》" + Ccourseclassify;
-	var genderStore = new Ext.data.ArrayStore({//
-		fields:["gender"],
-		data:[["男"],["女"]]
-	});
 	var Customercuscardviewaction = "CustomercuscardviewAction.do";
 	var Customercuscardviewfields = ['cuscardid'
 	     	        			    ,'cuscardcustomer' 
@@ -98,26 +94,6 @@ Ext.onReady(function() {
 				}
 			},{
 				xtype : 'textfield',
-				fieldLabel : '会员姓名',
-				id : 'customername',
-				name : 'customername',
-				maxLength : 100,
-				anchor : '100%',
-				enableKeyEvents : true,
-				listeners : {
-					specialkey : function(field, e) {
-						if (e.getKey() == Ext.EventObject.ENTER) {
-							Customercuscardviewstore.load({
-								params : {
-									wheresql : "customername like '%"+field.getValue()+"%'"
-								},
-								callback : formloadRecord
-							});
-						}
-					}
-				}
-			},{
-				xtype : 'textfield',
 				fieldLabel : '证件号码',
 				id : 'customercdcard',
 				name : 'customercdcard',
@@ -201,11 +177,11 @@ Ext.onReady(function() {
 		, {
 			columnWidth : .3,
 			layout : 'form',
-			items : [ {
+			items : [{
 				xtype : 'textfield',
-				fieldLabel : '会员编号',
-				id : 'customercode',
-				name : 'customercode',
+				fieldLabel : '会员姓名',
+				id : 'customername',
+				name : 'customername',
 				maxLength : 100,
 				anchor : '100%',
 				enableKeyEvents : true,
@@ -214,7 +190,7 @@ Ext.onReady(function() {
 						if (e.getKey() == Ext.EventObject.ENTER) {
 							Customercuscardviewstore.load({
 								params : {
-									wheresql : "customercode like '%"+field.getValue()+"%'"
+									wheresql : "customername like '%"+field.getValue()+"%'"
 								},
 								callback : formloadRecord
 							});
@@ -222,18 +198,11 @@ Ext.onReady(function() {
 					}
 				}
 			},{
-				xtype : 'combo',
+				xtype : 'textfield',
 				fieldLabel : '性别',
 				id : 'customersex',
 				name : 'customersex',
-				emptyText : '请选择',
-				store : genderStore,
-				mode : 'local',
-				displayField : 'gender',
-				valueField : 'gender',
-				hiddenName : 'gender',
-				triggerAction : 'all',
-				maxLength : 100,
+				readOnly:true,
 				anchor : '100%'
 			},{
 				xtype : 'textfield',

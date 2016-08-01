@@ -48,13 +48,6 @@ Ext.onReady(function() {
 			sortable : true
 		}
 		, {
-			header : '编码',
-			dataIndex : 'coachcode',
-			align : 'center',
-			width : 80,
-			sortable : true
-		}
-		, {
 			header : '姓名',
 			dataIndex : 'coachname',
 			align : 'center',

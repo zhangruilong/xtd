@@ -3,6 +3,7 @@
   <head>
 	<%@ include file="/common/common.jsp" %>
 	<script type="text/javascript" src="Cardtype.js"></script>
+	<script type="text/javascript" src="Om_employee.js"></script>
 	<script type="text/javascript" src="Cuscardadd.js"></script>
   </head>
   <body>
