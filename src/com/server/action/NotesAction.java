@@ -110,8 +110,8 @@ public class NotesAction extends BaseAction {
 		
 		if(cussCuscard.size()==0){
 			result = "{success:true,code:400,msg:'该卡号不存在!'}";
-		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")!=0){
-			result = "{success:true,code:400,msg:'已经进场成功,不能重复进场!'}";
+//		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+temp.getNotescard()+"' and notesend is null")!=0){
+//			result = "{success:true,code:400,msg:'已经进场成功,不能重复进场!'}";
 		}else{
 			Cuscard mCuscard = cussCuscard.get(0);
 			//判断是否过期
@@ -170,8 +170,8 @@ public class NotesAction extends BaseAction {
 		
 		if(cussCuscard.size()==0){
 			result = "{success:false,code:400,msg:'该卡号不存在!'}";
-		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")!=0){
-			result = "{success:false,code:500,msg:'已经进场成功,不能重复进场!'}";
+//		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")!=0){
+//			result = "{success:false,code:500,msg:'已经进场成功,不能重复进场!'}";
 		}else{
 			Notes temp = new Notes();
 			temp.setNotescard(cardno);
