@@ -19,8 +19,9 @@ Ext.onReady(function() {
 	var CustomercuscardviewdataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
 		id:'CustomercuscardviewdataForm',
 		title:Ccoursetitle,
-		bodyStyle:'padding:50px;',
+		bodyStyle:'padding:20px;',
 		labelAlign : 'right',
+		renderTo:'divFormPanel',
 		fileUpload : true,
 		frame : true,
 		layout : 'column',
@@ -38,7 +39,7 @@ Ext.onReady(function() {
 			} ]
 		}
 		, {
-			columnWidth : .3,
+			columnWidth : .5,
 			layout : 'form',
 			items : [{
 				xtype : 'textfield',
@@ -151,7 +152,7 @@ Ext.onReady(function() {
 			} ]
 		}
 		, {
-			columnWidth : .3,
+			columnWidth : .5,
 			layout : 'form',
 			items : [ {
 				xtype : 'textfield',
@@ -270,11 +271,11 @@ Ext.onReady(function() {
 			columnWidth : .3,
 			layout : 'form',
 			items : [ {
-				xtype : 'textfield',
+				xtype : 'hidden',
 				fieldLabel : '照片',
 				id : 'customerimage',
 				name : 'customerimage',
-				inputType : 'file',
+//				inputType : 'file',
 				anchor : '95%'
 			}
 //			,{
@@ -303,6 +304,7 @@ Ext.onReady(function() {
 //						}
 //					})
 //				}
+				Ext.getCmp("customerimage").setValue(imageserverurl);
 				if (CustomercuscardviewdataForm.form.isValid()) {
 					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getValues(false)) + "]";
 					CustomercuscardviewdataForm.form.submit({
@@ -315,6 +317,7 @@ Ext.onReady(function() {
 						},
 						success : function(form, action) {
 							Ext.Msg.alert('提示', action.result.msg,function(){
+								imageserverurl = "";
 							});
 						},
 						failure : function(form, action) {
@@ -328,13 +331,5 @@ Ext.onReady(function() {
 			}
 		}
 	]
-	});
-
-	var win = new Ext.Viewport({//只能有一个viewport
-		resizable : true,
-		layout : 'fit',
-		bodyStyle : 'padding:0px;',
-        renderTo:'divFormPanel',
-		items : [ CustomercuscardviewdataForm ]
 	});
 })

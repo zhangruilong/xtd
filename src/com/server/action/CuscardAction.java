@@ -168,15 +168,15 @@ public class CuscardAction extends BaseAction {
 			
 			//新增照片附件
 			if(CommonUtil.isNotNull(mCustomer.getCustomerimage())){
-				Fileinfo fileinfo = FileUtil.upload(request,0,null,null,"upload");
+//				Fileinfo fileinfo = FileUtil.upload(request,0,null,null,"upload");
 				System_attach mSystem_attach = new System_attach();
 				mSystem_attach.setFid(newid+",");
 				mSystem_attach.setCode(newid);
 				mSystem_attach.setClassify("会员");
 				mSystem_attach.setId(newid);
-				mSystem_attach.setName(fileinfo.getFullname());
-				mSystem_attach.setAttachsize(String.valueOf(fileinfo.getSize()/1024)+"KB");
-				mSystem_attach.setType(fileinfo.getType());
+				mSystem_attach.setName(mCustomer.getCustomerimage());
+//				mSystem_attach.setAttachsize(String.valueOf(fileinfo.getSize()/1024)+"KB");
+//				mSystem_attach.setType(fileinfo.getType());
 				mSystem_attach.setCreator(Creator);
 				mSystem_attach.setCreatetime(Createtime);
 				result = DAO.insSingle(mSystem_attach);

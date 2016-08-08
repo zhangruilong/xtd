@@ -177,41 +177,53 @@ public class NotesAction extends BaseAction {
 			temp.setNotescard(cardno);
 			temp.setNotesid(CommonUtil.getNewId());
 			temp.setNotesbegin(DateUtils.getDateTime());
-			//判断是否为次卡
 			Cuscard mCuscard = cussCuscard.get(0);
-			if("次卡".equals(mCuscard.getCuscardtype())){
-				if(mCuscard.getCuscardtimes()==0){
-					result = "{success:false,code:401,msg:'该卡的剩余次数为0，不能进场!'}";
+			//判断是否过期
+			int isend = DateUtils.compareSqlDate(DateUtils.getDate(), mCuscard.getCuscardend());
+			if(1==isend){
+				temp.setNotesid(CommonUtil.getNewId());
+				temp.setNotesbegin(DateUtils.getDateTime());
+				//判断是否为次卡
+				if("次卡".equals(mCuscard.getCuscardtype())){
+					if(mCuscard.getCuscardtimes()==0){
+						result = "{success:false,code:400,msg:'该卡的剩余次数为0，不能进场!'}";
+					}else{
+						String sqlNotes = DAO.getInsSingleSql(temp);
+						int Cuscardtimes = mCuscard.getCuscardtimes()-1;
+						String sqlCuscard = "update Cuscard set Cuscardtimes="
+						+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
+						result = DAO.doAll(sqlNotes,sqlCuscard);
+					}
 				}else{
-					String sqlNotes = DAO.getInsSingleSql(temp);
-					int Cuscardtimes = mCuscard.getCuscardtimes()-1;
-					String sqlCuscard = "update Cuscard set Cuscardtimes="
-					+Cuscardtimes+" where cuscardid='"+mCuscard.getCuscardid()+"'";
-					result = DAO.doAll(sqlNotes,sqlCuscard);
+					result = DAO.insSingle(temp);
 				}
+			}else if(2==isend){
+				result = "{success:false,code:400,msg:'该卡已到期,请续费!'}";
+			}else if(0==isend){
+				result = "{success:true,code:202,msg:'操作成功！该卡明天到期。'}";
 			}else{
-				result = DAO.insSingle(temp);
+				result = "{success:false,code:400,msg:'该卡有效期异常!'}";
 			}
 			
 		}
 		responsePW(response, result);
 	}
 	//闸机接口
-	public void checkcardout(HttpServletRequest request, HttpServletResponse response){
-		String cardno = request.getParameter("cardno");
-		System.out.println("闸机cardno : " + cardno);
-		
-		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+cardno+"'")==0){
-			result = "{success:false,code:400,msg:'该卡号不存在!'}";
-		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")==0){
-			result = "{success:false,code:401,msg:'还未进场刷卡!'}";
-		}else{
-			Notes temp = new Notes();
-			temp.setNotescard(cardno);
-			temp.setNotesend(DateUtils.getDateTime());
-			String[] KEYCOLUMN = {"notescard"};
-			result = DAO.updSingle(temp,KEYCOLUMN);
-		}
-		responsePW(response, result);
-	}
+//	public void checkcardout(HttpServletRequest request, HttpServletResponse response){
+//		String cardno = request.getParameter("cardno");
+//		System.out.println("闸机cardno : " + cardno);
+//		
+//		if(DAO.getTotal(CuscardPoco.TABLE, "cuscardno='"+cardno+"'")==0){
+//			result = "{success:false,code:400,msg:'该卡号不存在!'}";
+//		}else if(DAO.getTotal(NotesPoco.TABLE, "notescard='"+cardno+"' and notesend is null")==0){
+//			result = "{success:false,code:401,msg:'还未进场刷卡!'}";
+//		}else{
+//			Notes temp = new Notes();
+//			temp.setNotescard(cardno);
+//			temp.setNotesend(DateUtils.getDateTime());
+//			String[] KEYCOLUMN = {"notescard"};
+//			result = DAO.updSingle(temp,KEYCOLUMN);
+//		}
+//		responsePW(response, result);
+//	}
 }
