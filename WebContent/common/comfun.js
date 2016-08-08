@@ -1,3 +1,6 @@
+function zhaji(){
+	alert(1);
+}
 var statueStore = new Ext.data.ArrayStore({//状态下拉
 	fields:["name"],
 	data:[["启用"],["禁用"]]
@@ -154,7 +157,7 @@ function createBigWindow(url,title,_form,store) {
 	});
 	dataWindow.show();
 }
-function createWindow(url,title,_form,store) {
+function createWindow(url,title,_form,store,callback) {
 	var dataWindow = new Ext.Window({
 		title : title, // 窗口标题
 		layout : 'fit', // 设置窗口布局模式
@@ -188,6 +191,7 @@ function createWindow(url,title,_form,store) {
 									Ext.Msg.alert('提示', action.result.msg,function(){
 										dataWindow.hide();
 										store.reload();
+										callback && callback();
 									});
 								},
 								failure : function(form, action) {

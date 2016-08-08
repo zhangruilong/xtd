@@ -814,7 +814,7 @@ function selectCuscard(customerid) {
 						});
 						return;
 					}
-					createWindow(basePath + "CuscardcontinueAction.do" + "?method=ccontinue", "修改", CuscardcontinuedataForm, Cuscardstore);
+					createWindow(basePath + "CuscardcontinueAction.do" + "?method=ccontinue", "修改", CuscardcontinuedataForm, Cuscardstore, zhaji);
 					CuscardcontinuedataForm.form.loadRecord(selections[0]);
 				}
 			}
