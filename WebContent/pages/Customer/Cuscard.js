@@ -250,6 +250,8 @@ function selectCuscard(customerid) {
 				fieldLabel : '有效期开始',
 				id : 'Cuscardcuscardbegin',
 				name : 'cuscardbegin',
+				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -262,6 +264,8 @@ function selectCuscard(customerid) {
 				fieldLabel : '有效期结束',
 				id : 'Cuscardcuscardend',
 				name : 'cuscardend',
+				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -528,6 +532,18 @@ function selectCuscard(customerid) {
 				anchor : '95%'
 			} ]
 		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '创建人',
+				id : 'Cuscardcontinuecreator',
+				name : 'creator',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
 		]
 	});
 	var CuscardcontinuedataForm = new Ext.form.FormPanel({// 定义新增和修改的FormPanel
@@ -635,10 +651,12 @@ function selectCuscard(customerid) {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'hidden',
+				xtype : 'datefield',
 				fieldLabel : '有效期开始',
 				id : 'Cuscardcontinuebegin',
 				name : 'cuscardbegin',
+				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -647,10 +665,12 @@ function selectCuscard(customerid) {
 			columnWidth : 1,
 			layout : 'form',
 			items : [ {
-				xtype : 'hidden',
+				xtype : 'datefield',
 				fieldLabel : '有效期结束',
 				id : 'Cuscardcontinueend',
 				name : 'cuscardend',
+				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '95%'
 			} ]
@@ -731,6 +751,18 @@ function selectCuscard(customerid) {
 				anchor : '95%'
 			} ]
 		}
+		, {
+			columnWidth : 1,
+			layout : 'form',
+			items : [ {
+				xtype : 'hidden',
+				fieldLabel : '创建人',
+				id : 'Cuscardcontinuecreator',
+				name : 'creator',
+				maxLength : 100,
+				anchor : '95%'
+			} ]
+		}
 		]
 	});
 	var Cuscardbbar = pagesizebar(Cuscardstore);//定义分页
@@ -776,7 +808,7 @@ function selectCuscard(customerid) {
 						});
 						return;
 					}
-					createWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
+					createTextWindow(basePath + Cuscardaction + "?method=updAll", "修改", CuscarddataForm, Cuscardstore);
 					CuscarddataForm.form.loadRecord(selections[0]);
 				}
 			},'-',{
@@ -803,6 +835,7 @@ function selectCuscard(customerid) {
 					}
 					createWindow(basePath + "CuscardchangeAction.do" + "?method=change", "换卡", CuscardchangedataForm, Cuscardstore);
 					CuscardchangedataForm.form.loadRecord(selections[0]);
+					Ext.getCmp("Cuscardcontinuecreator").setValue(selections[0].data["customercode"]);
 				}
 			},'-',{
 				text : "续卡",
@@ -814,8 +847,9 @@ function selectCuscard(customerid) {
 						});
 						return;
 					}
-					createWindow(basePath + "CuscardcontinueAction.do" + "?method=ccontinue", "修改", CuscardcontinuedataForm, Cuscardstore, zhaji);
+					createWindow(basePath + "CuscardcontinueAction.do" + "?method=ccontinue", "修改", CuscardcontinuedataForm, Cuscardstore);
 					CuscardcontinuedataForm.form.loadRecord(selections[0]);
+					Ext.getCmp("Cuscardcontinuecreator").setValue(selections[0].data["customercode"]);
 				}
 			}
 		]

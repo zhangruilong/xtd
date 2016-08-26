@@ -231,7 +231,7 @@ function selectCardtype() {
 	
 	var Cardtypebbar = pagesizebar(Cardtypestore);//定义分页
 	var Cardtypegrid = new Ext.grid.GridPanel({
-		height : document.documentElement.clientHeight - 4,
+		height : 580,
 		width : '100%',
 		store : Cardtypestore,
 		stripeRows : true,
@@ -277,7 +277,7 @@ function selectCardtype() {
 	var selectgridWindow = new Ext.Window({
 		layout : 'fit', // 设置窗口布局模式
 		width : 620, // 窗口宽度
-		height : document.body.clientHeight -4, // 窗口高度
+		height : 580, // 窗口高度
 		modal : true,
 		title : Cardtypetitle,
 		//closeAction: 'hide',

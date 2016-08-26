@@ -1,10 +1,14 @@
 package com.server.action;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.server.ZhajiApi;
+import com.server.ZhajiCard;
+import com.server.ZhajiResult;
 import com.server.dao.CuscardDao;
 import com.server.pojo.Cuscard;
 import com.server.pojo.Customer;
@@ -109,6 +113,7 @@ public class CuscardAction extends BaseAction {
 			int mCuscardno = TypeUtil.stringToInt(temp.getCuscardno()) ;
 			String creator = getCurrentUsername(request);
 			String createtime = DateUtils.getDateTime();
+			ZhajiResult token = ZhajiApi.getToken();
 			for(int i=0;i<num;i++){
 				String newid = CommonUtil.getNewId();
 				temp.setCreator(creator);
@@ -117,14 +122,25 @@ public class CuscardAction extends BaseAction {
 				temp.setCuscardno(TypeUtil.intToString(mCuscardno));
 				temp.setCuscardcustomer(newid);
 				result = DAO.insSingle(temp);
+				String cuscardsql = DAO.getInsSingleSql(temp);
+				//会员code 闸机用
+				int randomnum = new Random().nextInt();
+				Customer mCustomer = new Customer();
+				mCustomer.setCustomercode(randomnum+"");
+				mCustomer.setCustomerid(newid);
+				mCustomer.setCustomername("批量发卡的用户");
+				mCustomer.setCreator(creator);
+				mCustomer.setCreatetime(createtime);
+				String customersql = DAO.getInsSingleSql(mCustomer);
+				result = DAO.doAll(cuscardsql,customersql);
+				//闸机
 				if(CommonConst.SUCCESS.equals(result)){
-					Customer mCustomer = new Customer();
-					mCustomer.setCustomercode(TypeUtil.intToString(mCuscardno));
-					mCustomer.setCustomerid(newid);
-					mCustomer.setCustomername("批量发卡的用户");
-					mCustomer.setCreator(creator);
-					mCustomer.setCreatetime(createtime);
-					result = DAO.insSingle(mCustomer);
+					ZhajiCard card = new ZhajiCard(randomnum, token.getToken(),
+							temp.getCuscardno(), temp.getCuscardno(), 
+							temp.getCuscardbegin(), temp.getCuscardend());
+					ZhajiResult mZhajiResult = ZhajiApi.updUser(card);
+					System.out.println("批量发卡成功->闸机接口 code:" + mZhajiResult.getCode() +
+							"result:" +mZhajiResult.getResult() +"msg:"+ mZhajiResult.getMessage());
 				}
 				mCuscardno++;
 			}
@@ -151,7 +167,10 @@ public class CuscardAction extends BaseAction {
 		}else if(DAO.getTotal(CustomerPoco.TABLE, "customerphone='"+mCustomer.getCustomerphone()+"'")>0){
 			responsePW(response, "{success:true,code:403,msg:'手机号已存在'}");
 		}else{
+			//会员code 闸机用
+			int randomnum = new Random().nextInt();
 			//新增会员
+			mCustomer.setCustomercode(randomnum+"");
 			mCustomer.setCreatetime(Createtime);
 			mCustomer.setCreator(Creator);
 			mCustomer.setCustomerid(newid);
@@ -179,7 +198,16 @@ public class CuscardAction extends BaseAction {
 //				mSystem_attach.setType(fileinfo.getType());
 				mSystem_attach.setCreator(Creator);
 				mSystem_attach.setCreatetime(Createtime);
-				result = DAO.insSingle(mSystem_attach);
+				DAO.insSingle(mSystem_attach);
+			}
+			if(CommonConst.SUCCESS.equals(result)){
+				ZhajiResult token = ZhajiApi.getToken();
+				ZhajiCard card = new ZhajiCard(randomnum, token.getToken(),
+						mCuscard.getCuscardno(), mCuscard.getCuscardno(), 
+						mCuscard.getCuscardbegin(), mCuscard.getCuscardend());
+				ZhajiResult mZhajiResult = ZhajiApi.updUser(card);
+				System.out.println("发卡成功->闸机接口 code:" + mZhajiResult.getCode() +
+						"result:" +mZhajiResult.getResult() +"msg:"+ mZhajiResult.getMessage());
 			}
 			responsePW(response, result);
 		}

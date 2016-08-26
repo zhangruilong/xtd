@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.server.ZhajiApi;
+import com.server.ZhajiCard;
+import com.server.ZhajiResult;
 import com.server.dao.CuscardcontinueDao;
 import com.server.pojo.Cuscardchange;
 import com.server.pojo.Cuscardcontinue;
@@ -16,6 +19,7 @@ import com.system.tools.pojo.Queryinfo;
 import com.system.tools.util.CommonUtil;
 import com.system.tools.util.DateUtils;
 import com.system.tools.util.FileUtil;
+import com.system.tools.util.TypeUtil;
 import com.system.tools.pojo.Pageinfo;
 
 /**
@@ -103,16 +107,28 @@ public class CuscardcontinueAction extends BaseAction {
 	public void ccontinue(HttpServletRequest request, HttpServletResponse response){
 		json2cuss(request);
 		Cuscardcontinue temp = cuss.get(0);
-		String sqlCuscard = "update Cuscard set cuscardmoney='"+
-				temp.getCuscardmoneynew()+"',cuscardnums="+
-				temp.getCuscardnumsnew()+",cuscardtimes="+
-				temp.getCuscardtimesnew()+" where cuscardid='"+
-				temp.getCuscardid()+"'";
+		String customercode = temp.getCreator();
+		String sqlCuscard = "update Cuscard set cuscardmoney='"+temp.getCuscardmoneynew()+
+				"',cuscardnums="+temp.getCuscardnumsnew()+
+				",cuscardtimes="+temp.getCuscardtimesnew()+
+				",cuscardbegin="+temp.getCuscardbegin()+
+				",cuscardend="+temp.getCuscardend()+
+				" where cuscardid='"+temp.getCuscardid()+"'";
 		temp.setCuscardid(CommonUtil.getNewId());
 		temp.setCreator(getCurrentUsername(request));
 		temp.setCreatetime(DateUtils.getDateTime());
 		String sqlCuscardchange = DAO.getInsSingleSql(temp);
 		result = DAO.doAll(sqlCuscard,sqlCuscardchange);
+		//闸机
+		if(CommonConst.SUCCESS.equals(result)){
+			ZhajiResult token = ZhajiApi.getToken();
+			ZhajiCard card = new ZhajiCard(TypeUtil.stringToInt(customercode), token.getToken(),
+					temp.getCuscardno(), temp.getCuscardno(), 
+					temp.getCuscardbegin(), temp.getCuscardend());
+			ZhajiResult mZhajiResult = ZhajiApi.updUser(card);
+			System.out.println("批量发卡成功->闸机接口 code:" + mZhajiResult.getCode() +
+					"result:" +mZhajiResult.getResult() +"msg:"+ mZhajiResult.getMessage());
+		}
 		responsePW(response, result);
 	}
 }

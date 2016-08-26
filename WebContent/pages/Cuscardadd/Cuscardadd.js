@@ -36,6 +36,11 @@ Ext.onReady(function() {
 				id : 'cuscardcustomer',
 				name : 'cuscardcustomer',
 				hidden : true
+			},{
+				xtype : 'textfield',
+				id : 'customercode',
+				name : 'customercode',
+				hidden : true
 			} ]
 		}
 		, {
@@ -68,6 +73,7 @@ Ext.onReady(function() {
 				id : 'cuscardbegin',
 				name : 'cuscardbegin',
 				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -176,6 +182,7 @@ Ext.onReady(function() {
 				id : 'cuscardend',
 				name : 'cuscardend',
 				format : 'Y-m-d',
+				allowBlank : false,
 				maxLength : 100,
 				anchor : '100%'
 			},{
@@ -305,6 +312,8 @@ Ext.onReady(function() {
 //					})
 //				}
 				Ext.getCmp("customerimage").setValue(imageserverurl);
+				var num = GetRandomNum(1,4294967294);//闸机的客户号4字节无符号整形
+				Ext.getCmp("customercode").setValue(num);
 				if (CustomercuscardviewdataForm.form.isValid()) {
 					var json = "[" + Ext.encode(CustomercuscardviewdataForm.form.getValues(false)) + "]";
 					CustomercuscardviewdataForm.form.submit({
@@ -318,6 +327,13 @@ Ext.onReady(function() {
 						success : function(form, action) {
 							Ext.Msg.alert('提示', action.result.msg,function(){
 								imageserverurl = "";
+//								var zhajicard;
+//								zhajicard.UID = num;
+//								zhajicard.CARD = Ext.getCmp("cuscardno").getValue();
+//								zhajicard.CARD_XTD = Ext.getCmp("cuscardno").getValue();
+//								zhajicard.EXPIRE_FROM = Ext.getCmp("cuscardbegin").getValue();
+//								zhajicard.EXPIRE_TO = Ext.getCmp("cuscardend").getValue();
+//								zhajiall(zhajicard);
 							});
 						},
 						failure : function(form, action) {
